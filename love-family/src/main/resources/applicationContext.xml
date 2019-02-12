@@ -21,24 +21,6 @@
 	<!-- 指定spring读取db.properties配置 -->
 	<context:property-placeholder location="classpath:db.properties" />
 
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="packagesToScan" value="com.love.family.entity" />
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-		</property>
-		<property name="jpaProperties">
-			<props>
-				<prop key="hibernate.connection.driver_class">${spring.datasource.driverClassName}</prop>
-				<prop key="hibernate.connection.url">${spring.datasource.url}</prop>
-				<prop key="hibernate.connection.username">${spring.datasource.username}</prop>
-				<prop key="hibernate.connection.password">${spring.datasource.password}</prop>
-				<prop key="hibernate.c3p0.min_size">10</prop>
-				<prop key="hibernate.hbm2ddl.auto">none</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-			</props>
-		</property>
-	</bean>
 
 	<!-- 开启MVC注解扫描 -->
 	<mvc:annotation-driven />
@@ -62,12 +44,52 @@
 	</bean>
 	<!-- 对静态资源文件的访问，将无法mapping到Controller的path交给default servlet handler处理 -->
 	<mvc:default-servlet-handler />
+	
+	<!-- 重要配置：启用扫描并自动创建代理的功能  -->
+    <jpa:repositories base-package="com.love.family"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
+	
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+
+	
 	<!-- 启用 annotation事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<!-- 配置Spring Data JPA扫描目录 -->
-	<jpa:repositories base-package="com.love.family" />
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" />
+			<tx:method name="apply*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config proxy-target-class="true">
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.love.family.service..*.*(..))" />
+	</aop:config>
+	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="packagesToScan" value="com.love.family.entity.*" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.connection.driver_class">${spring.datasource.driverClassName}</prop>
+				<prop key="hibernate.connection.url">${spring.datasource.url}</prop>
+				<prop key="hibernate.connection.username">${spring.datasource.username}</prop>
+				<prop key="hibernate.connection.password">${spring.datasource.password}</prop>
+				<prop key="hibernate.c3p0.min_size">10</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
+	</bean>
 </beans>
