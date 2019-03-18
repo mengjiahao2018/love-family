@@ -63,21 +63,6 @@ public class MyBaseHibernateQueryDao<E extends Serializable> {
 		
 		List<Map<String, Object>> list = null;
 		setParameters(query,params,null);
-//		if (params != null && !params.isEmpty()) {
-//			for (Entry<String, Object> entry : params.entrySet()) {
-//				String key = entry.getKey();
-//				Object value = entry.getValue();
-//				if ("start".equals(key)
-//						&& StringUtils.isNotEmpty(value.toString())) {
-//					query.setFirstResult(Integer.parseInt(value.toString()));
-//				} else if ("end".equals(key)
-//						&& StringUtils.isNotEmpty(value.toString())) {
-//					query.setMaxResults(Integer.parseInt(value.toString()));
-//				} else if (sql.contains(":" + key)) {
-//					query.setParameter(key, value);
-//				}
-//			}
-//		}
 		query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		list = query.getResultList();
 		return list;
@@ -95,15 +80,6 @@ public class MyBaseHibernateQueryDao<E extends Serializable> {
 		Query query = em.createNativeQuery(sql);
 		List<Map<String, Object>> list = null;
 		setParameters(query,params,null);
-//		if (params != null && !params.isEmpty()) {
-//			for (Entry<String, Object> entry : params.entrySet()) {
-//				String key = entry.getKey();
-//				Object value = entry.getValue();
-//				if (sql.contains(":" + key)) {
-//					query.setParameter(key, value);
-//				}
-//			}
-//		}
 		query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		list = query.getResultList();
 		if (CollectionUtils.isEmpty(list)) {
@@ -155,15 +131,6 @@ public class MyBaseHibernateQueryDao<E extends Serializable> {
 	public int executeSqlUpdate(String sql, Map<String, Object> params) {
 		Query query = em.createNativeQuery(sql);
 		setParameters(query,params,null);
-//		if (params != null && !params.isEmpty()) {
-//			for (Entry<String, Object> entry : params.entrySet()) {
-//				String key = entry.getKey();
-//				Object value = entry.getValue();
-//				if (sql.contains(":" + key)) {
-//					query.setParameter(key, value);
-//				}
-//			}
-//		}
 		int executeUpdate = query.executeUpdate();
 		return executeUpdate;
 	}

@@ -1,0 +1,326 @@
+/**
+ * Created by bloodyears on 2017/9/11.
+ */
+
+/******************************首页样式******************************/
+body {
+    margin: 0;
+    padding: 0;
+}
+.hancker-table{
+	position:absolute;
+	left:9999px;
+}
+#app {
+    background-color: #f1f7fb;
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+    color: #ffffff;
+    background-color: #1565c0;
+    border-bottom: 2px solid #ffffff;
+}
+
+.header .header-left {
+    float: left;
+    height: 100%;
+}
+
+.header .header-right {
+    float: right;
+    height: 100%;
+    line-height: 65px;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.body {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    font-family:"微软雅黑";
+}
+
+.body .body-middle {
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+.submenu-container {
+    margin: 10px 10px 10px 200px;
+}
+
+.body .body-inner {
+    height: 100%;
+    margin-left: 200px;
+    margin-right: 10px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    box-shadow: 0 0 50px #c0e6fa;
+}
+
+.body .body-left {
+    width: 200px;
+    height: 100%;
+    background-color: transparent;
+    float: left;
+    margin-left: -100%;
+}
+
+.menu-container {
+    width: 190px;
+    height: 100%;
+    float: left;
+    overflow-y: auto;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px #cccccc;
+}
+
+.menu-collapser {
+    width: 10px;
+    height: 31px;
+    float: left;
+    top: 45%;
+    position: relative;
+    text-align: center;
+    line-height: 30px;
+    font-size: 13px;
+    color: #ffffff;
+    background-color: #008cd7;
+}
+
+/******************************覆盖原有组件样式******************************/
+.el-menu {
+    background-color: #ffffff;
+}
+
+.menu-container .el-menu-item.is-active {
+    color: #ffffff;
+    background-color: #008cd7;
+    /* border-left: 5px solid #a7c739; */
+}
+
+.el-menu-item, .el-submenu__title {
+    height: 44px;
+    line-height: 44px;
+    border-bottom: 1px solid #e0e6ed;
+    color:#000;
+}
+
+.el-menu--horizontal .el-menu-item {
+    height: 44px;
+    line-height: 44px;
+    font-size:15px;
+}
+
+.el-menu--horizontal .el-submenu .el-submenu__title {
+    height: 44px;
+    line-height: 44px;
+    font-size:15px;
+}
+
+.el-menu--horizontal .el-submenu>.el-menu {
+    top: 49px;
+}
+
+.el-menu-item [class^=icon-] {
+    display: inline-block;
+    width: 24px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.submenu-container .el-badge {
+    margin: -18px -15px 0 -5px;
+}
+
+.submenu-container .el-badge__content {
+	border: none;
+}
+
+
+/******************************通用样式******************************/
+.container {
+    padding: 10px;
+}
+
+.container-bottom {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.container-bottom .el-pagination {
+    display: inline-block;
+}
+
+.container-bottom .el-button {
+    float: left;
+}
+
+.line {
+    height: 1px;
+    background-color: #e0e6ed;
+    margin: 10px 0;
+}
+
+
+/******************************覆盖原有组件样式******************************/
+.el-collapse {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.el-collapse-item__header {
+    height: 33px;
+    line-height: 33px;
+}
+
+.search-form .el-form-item {
+    margin-bottom: 0;
+}
+
+.search-form .el-form-item__label {
+	text-align: left;
+}
+
+.search-form .el-form-item__content {
+    width: 195px;
+}
+
+.search-form .el-form-item__content>div {
+    width: 100%;
+}
+
+.search-form .el-form-item__error {
+	display: none;
+}
+
+.edit-form .el-form-item__content>div {
+    width: 100%;
+}
+
+.edit-form.el-form--label-top .el-col .el-form-item {
+	width: 100%;
+}
+
+.el-form-item__label {
+    font-size: 13px;
+    color: #000;
+}
+
+.el-form-item.is-required .el-form-item__label:before {
+    content: '|';
+    font-weight: 900;
+}
+
+.el-tree-node__content {
+	line-height: 30px;
+    height: 30px;
+}
+
+.el-table {
+    font-size: 13px;
+}
+
+.el-table td, .el-table th {
+    height: 33px;
+}
+.selection-all-disabled th.el-table-column--selection label {
+	display: none;
+}
+
+.el-dialog__footer {
+    text-align: center;
+    background-color: #f0f8ff;
+}
+
+.el-button span[class*=icon-] {
+    margin-right: 5px;
+}
+
+.el-button--text {
+    color: #1f2d3d;
+}
+
+.el-select .el-input--small input {
+	max-height : 31px;
+}
+
+.nowrap-select .el-select__tags {
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+
+.el-dropdown-menu .el-tree {
+	border: none;
+}
+
+.uploadDiv1 {
+	float: left;
+	position: relative;
+	border-radius: 2px;
+	top: 1px;
+}
+
+.uploadDiv2 {
+	text-align: center;
+	font-family: 微软雅黑;
+	font-weight: bolder;
+	color: #fff;
+}
+
+.uploadInput {
+	cursor: pointer;
+	outline: medium none;
+	position: absolute;
+	filter: alpha(opacity = 0);
+	-moz-opacity: 0;
+	opacity: 0;
+	left: 0px;
+	top: 5px;
+}
+.el-tree-node>.el-tree-node__children{
+	overflow-x: auto;
+}
+
+.icon-edit:before {
+    
+    font-size: 20px;
+}
+.icon-upload:before{
+    
+    font-size: 20px;
+}
+.icon-trash:before{
+	font-size: 20px;
+}
+
+
+.merge-suffix-input>input{
+	border-right:0;
+	width:60px;
+	height:30px;
+}
+.merge-suffix-input>input:focus+div{
+	border-color: #008cd7;
+}
+.merge-suffix-input>input:hover+div{
+	border-color: rgb(131, 147, 165);
+}
+.merge-suffix-input>input:disabled+div{
+	background-color: rgb(234, 234, 234)
+}
+.merge-suffix-input>.el-input-group__append{
+	border-left:0;
+	background-color:white
+}
+
+.no-wrap-table td>div.cell{
+	overflow: hidden;
+	white-space: nowrap!important;
+	text-overflow: ellipsis;
+}
