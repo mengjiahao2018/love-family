@@ -1,4 +1,4 @@
-package com.love.family.service.login;
+package com.love.family.login.service;
 
 import java.util.Map;
 
@@ -8,8 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.love.family.dao.user.LoginDao;
-import com.love.family.entity.user.LoginUser;
+import com.love.family.login.dao.LoginDao;
+import com.love.family.login.entity.LoginUser;
 import com.love.family.utils.MyBusinessException;
 
 @Service

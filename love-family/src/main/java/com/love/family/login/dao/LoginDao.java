@@ -1,6 +1,6 @@
-package com.love.family.dao.user;
+package com.love.family.login.dao;
 
-import com.love.family.entity.user.LoginUser;
+import com.love.family.login.entity.LoginUser;
 
 public interface LoginDao {
 	boolean login(String loginName, String password);

@@ -1,13 +1,15 @@
-package com.love.family.dao.user;
+package com.love.family.login.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.transaction.Transactional;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Repository;
 
 import com.love.family.dao.base.MyBaseHibernateQueryDao;
-import com.love.family.entity.user.LoginUser;
+import com.love.family.login.entity.LoginUser;
 
 @Repository
 public class LoginDaoImpl extends MyBaseHibernateQueryDao<LoginUser> implements

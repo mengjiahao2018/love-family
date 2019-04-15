@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.love.family.service.login.LoginService;
+import com.love.family.login.service.LoginService;
 import com.love.family.utils.MessageUtil;
 
 @Controller

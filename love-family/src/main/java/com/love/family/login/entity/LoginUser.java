@@ -1,4 +1,4 @@
-package com.love.family.entity.user;
+package com.love.family.login.entity;
 
 import java.io.Serializable;
 
