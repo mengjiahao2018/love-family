@@ -1,4 +1,4 @@
-package com.love.family.controller.login;
+package com.love.family.controller.loginManage;
 
 import java.util.HashMap;
 import java.util.Map;
