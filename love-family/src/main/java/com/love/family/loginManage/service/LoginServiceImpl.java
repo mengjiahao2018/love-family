@@ -1,15 +1,13 @@
-package com.love.family.login.service;
+package com.love.family.loginManage.service;
 
 import java.util.Map;
-
-import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.love.family.login.dao.LoginDao;
-import com.love.family.login.entity.LoginUser;
+import com.love.family.loginManage.dao.LoginDao;
+import com.love.family.loginManage.entity.LoginUser;
 import com.love.family.utils.MyBusinessException;
 
 @Service
