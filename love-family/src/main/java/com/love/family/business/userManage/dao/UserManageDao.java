@@ -1,9 +1,9 @@
-package com.love.family.userManage.dao;
+package com.love.family.business.userManage.dao;
 
 import java.util.List;
 import java.util.Map;
 
-import com.love.family.userManage.entity.UserInfo;
+import com.love.family.business.userManage.entity.UserInfo;
 
 public interface UserManageDao {
 

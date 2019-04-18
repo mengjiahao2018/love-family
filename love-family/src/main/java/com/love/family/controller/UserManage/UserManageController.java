@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.love.family.userManage.entity.UserInfo;
-import com.love.family.userManage.service.UserManageService;
+import com.love.family.business.userManage.entity.UserInfo;
+import com.love.family.business.userManage.service.UserManageService;
 import com.love.family.utils.MessageUtil;
 
 @Controller

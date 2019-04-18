@@ -22,14 +22,6 @@ public class MyBaseHibernateQueryDao<E extends Serializable> {
 	@PersistenceContext
 	private EntityManager em;
 	
-	public void setEntityManager(EntityManager em) {
-	    this.em = em;
-	}
-
-	public EntityManager getEntityManager() {
-	    return this.em;
-	}   
-
 	/**
 	 * 新增
 	 * 

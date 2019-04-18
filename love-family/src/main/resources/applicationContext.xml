@@ -20,8 +20,8 @@
          http://www.springframework.org/schema/data/jpa  
          http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-	<import resource="classpath:spring/springdata-jpa.xml" />
 	<import resource="classpath:spring/spring-mvc.xml" />
+	<import resource="classpath:spring/springdata-jpa.xml" />
 	<import resource="classpath:spring/spring-security.xml" />
 
 </beans>

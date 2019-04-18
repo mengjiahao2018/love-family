@@ -1,4 +1,4 @@
-package com.love.family.userManage.dao;
+package com.love.family.business.userManage.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import com.love.family.business.userManage.entity.UserInfo;
 import com.love.family.dao.base.MyBaseHibernateQueryDao;
-import com.love.family.userManage.entity.UserInfo;
 
 @Repository
 public class UserManageDaoImpl extends MyBaseHibernateQueryDao<UserInfo> implements UserManageDao {

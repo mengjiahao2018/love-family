@@ -20,11 +20,19 @@
          http://www.springframework.org/schema/data/jpa  
          http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
+	<!-- 开启IOC注解扫描 -->
+	<context:component-scan base-package="com.love.family" />
+	
 	<!-- 重要配置：启用扫描并自动创建代理的功能 -->
 	<jpa:repositories base-package="com.love.family" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" />
 	
-	<!-- 开启IOC注解扫描 -->
-	<context:component-scan base-package="com.love.family" />
+	<!-- 开启注解事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    
+    <!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
 	
 	<!-- 指定spring读取db.properties配置 -->
 	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -35,36 +43,10 @@
             </list>
         </property>
     </bean>
-	
-	<!-- 配置事务管理器 -->
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-	
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="save*" propagation="REQUIRED" />
-			<tx:method name="del*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="find*" propagation="REQUIRED" />
-			<tx:method name="get*" propagation="REQUIRED" />
-			<tx:method name="apply*" propagation="REQUIRED" />
-			<tx:method name="*" rollback-for="Exception" />
-		</tx:attributes>
-	</tx:advice>
-	
-	<aop:config>
-        <aop:pointcut id="txPointcut" expression="execution(* com.love.family.*.service.*.*(..))" />
-        <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
-    </aop:config>
-    
-    <!-- 开启注解事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
     
     <bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="packagesToScan" value="com.love.family.*.entity" />
+		<property name="packagesToScan" value="com.love.family.business.*.entity" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>

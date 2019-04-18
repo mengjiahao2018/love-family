@@ -14,7 +14,26 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<!-- 开启IOC注解扫描 -->
-	<context:component-scan base-package="com.**.controller" />
+	<context:component-scan base-package="com.love.family" />
+	
+	<!-- aop 一定要写在mvc配置文件中，否则无效 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" />
+			<tx:method name="apply*" propagation="REQUIRED" />
+			<tx:method name="*" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* com.love.family.business.*.service.*.*(..))" />
+        <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+    </aop:config>
 
 	<!-- 定义视图解析器viewResolver -->
     <bean
