@@ -7,10 +7,10 @@ import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Repository;
 
 import com.love.family.business.loginManage.entity.LoginUser;
-import com.love.family.dao.base.MyBaseHibernateQueryDao;
+import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository
-public class LoginDaoImpl extends MyBaseHibernateQueryDao<LoginUser> implements
+public class LoginDaoImpl extends BaseHibernate4QueryDao<LoginUser> implements
 		LoginDao {
 
 	@Override
@@ -21,7 +21,7 @@ public class LoginDaoImpl extends MyBaseHibernateQueryDao<LoginUser> implements
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("from LoginUser where loginName= :loginName and password= :password");
 		try {
-			List<LoginUser> loginUserList = super.executeHqlQuery(buffer.toString(), params, LoginUser.class);
+			List<LoginUser> loginUserList = super.findEntityObjects(buffer.toString(), params);
 			if(loginUserList!=null&&loginUserList.size()>0){
 				return true;
 			}
@@ -47,7 +47,7 @@ public class LoginDaoImpl extends MyBaseHibernateQueryDao<LoginUser> implements
 		Map<String, Object> params = new HashedMap();
 		params.put("loginName", loginName);
 		try {
-			List<LoginUser> loginUserList = super.executeHqlQuery(buffer.toString(), params, LoginUser.class);
+			List<LoginUser> loginUserList = super.findEntityObjects(buffer.toString(), params);
 			if(loginUserList!=null&&loginUserList.size()>0){
 				return loginUserList.get(0);
 			}

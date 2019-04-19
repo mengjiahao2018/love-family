@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import com.love.family.business.userManage.entity.UserInfo;
-import com.love.family.dao.base.MyBaseHibernateQueryDao;
+import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository
-public class UserManageDaoImpl extends MyBaseHibernateQueryDao<UserInfo> implements UserManageDao {
+public class UserManageDaoImpl extends BaseHibernate4QueryDao<UserInfo> implements UserManageDao {
 
 	@Override
 	public List<UserInfo> findUserInfoList(Map<String, Object> param) throws Exception {
@@ -22,7 +22,7 @@ public class UserManageDaoImpl extends MyBaseHibernateQueryDao<UserInfo> impleme
 		if(!StringUtils.isEmpty((String)param.get("sex"))) {
 			hql.append(" and sex = :sex");
 		}
-		List<UserInfo> UserInfoList = super.executeHqlQuery(hql.toString(), param, UserInfo.class);
+		List<UserInfo> UserInfoList = super.findEntityObjects(hql.toString(), param);
 		return UserInfoList;
 	}
 
