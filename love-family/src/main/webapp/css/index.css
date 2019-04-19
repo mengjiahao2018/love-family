@@ -1,8 +1,8 @@
-/**
- * Created by bloodyears on 2017/9/11.
- */
-
 /******************************首页样式******************************/
+#login_body {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(../images/login/login_bg.gif) #226cc5 repeat-x 50% top; PADDING-BOTTOM: 0px; MARGIN: 110px 0px 0px; FONT: 12px/150% Arial, "宋体" ,Helvetica,sans-serif; PADDING-TOP: 0px; TEXT-DECORATION: none
+}
+
 body {
     margin: 0;
     padding: 0;
