@@ -6,11 +6,11 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.love.family.business.loginManage.entity.LoginUser;
+import com.love.family.business.loginManage.entity.SysUser;
 import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository
-public class LoginDaoImpl extends BaseHibernate4QueryDao<LoginUser> implements LoginDao {
+public class LoginDaoImpl extends BaseHibernate4QueryDao<SysUser> implements LoginDao {
 
 	@Override
 	public boolean login(String loginName, String password) {
@@ -20,7 +20,7 @@ public class LoginDaoImpl extends BaseHibernate4QueryDao<LoginUser> implements L
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("from LoginUser where loginName= :loginName and password= :password");
 		try {
-			List<LoginUser> loginUserList = super.findEntityObjects(buffer.toString(), params);
+			List<SysUser> loginUserList = super.findEntityObjects(buffer.toString(), params);
 			if (loginUserList != null && loginUserList.size() > 0) {
 				return true;
 			}
@@ -31,23 +31,23 @@ public class LoginDaoImpl extends BaseHibernate4QueryDao<LoginUser> implements L
 	}
 
 	@Override
-	public boolean addLoginUser(String loginName, String password) {
-		LoginUser loginUser = new LoginUser();
-		loginUser.setLoginName(loginName);
-		loginUser.setPassword(password);
-		super.insert(loginUser);
+	public boolean addLoginUser(String username, String password) {
+		SysUser sysUser = new SysUser();
+		sysUser.setUsername(username);
+		sysUser.setPassword(password);
+		super.insert(sysUser);
 		return true;
 	}
 
 	@Override
-	public List<LoginUser> findLoginUserByLoginName(String loginName) {
+	public List<SysUser> findLoginUserByLoginName(String username) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("from LoginUser where loginName= :loginName");
+		buffer.append("from SysUser where username= :username");
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("loginName", loginName);
+		params.put("username", username);
 		try {
-			List<LoginUser> loginUserList = super.findEntityObjects(buffer.toString(), params);
-			return loginUserList;
+			List<SysUser> sysUserList = super.findEntityObjects(buffer.toString(), params);
+			return sysUserList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

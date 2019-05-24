@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.love.family.business.loginManage.dao.LoginDao;
-import com.love.family.business.loginManage.entity.LoginUser;
+import com.love.family.business.loginManage.entity.SysUser;
 import com.love.family.utils.MyBusinessException;
 
 @Service
@@ -43,8 +43,8 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		//新增用户前查看用户是否已经存在
-		List<LoginUser> loginUserList = userDao.findLoginUserByLoginName(loginName);
-		if(loginUserList.size()>0){
+		List<SysUser> sysUserList = userDao.findLoginUserByLoginName(loginName);
+		if(sysUserList.size()>0){
 			throw new MyBusinessException("用户名已经存在，不可重新注册!");
 		}
 		
@@ -52,7 +52,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public List<LoginUser> findLoginUserByLoginName(String username) {
+	public List<SysUser> findLoginUserByLoginName(String username) {
 		return userDao.findLoginUserByLoginName(username);
 	}
 

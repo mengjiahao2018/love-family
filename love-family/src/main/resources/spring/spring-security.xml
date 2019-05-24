@@ -1,14 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://www.springframework.org/schema/security"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd
-            http://www.springframework.org/schema/security
-            http://www.springframework.org/schema/security/spring-security.xsd" >
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+          http://www.springframework.org/schema/beans/spring-beans.xsd  
+          http://www.springframework.org/schema/context  
+          http://www.springframework.org/schema/context/spring-context.xsd  
+          http://www.springframework.org/schema/security  
+              http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<context:component-scan	base-package="com.love.family" />
+
+	<!--
+ 		1、设置放行资源，如登录注册页面，静态资源css、js等等 security="none" 设置此资源不被拦截.
+    -->
+    <http pattern="/**/*.css" security="none" />
+    <http pattern="/**/*.js" security="none" />
+	<http pattern="/images/*" security="none" />
+	<http pattern="/login.jsp" security="none" />
+	<http pattern="/*.ico" security="none" />
+
+
+	<http>
+		<!-- 2、拦截所有（除放行资源外） -->
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<!-- 3、登录表单设置 
+		    1)login-page：指定登录页面； 
+		    2)login-processing-url：指定登录请求路径；
+			3)default-target-url：指定了成功进行身份验证和授权后默认呈现给用户的页面； 
+			4)always-use-default-target：指定了是否在身份验证通过后总是跳转到； default-target-url 属性指定的URL。 
+			5)authentication-failure-url：指定了身份验证失败时跳转到的页面； -->
+		<form-login login-page="/login.jsp"
+			username-parameter="j_username" 
+			password-parameter="j_password"
+		    login-processing-url="/j_spring_security_check" 
+		    always-use-default-target="true"
+			default-target-url="/index.jsp"
+			authentication-failure-url="/error/loginerror.html" />
+		<!-- 4、注销设置 
+			1)logout-url：指定注销的url； 
+			2)logout-success-url：注销成功后登录返回的页面。 
+		-->
+		<logout logout-url="/j_spring_security_logout" logout-success-url="/login.jsp" />
+		<!-- 5、跨站请求设置（我们这里关闭） 
+			1)csrf disabled="true" 关闭 csrf ,如果不加会出现错误 
+			2)CSRF（Cross-site request forgery）:跨站请求伪造， 也被称为“One Click Attack”或者 SessionRiding， 通常缩写为 CSRF或者 XSRF，是一种对网站的恶意利用。 -->
+		<csrf disabled="true" />
+
+		<!-- 6、iframe 框架结构展示 -->
+		<headers>
+			<frame-options policy="SAMEORIGIN" />
+		</headers>
+	</http>
+	
+	<!-- 
+             认证管理器
+    -->
+    <authentication-manager alias="authenticationManager">
+        <!-- 注入自定义认证类对象 -->
+        <authentication-provider user-service-ref='userDetailService'>
+            <!-- 注入加密算法类 -->
+            <password-encoder ref="bcryptEncoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
     
-    <!-- 不需要被拦截的请求 -->
-    <http pattern="/images/*" security="none"/>
-    <http pattern="/login.html" security="none"/>
+    <!-- 2、注册加密算法类，使用BCryptPasswordEncoder加密方式 -->
+    <beans:bean id="bcryptEncoder"  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    
+     <!-- 四、注册认证类 -->
+    <beans:bean id="userDetailService" class="com.love.family.security.service.UserDetailServiceImpl" />
+
     
 </beans:beans>

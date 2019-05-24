@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
-<!DOCTYPE HTML >
+<!DOCTYPE HTML>
 <HTML>
 <HEAD>
 <TITLE>用户登录</TITLE>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta charset="utf-8">
-<LINK href="lib/element/element.min.css" rel=stylesheet>
-<LINK href="lib/font-awesome/css/font-awesome.min.css" rel=stylesheet>
-<LINK href="css/index.css" rel=stylesheet>
+<LINK rel=stylesheet href="lib/element/element.min.css">
+<LINK rel=stylesheet href="lib/font-awesome/css/font-awesome.min.css">
+<LINK rel=stylesheet href="css/index.css">
 </HEAD>
 <BODY id=login_body>
 	<div align="center" style="width: 100%">
@@ -59,14 +59,11 @@ var loginApp = new Vue({
     		if(parent!=null){
     			loginForm.$el.target="_parent";
     		}
-    		$("j_username").val(_this.loginData.username);
-    		$("j_username").val(_this.loginData.password);
-    		
+    		$("#j_username").val(_this.loginData.username);
+    		$("#j_password").val(_this.loginData.password);
     		loginForm.$el.submit();
     	}
     }
  })
 </script>
-
-
 </HTML>
