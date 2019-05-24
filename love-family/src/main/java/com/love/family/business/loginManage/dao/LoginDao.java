@@ -1,5 +1,7 @@
 package com.love.family.business.loginManage.dao;
 
+import java.util.List;
+
 import com.love.family.business.loginManage.entity.LoginUser;
 
 public interface LoginDao {
@@ -7,5 +9,5 @@ public interface LoginDao {
 
 	boolean addLoginUser(String loginName, String password);
 
-	LoginUser findLoginUserByLoginName(String loginName);
+	List<LoginUser> findLoginUserByLoginName(String loginName);
 }

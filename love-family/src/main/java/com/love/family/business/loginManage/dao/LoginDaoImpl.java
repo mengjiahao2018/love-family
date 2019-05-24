@@ -40,16 +40,14 @@ public class LoginDaoImpl extends BaseHibernate4QueryDao<LoginUser> implements L
 	}
 
 	@Override
-	public LoginUser findLoginUserByLoginName(String loginName) {
+	public List<LoginUser> findLoginUserByLoginName(String loginName) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("from LoginUser where loginName= :loginName");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("loginName", loginName);
 		try {
 			List<LoginUser> loginUserList = super.findEntityObjects(buffer.toString(), params);
-			if (loginUserList != null && loginUserList.size() > 0) {
-				return loginUserList.get(0);
-			}
+			return loginUserList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

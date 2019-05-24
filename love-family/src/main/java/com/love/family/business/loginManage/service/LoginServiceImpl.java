@@ -1,5 +1,6 @@
 package com.love.family.business.loginManage.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,12 +43,17 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		//新增用户前查看用户是否已经存在
-		LoginUser loginUser = userDao.findLoginUserByLoginName(loginName);
-		if(loginUser!=null){
+		List<LoginUser> loginUserList = userDao.findLoginUserByLoginName(loginName);
+		if(loginUserList.size()>0){
 			throw new MyBusinessException("用户名已经存在，不可重新注册!");
 		}
 		
 		return userDao.addLoginUser(loginName,password);
+	}
+
+	@Override
+	public List<LoginUser> findLoginUserByLoginName(String username) {
+		return userDao.findLoginUserByLoginName(username);
 	}
 
 }
