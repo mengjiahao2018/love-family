@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,7 +26,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
 			SysUser sysUser = findUser(username);
-			return sysUser;
+			return  new User(sysUser.getUsername(), sysUser.getPassword(), sysUser.isEnabled(), sysUser.isAccountNonExpired(), sysUser.isCredentialsNonExpired(), sysUser.isAccountNonLocked(), sysUser.getAuthorities());
 		} catch (Exception e) {
 			logger.error("获取用户\"{}\"的信息时错误!", username);
 			e.printStackTrace();

@@ -27,7 +27,6 @@ public class SysUser implements UserDetails{
 	 * 
 	 */
 	private static final long serialVersionUID = -9201353176787742025L;
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,8 +79,10 @@ public class SysUser implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> auths = new ArrayList<>();
         List<SysRole> userRoles = this.getSysRoles();
-        for (SysRole role : userRoles) {
-            auths.add(new SimpleGrantedAuthority(role.getName()));
+        if(userRoles!=null&&userRoles.size()>0) {
+	        for (SysRole role : userRoles) {
+	            auths.add(new SimpleGrantedAuthority(role.getCode()));
+	        }
         }
         return auths;
 	}

@@ -8,6 +8,11 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SecurityAuthFilter implements Filter {
 
@@ -19,6 +24,14 @@ public class SecurityAuthFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication==null) {
+			HttpSession session = ((HttpServletRequest)request).getSession(false); 
+			if(session!=null) {
+				authentication = (Authentication)session.getAttribute("SPRING_SECURITY_authenticate");
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			}
+		}
 		chain.doFilter(request, response);
 	}
 

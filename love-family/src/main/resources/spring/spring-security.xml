@@ -22,6 +22,7 @@
 	<http pattern="/images/*" security="none" />
 	<http pattern="/login.jsp" security="none" />
 	<http pattern="/*.ico" security="none" />
+	<http pattern="/error/accessDeny.html" security="none" />
 
 
 	<http>
@@ -39,7 +40,7 @@
 		    login-processing-url="/j_spring_security_check" 
 		    always-use-default-target="true"
 			default-target-url="/index.jsp"
-			authentication-failure-url="/error/loginerror.html" />
+			authentication-failure-url="/error/accessDeny.html" />
 		<!-- 4、注销设置 
 			1)logout-url：指定注销的url； 
 			2)logout-success-url：注销成功后登录返回的页面。 

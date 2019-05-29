@@ -47,8 +47,8 @@ var loginApp = new Vue({
     data: function() {
       return { 
 			loginData:{
-				username:"",
-				password:""
+				username:"mengjiahao",
+				password:"mengjiahao"
 			}
       }
     },
