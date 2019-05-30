@@ -25,7 +25,7 @@
 	<http pattern="/error/accessDeny.html" security="none" />
 
 
-	<http>
+	<http auto-config="true">
 		<!-- 2、拦截所有（除放行资源外） -->
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<!-- 3、登录表单设置 
