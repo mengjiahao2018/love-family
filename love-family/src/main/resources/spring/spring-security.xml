@@ -27,7 +27,6 @@
 
 	<http auto-config="true">
 		<!-- 2、拦截所有（除放行资源外） -->
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<!-- 3、登录表单设置 
 		    1)login-page：指定登录页面； 
 		    2)login-processing-url：指定登录请求路径；
@@ -51,10 +50,6 @@
 			2)CSRF（Cross-site request forgery）:跨站请求伪造， 也被称为“One Click Attack”或者 SessionRiding， 通常缩写为 CSRF或者 XSRF，是一种对网站的恶意利用。 -->
 		<csrf disabled="true" />
 
-		<!-- 6、iframe 框架结构展示 -->
-		<headers>
-			<frame-options policy="SAMEORIGIN" />
-		</headers>
 	</http>
 	
 	<!-- 
