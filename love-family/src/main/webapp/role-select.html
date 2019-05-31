@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<TITLE>love-family</TITLE>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta charset="utf-8">
+<LINK rel=stylesheet href="lib/element/element.min.css">
+<LINK rel=stylesheet href="lib/font-awesome/css/font-awesome.min.css">
+<LINK rel=stylesheet href="css/index.css">
+</HEAD>
+<BODY>
+	<div align="center" style="width: 100%">
+		<div id="roleSelectApp" style="width: 250px;margin: auto;" align="center">
+			<div style="margin-bottom: 20px;font-weight: 600" >角色选择</div>
+			<el-form id="roleSelectForm" ref="roleSelectForm" :model="selectedRoleData" action="selectOneRole.do" method="post">
+				<el-form-item prop="selectedRoleId">
+					<el-select v-model="selectedRoleData.selectedRoleId" placeholder="请选择角色" >
+						<el-option v-for="role in roles"
+						:key="''+role.id"
+						:lable="role.name"
+						:value="''+role.id">
+						</el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item>
+					  <el-button type="primary" @click="submitForm" >确定</el-button>
+				</el-form-item>
+				<input id="selectedRoleId" name="selectedRoleId" type="hidden" />
+			</el-form>
+		</div>
+	</div>
+</BODY>
+
+<script src="lib/vue/vue.js"></script>
+<script src="lib/element/element.min.js"></script>
+<script src="lib/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+var loginApp = new Vue({
+    el: '#roleSelectApp',
+    data: function() {
+      return { 
+			selectedRoleData:{
+				selectedRoleId:""
+    	  	},
+    		roles:[],
+    		rules:{
+					selectedRoleId:[
+    					{required:true,message:'请选择角色',trigger:'change'}
+    	 			]
+    		}
+			
+      }
+    },
+    methods:{
+    	submitForm:function(){
+    		var _this=this;
+    		var roleSelectForm = _this.$refs.roleSelectForm;
+    		roleSelectForm.validate(function(isPass){
+    			if(isPass){
+    	    		$("#selectedRoleId").val(_this.selectedRoleData.selectedRoleId);
+    	    		roleSelectForm.$el.submit();
+    			}
+    		});
+    	}
+    },
+    created:function(){
+    	var _this=this;
+    	$.ajaxSetup({
+    		cache:false
+    	});
+    	
+    	$.ajax({
+    		type:"POST",
+    		url:"getRoles.do",
+    		data:{},
+    		dataType:"json",
+    		success:function(data){
+    			_this.roles = data.roleList;
+    			_this.$nextTick(function(){
+    				if(_this.roles&&_this.roles.length>0){
+    					_this.selectedRoleData.selectedRoleId=""+_this.roles[0].id;
+    					if(_this.roles.length==1){
+    						_this.submitForm();
+    					}
+    				}
+    			});
+    		}
+    	});
+    }
+ })
+</script>
+</HTML>

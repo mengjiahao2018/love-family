@@ -38,7 +38,7 @@
 			password-parameter="j_password"
 		    login-processing-url="/j_spring_security_check" 
 		    always-use-default-target="true"
-			default-target-url="/index.jsp"
+			default-target-url="/role-select.html"
 			authentication-failure-url="/error/accessDeny.html" />
 		<!-- 4、注销设置 
 			1)logout-url：指定注销的url； 

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.love.family.business.loginManage.entity.SysUser;
 import com.love.family.business.loginManage.service.LoginService;
+import com.love.family.security.model.UserInfoImpl;
 import com.love.family.utils.MyBusinessException;
 
 public class UserDetailServiceImpl implements UserDetailsService {
@@ -26,7 +27,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
 			SysUser sysUser = findUser(username);
-			return  new User(sysUser.getUsername(), sysUser.getPassword(), sysUser.isEnabled(), sysUser.isAccountNonExpired(), sysUser.isCredentialsNonExpired(), sysUser.isAccountNonLocked(), sysUser.getAuthorities());
+			return new UserInfoImpl(sysUser);  
 		} catch (Exception e) {
 			logger.error("获取用户\"{}\"的信息时错误!", username);
 			e.printStackTrace();
