@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.love.family.business.loginManage.entity.SysUser;
+import com.love.family.pub.rbac.system.entity.GenericUser;
 
 public class UserInfoImpl implements UserInfo {
 
@@ -20,7 +21,7 @@ public class UserInfoImpl implements UserInfo {
 	private static final long serialVersionUID = 256808602035007549L;
 
 	private Long id;
-	private String userCode;
+	private String loginName;
 	private String password;
 
 	private List<String> resources = new ArrayList<String>();
@@ -28,22 +29,23 @@ public class UserInfoImpl implements UserInfo {
 	private Map<String, Set<String>> orgAuthority = new HashMap<String, Set<String>>();
 
 	private Map<String, String> menus = new HashMap<String, String>();
-
-	private SysUser sysUser;
+	
+	private GenericUser user;
 
 	public UserInfoImpl() {
 
 	}
 
-	public UserInfoImpl(SysUser sysUser) {
-		this.id = sysUser.getId();
-		this.userCode = sysUser.getUsername();
-		this.password = sysUser.getPassword();
-		this.sysUser = sysUser;
+	public UserInfoImpl(GenericUser user) {
+		this.id = user.getId();
+		this.loginName = user.getLoginName();
+		this.password = user.getPassword();
+		this.user = user;
 	}
 
-	public SysUser getSimpleUser() {
-		return sysUser;
+	@Override
+	public GenericUser getSimpleUser() {
+		return user;
 	}
 
 	public void setId(Long id) {
@@ -54,12 +56,12 @@ public class UserInfoImpl implements UserInfo {
 		this.password = password;
 	}
 
-	public String getUserCode() {
-		return userCode;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 
 	@Override
@@ -126,7 +128,7 @@ public class UserInfoImpl implements UserInfo {
 
 	@Override
 	public String getUsername() {
-		return getUserCode();
+		return getLoginName();
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.love.family.business.loginManage.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,28 +15,31 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 @Entity
 @Table(name = "sys_user")
-public class SysUser implements UserDetails{
+public class SysUser implements Serializable{
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -9201353176787742025L;
-	
+	private static final long serialVersionUID = 5899805478754620321L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="username")
-	private String username;
+	@Column(name="login_name")
+	private String loginName;
+	
+	@Column(name="user_name")
+	private String userName;
 	
 	@Column(name="password")
 	private String password;
+	
+	@Column(name="status")
+	private String status;
 	
 	@ManyToMany(cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     @JoinTable(name = "sys_user_role",joinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
@@ -51,12 +53,20 @@ public class SysUser implements UserDetails{
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -74,38 +84,14 @@ public class SysUser implements UserDetails{
 	public void setSysRoles(List<SysRole> sysRoles) {
 		this.sysRoles = sysRoles;
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> auths = new ArrayList<>();
-        List<SysRole> userRoles = this.getSysRoles();
-        if(userRoles!=null&&userRoles.size()>0) {
-	        for (SysRole role : userRoles) {
-	            auths.add(new SimpleGrantedAuthority(role.getCode()));
-	        }
-        }
-        return auths;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 }

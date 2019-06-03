@@ -31,20 +31,21 @@ public class LoginDaoImpl extends BaseHibernate4QueryDao<SysUser> implements Log
 	}
 
 	@Override
-	public boolean addLoginUser(String username, String password) {
+	public boolean addLoginUser(String loginName, String password) {
 		SysUser sysUser = new SysUser();
-		sysUser.setUsername(username);
+		sysUser.setLoginName(loginName);
 		sysUser.setPassword(password);
+		sysUser.setStatus("0");
 		super.insert(sysUser);
 		return true;
 	}
 
 	@Override
-	public List<SysUser> findLoginUserByLoginName(String username) {
+	public List<SysUser> findLoginUserByLoginName(String loginName) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("from SysUser where username= :username");
+		buffer.append("from SysUser where loginName= :loginName and status=0");
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("username", username);
+		params.put("loginName", loginName);
 		try {
 			List<SysUser> sysUserList = super.findEntityObjects(buffer.toString(), params);
 			return sysUserList;

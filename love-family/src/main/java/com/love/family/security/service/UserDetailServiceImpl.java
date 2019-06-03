@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.love.family.business.loginManage.entity.SysUser;
 import com.love.family.business.loginManage.service.LoginService;
+import com.love.family.pub.rbac.system.entity.GenericUser;
 import com.love.family.security.model.UserInfoImpl;
 import com.love.family.utils.MyBusinessException;
 
@@ -27,7 +29,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
 			SysUser sysUser = findUser(username);
-			return new UserInfoImpl(sysUser);  
+			GenericUser genericUser = new GenericUser();
+			BeanUtils.copyProperties(sysUser, genericUser);
+			return new UserInfoImpl(genericUser);  
 		} catch (Exception e) {
 			logger.error("获取用户\"{}\"的信息时错误!", username);
 			e.printStackTrace();

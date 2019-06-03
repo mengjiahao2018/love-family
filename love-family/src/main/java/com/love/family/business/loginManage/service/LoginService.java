@@ -11,5 +11,5 @@ public interface LoginService {
 
 	boolean addLoginUser(Map<String, Object> pageRequest);
 
-	List<SysUser> findLoginUserByLoginName(String username);
+	List<SysUser> findLoginUserByLoginName(String loginName);
 }

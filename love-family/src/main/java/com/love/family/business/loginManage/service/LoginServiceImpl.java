@@ -52,8 +52,8 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public List<SysUser> findLoginUserByLoginName(String username) {
-		return userDao.findLoginUserByLoginName(username);
+	public List<SysUser> findLoginUserByLoginName(String loginName) {
+		return userDao.findLoginUserByLoginName(loginName);
 	}
 
 }
