@@ -12,12 +12,12 @@
 	<div align="center" style="width: 100%">
 		<div id="roleSelectApp" style="width: 250px;margin: auto;" align="center">
 			<div style="margin-bottom: 20px;font-weight: 600" >角色选择</div>
-			<el-form id="roleSelectForm" ref="roleSelectForm" :model="selectedRoleData" action="selectOneRole.do" method="post">
+			<el-form id="roleSelectForm" ref="roleSelectForm" :model="selectedRoleData" :rules="rules" action="selectOneRole.do" method="post">
 				<el-form-item prop="selectedRoleId">
 					<el-select v-model="selectedRoleData.selectedRoleId" placeholder="请选择角色" >
 						<el-option v-for="role in roles"
 						:key="''+role.id"
-						:lable="role.name"
+						:label="role.name"
 						:value="''+role.id">
 						</el-option>
 					</el-select>
@@ -44,11 +44,10 @@ var loginApp = new Vue({
     	  	},
     		roles:[],
     		rules:{
-					selectedRoleId:[
-    					{required:true,message:'请选择角色',trigger:'change'}
-    	 			]
+				selectedRoleId:[
+    				{required:true,message:'请选择角色',trigger:'change'}
+    	 		]
     		}
-			
       }
     },
     methods:{
