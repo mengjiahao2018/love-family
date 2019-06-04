@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import com.love.family.business.loginManage.entity.SysRole;
+import com.love.family.business.loginManage.entity.GenericRole;
 import com.love.family.entity.supports.AbstractEntity;
 
 @MappedSuperclass
@@ -24,7 +24,7 @@ public class GenericUser extends AbstractEntity<Long> {
 
 	private String status;
 	
-	private List<SysRole> sysRoles;
+	private List<GenericRole> roles;
 
 	@Id
 	@GeneratedValue(generator = "seq_user")
@@ -68,12 +68,12 @@ public class GenericUser extends AbstractEntity<Long> {
 		this.status = status;
 	}
 	
-	public List<SysRole> getSysRoles() {
-		return sysRoles;
+	public List<GenericRole> getRoles() {
+		return roles;
 	}
 
-	public void setSysRoles(List<SysRole> sysRoles) {
-		this.sysRoles = sysRoles;
+	public void setRoles(List<GenericRole> roles) {
+		this.roles = roles;
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class GenericUser extends AbstractEntity<Long> {
 		builder.append("loginName:").append(loginName);
 		builder.append("password:").append(password);
 		builder.append("status:").append(status);
-		builder.append("sysRoles:").append(sysRoles);
+		builder.append("roles:").append(roles);
 		return builder.toString();
 	}
 

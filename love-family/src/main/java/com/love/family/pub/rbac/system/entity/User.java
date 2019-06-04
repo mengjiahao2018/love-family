@@ -2,7 +2,8 @@ package com.love.family.pub.rbac.system.entity;
 
 import java.util.Date;
 
-import com.love.family.business.loginManage.entity.SysRole;
+import com.love.family.business.loginManage.entity.GenericRole;
+
 
 public class User extends GenericUser implements BaseEntityInterfc {
 	private String idCard;
@@ -15,7 +16,7 @@ public class User extends GenericUser implements BaseEntityInterfc {
 	
 	private Date lastModifiedTime;
 	
-	private SysRole currentSelectRole;
+	private GenericRole currentSelectRole;
 
 	/**
 	 * 
@@ -67,11 +68,11 @@ public class User extends GenericUser implements BaseEntityInterfc {
 		this.lastModifiedTime = lastModifiedTime;
 	}
 
-	public SysRole getCurrentSelectRole() {
+	public GenericRole getCurrentSelectRole() {
 		return currentSelectRole;
 	}
 
-	public void setCurrentSelectRole(SysRole currentSelectRole) {
+	public void setCurrentSelectRole(GenericRole currentSelectRole) {
 		this.currentSelectRole = currentSelectRole;
 	}
 	

@@ -43,7 +43,7 @@ public class SysUser implements Serializable{
 	
 	@ManyToMany(cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     @JoinTable(name = "sys_user_role",joinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
-	private List<SysRole> sysRoles;
+	private List<GenericRole> roles;
 
 	public Long getId() {
 		return id;
@@ -77,14 +77,14 @@ public class SysUser implements Serializable{
 		this.password = password;
 	}
 	
-	public List<SysRole> getSysRoles() {
-		return sysRoles;
+	public List<GenericRole> getRoles() {
+		return roles;
 	}
 
-	public void setSysRoles(List<SysRole> sysRoles) {
-		this.sysRoles = sysRoles;
+	public void setRoles(List<GenericRole> roles) {
+		this.roles = roles;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}
