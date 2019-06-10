@@ -88,6 +88,9 @@ new Vue({
         	} else {
         		this.getUserFuns.push(callback);
         	}
+        },
+        changeRole:function(){
+        	top.location.href = "role-select.html";
         }
     },
     created: function () {
@@ -109,6 +112,19 @@ new Vue({
         			if(_this.loadingCount<=0) {
         				_this.loading = false;
         			}
+    			}
+    		}
+    	});
+    	
+    	$.ajax({
+    		type:"POST",
+    		url:"getUserinfo.do",
+    		data:{},
+    		dataType:"json",
+    		success:function(data){
+    			_this.user = data;
+    			for(var i = 0;i<_this.getUserFuns;i++){
+    				_this.getUserFuns[i](_this.user);
     			}
     		}
     	});

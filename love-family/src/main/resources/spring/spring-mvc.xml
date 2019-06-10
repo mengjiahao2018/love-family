@@ -35,38 +35,37 @@
         <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
     </aop:config>
 
-	<!-- 定义视图解析器viewResolver -->
-    <bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="viewResolvers">
-			<list>
-				<bean id="viewResolverJsp"
-					class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-					<property name="viewClass" value="com.love.family.system.mvc.MyJstlView" />
-					<property name="contentType" value="text/html;charset=UTF-8" />
-					<property name="prefix" value="/" />
-					<property name="suffix" value=".jsp" />
-					<property name="order" value="0" />
-				</bean>
-				<bean id="viewResolverJspHtml"
-					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="viewClass"
-						value="org.springframework.web.servlet.view.InternalResourceView" />
-					<property name="contentType" value="text/html;charset=UTF-8" />
-					<property name="prefix" value="/" />
-					<property name="suffix" value=".html" />
-					<property name="order" value="1" />
-				</bean>
-			</list>
-		</property>
-		<!-- 用于将对象转换为 JSON -->
-		<property name="defaultViews">
-			<list>
-				<bean
-					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-			</list>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="1" />
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="locale">zh_CN</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="default_encoding">UTF-8</prop>
+			</props>
 		</property>
 	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+		<property name="suffix" value=".html" />
+		<property name="order" value="0" />
+		<!-- 解决网页中文乱码的问题 -->
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+
     
      <!-- 返回json 方法二 需要导入 jackson-annotations.jar,jackson-core.jar,jackson-databind.jar-->  
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

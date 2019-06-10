@@ -30,6 +30,7 @@ import com.love.family.pub.rbac.system.entity.User;
 import com.love.family.pub.rbac.system.util.UserInfoUtils;
 import com.love.family.security.context.SecurityContext;
 import com.love.family.security.model.UserInfo;
+import com.love.family.utils.MyBusinessException;
 
 @Controller
 public class RoleSelectController {
@@ -57,18 +58,42 @@ public class RoleSelectController {
 
 	}
 	
+	@RequestMapping(value = "getUserinfo", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> getUserinfo(HttpServletRequest request, HttpServletResponse response) {
+		Map<String,String> msgMap = new HashMap<String, String>();
+		UserInfo userInfo =(UserInfo)UserInfoUtils.getCurrentUserInfo();
+		if(userInfo!=null) {
+			User selfUser =(User) userInfo.getSimpleUser();
+			GenericRole role = selfUser.getCurrentSelectRole();
+			msgMap.put("rolename", role.getName());
+			msgMap.put("username", selfUser.getUserName());
+			msgMap.put("usercode", selfUser.getLoginName());
+		}
+		return msgMap;
+	}
+	
 	@RequestMapping(value = "selectOneRole")
 	public ModelAndView selectOneRole(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			UserInfo userInfo =(UserInfo)UserInfoUtils.getCurrentUserInfo();
-			User selfUser = (User)userInfo.getSimpleUser();
-			String selectedRoleId = request.getParameter("selectedRoleId");
-			Long roleId = StringUtils.isBlank(selectedRoleId)?0:Long.valueOf(selectedRoleId);
-			GenericRole role = roleService.findRoleById(roleId) ;
+			UserInfo userInfo = (UserInfo) UserInfoUtils.getCurrentUserInfo();
+			User selfUser = (User) userInfo.getSimpleUser();
+			String method = request.getMethod();
+			String selectedRoleId = null;
+			if("get".equalsIgnoreCase(method)) {
+				selectedRoleId = selfUser.getCurrentSelectRole().getId().toString();
+			}else {
+				selectedRoleId = request.getParameter("selectedRoleId");
+			}
+			Long roleId = StringUtils.isBlank(selectedRoleId) ? 0 : Long.valueOf(selectedRoleId);
+			GenericRole role = roleService.findRoleById(roleId);
 			selfUser.setCurrentSelectRole(role);
-			initUser(userInfo,Long.valueOf(selectedRoleId));
-		} catch (NumberFormatException e) {
-			ModelAndView indexView = new ModelAndView("index");
+			initUser(userInfo, Long.valueOf(selectedRoleId));
+		} catch (MyBusinessException e) {
+			ModelAndView indexView = new ModelAndView("/error/roleFunctionEmpty");
+			return indexView;
+		} catch (Exception e) {
+			ModelAndView indexView = new ModelAndView("/error/loginerror");
 			return indexView;
 		}
 		ModelAndView indexView = new ModelAndView("index");
@@ -106,7 +131,7 @@ public class RoleSelectController {
 			if(selectedRoleId.longValue()==role.getId().longValue()) {
 				try {
 					addRolePrivilege(userInfo,role);
-				} catch (RuntimeException e) {
+				} catch (MyBusinessException e) {
 					logger.error("加载[" + userInfo.getLoginName() + ":" + userInfo.getUsername() + "]的角色[id:"
 							+ role.getId() + ",code:" + role.getCode() + ",name:" + role.getName() + "]");
 					throw e;
@@ -121,7 +146,7 @@ public class RoleSelectController {
 		RolePrivilege privilege = roleService.getRolePrivilege(role.getId()); 
 		
 		if(privilege.getResourceList().size()==0) {
-			throw new RuntimeException("该角色权限列表为空！");
+			throw new MyBusinessException("该角色权限列表为空！");
 		}
 		
 		//第二步，将此角色对应的功能权限设置到此用户

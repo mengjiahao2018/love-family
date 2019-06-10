@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="UTF-8" />
+<LINK rel=stylesheet href="lib/element/element.min.css">
+<LINK rel=stylesheet href="lib/font-awesome/css/font-awesome.min.css">
+<LINK rel=stylesheet href="css/index.css">
+<style type="text/css">
+.weightDiv {
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<div id="app"  v-loading.fullscreen.lock="loading"  element-loading-text="拼命加载中">
+		<!-- 头部 -->
+		<div class="header" >
+			<div class="header-left">
+			</div>
+			<div class="header-right" >
+			    <el-tooltip content="角色选择"  placement="bottom">
+			      <el-button type="text" @click="changeRole" style="color:#ffffff;font-size:24px;"><span class="icon-user"></span></el-button>
+			    </el-tooltip>
+			</div>
+			<div class="header-right" style="font-size: 14px">|</div>
+			<div class="header-right" style="font-size: 14px">
+				{{user.rolename}}&nbsp;
+				{{user.username}}&nbsp;
+				{{user.usercode}}&nbsp;
+			</div>
+		</div>
+	</div>
+</body>
+<!-- 加载脚本 -->
+<script src="lib/babel-polyfill/polyfill.js"></script>
+<script src="lib/vue/vue.js"></script>
+<script src="lib/vue-router/vue-router.js"></script>
+<script src="lib/element/element.min.js"></script>
+<script src="lib/jquery/jquery-3.3.1.min.js"></script>
+<script src="lib/require/require.min.js"></script>
+<script src="lib/ajaxFileUpload/ajaxfileupload.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/components.js"></script>
+<script src="js/index.js"></script>
+
+
+</html>
