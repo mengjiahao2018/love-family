@@ -148,7 +148,44 @@ new Vue({
         	}
         },
         loadMenu:function(){
-        	
+        	var _this = this;
+        	$.ajax({
+        		type:"POST",
+        		url:"menu/queryFirstMenus.action",
+        		data:{},
+        		dataType:"json",
+        		success:function(data){
+        			_this.menus = data[1];
+        			//焦点设置到对应的菜单项
+        			_this.$nextTick(function () {
+        	            var urlPath = window.location.hash.substr(1);
+        	            if(urlPath){
+        	            	var menuIndePath = _this.findMenuIndexPathByPath(_this.menus,urlPath);
+        	            	if(menuIndePath&&menuIndePath.length>=2){
+        	            		//打开主菜单
+        	            		this.mainMenuIndex = menuIndePath[0];
+        	            		_this.$nextTick(function () {
+        	            			var submenu = $(".submenu-container").children(".el-menu").children("li").eq(menuIndePath[1]);
+        	            			if(menuIndePath.length==2){
+        	            				submenu.trigger("click");
+        	            			}else if(menuIndePath.length==3){
+        	            				submenu.children(".el-menu").children("li").eq(menuIndePath[2]).trigger("click");
+        	            			}
+        	            	    });        	            		
+        	            	}else{
+        	            		if("0SHOUYE"==_this.menus[0].code||"/templates/mainPage/mainPage.html"==_this.menus[0].code){
+        	            			router.push("/templates/mainPage/mainPage");
+        	            		}else{
+        	            			$(".menu-container .el-menu-item").first().trigger("click");
+        	            			_this.nextTick(function(){
+            	            			$(".submenu-container .el-menu-item").first().trigger("click");
+        	            			});
+        	            		}
+        	            	}
+        	            }
+        	        });
+        		}
+        	});
         }
     },
     created: function () {
