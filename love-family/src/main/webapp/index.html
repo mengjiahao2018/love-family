@@ -6,30 +6,73 @@
 <LINK rel=stylesheet href="lib/element/element.min.css">
 <LINK rel=stylesheet href="lib/font-awesome/css/font-awesome.min.css">
 <LINK rel=stylesheet href="css/index.css">
-<style type="text/css">
-.weightDiv {
-	font-weight: bold;
-}
-</style>
 </head>
 <body>
-	<div id="app"  v-loading.fullscreen.lock="loading"  element-loading-text="拼命加载中">
-		<!-- 头部 -->
-		<div class="header" >
-			<div class="header-left">
-			</div>
-			<div class="header-right" >
-			    <el-tooltip content="角色选择"  placement="bottom">
-			      <el-button type="text" @click="changeRole" style="color:#ffffff;font-size:24px;"><span class="icon-user"></span></el-button>
-			    </el-tooltip>
-			</div>
-			<div class="header-right" style="font-size: 14px">|</div>
-			<div class="header-right" style="font-size: 14px">
-				{{user.rolename}}&nbsp;
-				{{user.username}}&nbsp;
-				{{user.usercode}}&nbsp;
-			</div>
-		</div>
+	<div id="app"  v-loading.fullscreen.lock="loading" element-loading-text="拼命加载中">
+		<el-row class="container">
+			<el-col :span=24 class="header">
+				<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
+					{{collapsed?'':sysName}}
+				</el-col>
+				<el-col :span="14" class="userinfo">
+					<div class="header-right" style="font-size: 14px">
+						{{user.rolename}}&nbsp;
+						{{user.username}}&nbsp;&nbsp;
+						<el-tooltip content="角色选择"  placement="bottom">
+			     			<el-button type="text" @click="changeRole" style="font-size: 17px;color:#fff"><span class="fa fa-user"></span></el-button>
+			    		</el-tooltip>
+			    		<el-tooltip content="退出"  placement="bottom">
+			     			<el-button type="text" @click="logout" style="font-size: 17px;color:#fff"><span class="fa fa-power-off"></span></el-button>
+			    		</el-tooltip>
+					</div>
+				</el-col>
+			</el-col>
+			
+			<el-col :span="24" class="body">
+				<div class="body-middle">
+					<!-- 上方子菜单 -->
+					<div class="submenu-container" v-if="menus[mainMenuIndex]" :style="{'margin-left':bodyLeftWidth+'px'}">
+						<el-menu class="weighDiv" ref="subMenu" model="horizontal" @select="selectMenuItem">
+							<template v-for="submenu in menus[mainMenuIndex].demoMenus">
+								<el-submenu v-if="submenu.demoMenus" :index="''+submenu.id">
+									<template slot="title">
+										<i :class="submenu.icon" ></i>
+										{{submenu.label}}
+									</template>
+									<el-menu-item :index="''+submenuItem.id" v-for="submenuItem in submenu.demoMenus" :key="submenuItem.id">
+										{{submenuItem.label}}
+									</el-menu-item>
+								</el-submenu>
+								<el-menu-item v-else :index="''+submenu.id" >
+									<i :class="submenu.icon" ></i>
+									{{submenu.label}}
+								</el-menu-item>
+							</template>
+						</el-menu>
+					</div>
+					<!-- 容器内页面渲染 -->
+					<div class="body-inner" :style="{height:bodyInnerHeight+'px','margin-left':bodyLeftWidth+'px'}">
+						<router-view class="weighDiv"></router-view>
+					</div>
+				</div>
+				<!-- 左侧主菜单 -->
+				<div class="body-left" :style="{width:bodyLeftWidth+'px'}">
+					<div class="menu-container" :style="{width:(bodyLeftWidth-10)+'px'}">
+						<el-menu ref="mainMenu" @select="selectMainMenu" :default-active="mainMenuIndex" >
+							<el-menu-item :index="''+index" v-for="(menu,index) in menus" :key="menu.id" style="padding-left:25px">
+								<i :class="menu.icon" style="font-size: 24px"></i>
+								<span class="weighDiv" style="font-size: 16px;" slot="title">{{menu.label}}</span>
+							</el-menu-item>
+						</el-menu>
+					</div>
+					<div class="menu-collapser" @click="collapseMenu">
+						<i class="fa fa-caret-right" v-show="isMenuCollapse"></i>
+						<i class="fa fa-caret-left" v-show="!isMenuCollapse"></i>
+					</div>
+				</div>
+			</el-col>
+
+		</el-row>
 	</div>
 </body>
 <!-- 加载脚本 -->

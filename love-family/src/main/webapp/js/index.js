@@ -52,12 +52,13 @@ new Vue({
                 this.bodyInnerHeight = this.bodyHeight-64;//$(".submenu-container").outerHeight(true);
             },
             user: {},
-            isMenuCollapse: false,
             mainMenuIndex: '0',
             menus: [],
-            todoTaskCount: 0,
-            myTaskCount: 0,
-            getUserFuns: []
+            getUserFuns: [],
+            sysName:'系统后台管理系统',
+            collapsed:false,
+            structureMenuArr:[],
+            isMenuCollapse:false
         };
     },
     methods: {
@@ -91,6 +92,63 @@ new Vue({
         },
         changeRole:function(){
         	top.location.href = "role-select.html";
+        },
+        logout:function(){
+        	top.location.href="j_spring_security_logout";
+        },
+        selectMenuItem:function(index,indexPath){
+        	var menu = this.menus[this.mainMenuIndex];
+        	for(var i =0;i<indexPath.length;i++){
+        		for(var j=0;j<menu.demoMenus.length;j++){
+        			if(menu.demoMenus[j].id==indexPath[i]){
+        				menu=menu.demoMenus[j];
+        				break;
+        			}
+        		}
+        	}
+        	//动态构建页面导航菜单
+        	this.navigationMenu(menu);
+        	var path = menu.code.substr(0,menu.code.lastIndexOf('.html'));
+        	router.push(path);
+        },
+        navigationMenu:function(menu){
+        	this.menuArr=[];
+        	var sortStructureMenuArr=[];
+        	this.getMenuArray(menu,this.menus[this.mainMenuIndex]);
+        	if(this.menuArr.length>0){
+        		for(var i=0;i<this.menuArr.length;i++){
+        			var j = this.menuArr.length-1-i;
+        			var singMenu = {id:i,name:this.menuArr[j]};
+        			sortStructureMenuArr.push(singMenu);
+        		}
+        	}
+        	this.structureMenuArr=sortStructureMenuArr;
+        	console.log(this.structureMenuArr);
+        },
+        selectMainMenu:function(index){
+        	this.mainMenuIndex = index;
+        	if(this.mainMenuIndex==0){
+        		router.push("/templates/mainPage/mainPage");
+        	}else{
+        		this.$nextTick(function(){
+        			$(".submenu-container .el-menu-item").first().trigger("click");
+        		});
+        	}
+        },
+        collapseMenu:function(){
+        	var menu = $(this.$refs.mainMenu.$el);
+        	if(this.isMenuCollapse){
+        		this.isMenuCollapse=false;
+        		menu.removeClass("el-menu--collapse");
+        		this.bodyLeftWidth=this.initBodyLeftWidth;
+        	}else{
+        		this.isMenuCollapse=true;
+        		menu.addClass("el-menu--collapse");
+        		this.bodyLeftWidth=menu.width()+10;
+        	}
+        },
+        loadMenu:function(){
+        	
         }
     },
     created: function () {
@@ -128,6 +186,8 @@ new Vue({
     			}
     		}
     	});
+    	//加载菜单
+    	this.loadMenu();
     },
     mounted: function () {
         this.$nextTick(function () {

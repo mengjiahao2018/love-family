@@ -1,47 +1,61 @@
-/******************************首页样式******************************/
-#login_body {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(../images/login/login_bg.gif) #226cc5 repeat-x 50% top; PADDING-BOTTOM: 0px; MARGIN: 110px 0px 0px; FONT: 12px/150% Arial, "宋体" ,Helvetica,sans-serif; PADDING-TOP: 0px; TEXT-DECORATION: none
+.container {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	width: 100%;
 }
-
-body {
-    margin: 0;
-    padding: 0;
-}
-.hancker-table{
-	position:absolute;
-	left:9999px;
-}
-#app {
-    background-color: #f1f7fb;
-}
-
 .header {
-    width: 100%;
-    height: 60px;
-    color: #ffffff;
-    background-color: #1565c0;
-    border-bottom: 2px solid #ffffff;
+		height: 60px;
+		line-height: 60px;
+		background:#20a0ff;
+		color:#fff;
+		text-align: left;
 }
 
-.header .header-left {
-    float: left;
-    height: 100%;
-}
-
-.header .header-right {
+.header-right {
     float: right;
     height: 100%;
     line-height: 65px;
-    font-size: 14px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
+.logo {
+		text-align: left;
+		height:60px;
+		font-size: 20px;
+		padding-left:20px;
+		padding-right:20px;
+		border-color: rgba(238,241,146,0.3);
+		border-right-width: 1px;
+		border-right-style: solid;	
+}
+
+.logo-width{
+		width:260px;
+}
+
+.logo-collapse-width{
+		width:60px
+}	
+
+.tools{
+	padding: 0px 23px;
+	width:14px;
+	height: 60px;
+	line-height: 60px;
+	cursor: pointer;
+}
+
+.userinfo {
+	text-align: right;
+	padding-right: 35px;
+	float: right;
+}
+
 .body {
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-    font-family:"微软雅黑";
+    margin: 0;
+    padding: 0;
 }
 
 .body .body-middle {
@@ -52,6 +66,10 @@ body {
 
 .submenu-container {
     margin: 10px 10px 10px 200px;
+}
+
+.weighDiv{
+	font-weight: bold;
 }
 
 .body .body-inner {
@@ -93,234 +111,3 @@ body {
     background-color: #008cd7;
 }
 
-/******************************覆盖原有组件样式******************************/
-.el-menu {
-    background-color: #ffffff;
-}
-
-.menu-container .el-menu-item.is-active {
-    color: #ffffff;
-    background-color: #008cd7;
-    /* border-left: 5px solid #a7c739; */
-}
-
-.el-menu-item, .el-submenu__title {
-    height: 44px;
-    line-height: 44px;
-    border-bottom: 1px solid #e0e6ed;
-    color:#000;
-}
-
-.el-menu--horizontal .el-menu-item {
-    height: 44px;
-    line-height: 44px;
-    font-size:15px;
-}
-
-.el-menu--horizontal .el-submenu .el-submenu__title {
-    height: 44px;
-    line-height: 44px;
-    font-size:15px;
-}
-
-.el-menu--horizontal .el-submenu>.el-menu {
-    top: 49px;
-}
-
-.el-menu-item [class^=icon-] {
-    display: inline-block;
-    width: 24px;
-    margin-right: 5px;
-    text-align: center;
-}
-
-.submenu-container .el-badge {
-    margin: -18px -15px 0 -5px;
-}
-
-.submenu-container .el-badge__content {
-	border: none;
-}
-
-
-/******************************通用样式******************************/
-.container {
-    padding: 10px;
-}
-
-.container-bottom {
-    text-align: right;
-    margin-top: 5px;
-}
-
-.container-bottom .el-pagination {
-    display: inline-block;
-}
-
-.container-bottom .el-button {
-    float: left;
-}
-
-.line {
-    height: 1px;
-    background-color: #e0e6ed;
-    margin: 10px 0;
-}
-
-
-/******************************覆盖原有组件样式******************************/
-.el-collapse {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.el-collapse-item__header {
-    height: 33px;
-    line-height: 33px;
-}
-
-.search-form .el-form-item {
-    margin-bottom: 0;
-}
-
-.search-form .el-form-item__label {
-	text-align: left;
-}
-
-.search-form .el-form-item__content {
-    width: 195px;
-}
-
-.search-form .el-form-item__content>div {
-    width: 100%;
-}
-
-.search-form .el-form-item__error {
-	display: none;
-}
-
-.edit-form .el-form-item__content>div {
-    width: 100%;
-}
-
-.edit-form.el-form--label-top .el-col .el-form-item {
-	width: 100%;
-}
-
-.el-form-item__label {
-    font-size: 13px;
-    color: #000;
-}
-
-.el-form-item.is-required .el-form-item__label:before {
-    content: '|';
-    font-weight: 900;
-}
-
-.el-tree-node__content {
-	line-height: 30px;
-    height: 30px;
-}
-
-.el-table {
-    font-size: 13px;
-}
-
-.el-table td, .el-table th {
-    height: 33px;
-}
-.selection-all-disabled th.el-table-column--selection label {
-	display: none;
-}
-
-.el-dialog__footer {
-    text-align: center;
-    background-color: #f0f8ff;
-}
-
-.el-button span[class*=icon-] {
-    margin-right: 5px;
-}
-
-.el-button--text {
-    color: #1f2d3d;
-}
-
-.el-select .el-input--small input {
-	max-height : 31px;
-}
-
-.nowrap-select .el-select__tags {
-	white-space: nowrap;
-	overflow-x: hidden;
-}
-
-.el-dropdown-menu .el-tree {
-	border: none;
-}
-
-.uploadDiv1 {
-	float: left;
-	position: relative;
-	border-radius: 2px;
-	top: 1px;
-}
-
-.uploadDiv2 {
-	text-align: center;
-	font-family: 微软雅黑;
-	font-weight: bolder;
-	color: #fff;
-}
-
-.uploadInput {
-	cursor: pointer;
-	outline: medium none;
-	position: absolute;
-	filter: alpha(opacity = 0);
-	-moz-opacity: 0;
-	opacity: 0;
-	left: 0px;
-	top: 5px;
-}
-.el-tree-node>.el-tree-node__children{
-	overflow-x: auto;
-}
-
-.icon-edit:before {
-    
-    font-size: 20px;
-}
-.icon-upload:before{
-    
-    font-size: 20px;
-}
-.icon-trash:before{
-	font-size: 20px;
-}
-
-
-.merge-suffix-input>input{
-	border-right:0;
-	width:60px;
-	height:30px;
-}
-.merge-suffix-input>input:focus+div{
-	border-color: #008cd7;
-}
-.merge-suffix-input>input:hover+div{
-	border-color: rgb(131, 147, 165);
-}
-.merge-suffix-input>input:disabled+div{
-	background-color: rgb(234, 234, 234)
-}
-.merge-suffix-input>.el-input-group__append{
-	border-left:0;
-	background-color:white
-}
-
-.no-wrap-table td>div.cell{
-	overflow: hidden;
-	white-space: nowrap!important;
-	text-overflow: ellipsis;
-}
