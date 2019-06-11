@@ -7,35 +7,25 @@
 <meta charset="utf-8">
 <LINK rel=stylesheet href="lib/element/element.min.css">
 <LINK rel=stylesheet href="lib/font-awesome/css/font-awesome.min.css">
-<LINK rel=stylesheet href="css/index.css">
+<LINK rel=stylesheet href="css/login.css">
 </HEAD>
 <BODY id=login_body>
-	<div align="center" style="width: 100%">
-		<div id="loginApp" style="width: 250px;" align="center">
-			<div style="margin-bottom: 20px;font-weight: 600" >用户登录</div>
-			<el-form id="loginForm" ref="loginForm" :model="loginData" action="j_spring_security_check" method="post">
-				<el-form-item prop="username">
-					<el-input v-model="loginData.username" size="small" placeholder="请输入用户名">
-						<template slot="prepend">
-							<span class="ico-user"></span>
-						</template>
-					</el-input>
-				</el-form-item>
-				<el-form-item prop="password">
-					<el-input v-model="loginData.password" size="small" placeholder="请输入密码" type="password">
-						<template slot="prepend">
-							<span class="ico-lock"></span>
-						</template>
-					</el-input>
-				</el-form-item>
-				<el-form-item>
-					  <el-button type="primary" @click="submitForm" >登陆</el-button>
-				</el-form-item>
-				<input id="j_username" name="j_username" style="display: none" />
+		<div id="loginApp">
+			<el-form id="loginForm" ref="loginForm" :model="loginData" action="j_spring_security_check" method="post" label-position="left" label-width="0px" class="demo-ruleForm login-container">
+				<h3 class="title">系统登录</h3>
+			    <el-form-item prop="username">
+			    	<el-input type="text" v-model="loginData.username" auto-complete="off" placeholder="账号"></el-input>
+			    </el-form-item>
+			    <el-form-item prop="password">
+			    	<el-input type="password" v-model="loginData.password" auto-complete="off" placeholder="密码"></el-input>
+			    </el-form-item>
+			    <el-form-item style="width:100%;">
+			    	<el-button type="primary" style="width:100%;" @click.native.prevent="submitForm" :loading="logining">登录</el-button>
+			    </el-form-item>
+			    <input id="j_username" name="j_username" style="display: none" />
 				<input id="j_password" name="j_password" style="display: none" />
-			</el-form>
+  			</el-form>
 		</div>
-	</div>
 </BODY>
 
 <script src="lib/vue/vue.js"></script>
