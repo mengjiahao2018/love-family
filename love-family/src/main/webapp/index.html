@@ -6,10 +6,11 @@
 <LINK rel=stylesheet href="lib/element/element.min.css">
 <LINK rel=stylesheet href="lib/font-awesome/css/font-awesome.min.css">
 <LINK rel=stylesheet href="css/index.css">
+<link href="./images/favicon.ico" mce_href="./images/favicon.ico" rel="icon" type="image/x-icon">
 </head>
 <body>
 	<div id="app"  v-loading.fullscreen.lock="loading" element-loading-text="拼命加载中">
-		<el-row class="container">
+		<el-row class="main_container">
 			<el-col :span=24 class="header">
 				<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
 					{{collapsed?'':sysName}}

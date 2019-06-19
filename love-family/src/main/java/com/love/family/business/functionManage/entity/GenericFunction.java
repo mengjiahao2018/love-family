@@ -26,7 +26,7 @@ public class GenericFunction implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
-
+	
 	@Column(name="code")
 	protected String code;
 
@@ -81,6 +81,14 @@ public class GenericFunction implements Serializable{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override

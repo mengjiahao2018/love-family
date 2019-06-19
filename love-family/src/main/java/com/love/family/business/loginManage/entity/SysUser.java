@@ -1,6 +1,7 @@
 package com.love.family.business.loginManage.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "sys_user")
@@ -42,8 +45,9 @@ public class SysUser implements Serializable{
 	private String status;
 	
 	@ManyToMany(cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+	@JsonIgnore
     @JoinTable(name = "sys_user_role",joinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
-	private List<GenericRole> roles;
+	private List<GenericRole> roles = new ArrayList<GenericRole>();
 
 	public Long getId() {
 		return id;

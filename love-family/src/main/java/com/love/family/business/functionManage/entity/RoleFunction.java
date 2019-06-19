@@ -9,14 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.love.family.entity.supports.AbstractEntity;
+
 @Entity
 @Table(name = "sys_role_function")
-public class RoleFunction implements Serializable {
-
+public class RoleFunction extends AbstractEntity<Long> implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8715793346606615257L;
+	private static final long serialVersionUID = -9010495138376054806L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

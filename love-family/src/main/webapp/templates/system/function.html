@@ -1,0 +1,112 @@
+<div class="son_container">
+	<el-breadcrumb separator="/">
+	  <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+	  <el-breadcrumb-item>功能管理</el-breadcrumb-item>
+	</el-breadcrumb>
+
+	<el-collapse value="search" @change="collapseSearchChange">
+		 <el-collapse-item name="search">
+		 	<template slot="title">
+		 		查询条件
+		 	</template>
+		 	<el-form class="search-form" :inline="true" :model="dataSearch" label-width="80px" >
+			<el-form-item label="功能名称" prop="functionName">
+			    <el-input  v-model="dataSearch.functionName" size="small"></el-input>
+			  </el-form-item>
+			  <el-form-item label="功能链接" prop="functionUrl">
+			    <el-input  v-model="dataSearch.functionUrl" auto-complete="off"></el-input>
+			  </el-form-item>
+			  <el-form-item>
+			    <el-button type="primary" @click="currentPage=1;search();">查询</el-button>
+			  </el-form-item>
+			  <el-form-item style="float:right;text-align:right">
+			    <el-button type="primary" @click="addFunction" size="small"><span class="fa fa-plus"></span></el-button>
+			  </el-form-item>
+			</el-form>
+		 </el-collapse-item>
+	</el-collapse>
+	 <el-table 
+	 	ref="tableData"  
+		:data="dataFunction" 
+		:height="tableHeight"  
+		border 
+		stripe 
+		highlight-current-row>
+	      <el-table-column property="id" label="功能ID"  width="100" align="center"></el-table-column>
+	      <el-table-column property="name" label="功能名称"  width="150" align="center"></el-table-column>
+	      <el-table-column property="url" label="链接地址"  width="300" align="center"></el-table-column>
+	      <el-table-column property="type" label="链接类型"  width="150" align="center"></el-table-column>
+	      <el-table-column property="code" label="功能代码"  width="150" align="center"></el-table-column>
+	      <el-table-column property="status" :formatter="formatter" label="状态位"  width="150" align="center"></el-table-column>
+	      <el-table-column label="操作"  width="70" align="center" fixed="right">
+	      	<template slot-scope="scope">
+	      		<el-tooltip effect="light" content="编辑" >
+			      <el-button @click="editFunction(scope.row)" type="text" size="small" ><span class="fa fa-edit"></span></el-button>
+			    </el-tooltip>
+			    <el-tooltip effect="light" content="删除" >
+			      <el-button @click="deleteFunction(scope.row)" type="text" size="small" ><span class="fa fa-trash"></span></el-button>
+			    </el-tooltip>
+	      	</template>
+	      </el-table-column>
+    </el-table>
+    
+    <div class="container-bottom">
+	    	<el-pagination layout="total,prev,pager,next,jumper"
+	    	:pageSize="pageSize"
+	    	:current-page.sync="currentPage"
+	    	:total="total"
+	    	@current-change="search" >
+    	</el-pagination>
+    </div>
+    
+    
+   	<el-dialog :title="editingFunction.id?'修改':'新增'" :visible.sync="showEditDialog">
+  		<el-form ref="editForm" :model="editingFunction" :rules="rules" class="edit-from" label-position="top">
+  			<el-row :gutter="20">
+  				<el-col :span="12">
+  					<el-form-item label="功能名称" prop="name" required>
+  						<el-input  v-model="editingFunction.name" size="small"></el-input>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="链接地址" prop="url" required>
+  						<el-input  v-model="editingFunction.url" size="small"></el-input>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  			<el-row :gutter="20">
+  				<el-col :span="12">
+  					<el-form-item label="链接类型" prop="type" required>
+  						<el-select v-model="editingFunction.type" placeholder="请选择链接类型">
+  							<el-option label="菜单" value="MENU"></el-option>
+  							<el-option label="URL资源" value="URL"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="功能代码" prop="code" required>
+  						<el-input  v-model="editingFunction.code" size="small"></el-input>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  			<el-row :gutter="20">
+  				<el-col :span="12">
+  					<el-form-item label="状态位" prop="status" required>
+  						<el-select v-model="editingFunction.status" placeholder="请选择状态位">
+  							<el-option 
+  								v-for="item in fieldMaps.status"
+  								:key="item.value"
+  								:label="item.label"
+  								:value="item.value"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  		</el-form>
+  		<div slot="footer" align="center" >
+  			<el-button @click="saveFunction(editingFunction)" type="primary">确认</el-button>
+  			<el-button @click="showEditDialog=false" >取消</el-button>
+  		</div>
+	</el-dialog>
+	
+</div>

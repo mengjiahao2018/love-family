@@ -20,7 +20,7 @@
 			    	<el-input type="password" v-model="loginData.password" auto-complete="off" placeholder="密码"></el-input>
 			    </el-form-item>
 			    <el-form-item style="width:100%;">
-			    	<el-button type="primary" style="width:100%;" @click.native.prevent="submitForm" :loading="logining">登录</el-button>
+			    	<el-button type="primary" style="width:100%;" @click.native.prevent="submitForm" >登录</el-button>
 			    </el-form-item>
 			    <input id="j_username" name="j_username" style="display: none" />
 				<input id="j_password" name="j_password" style="display: none" />

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.love.family.business.loginManage.entity.GenericRole;
 import com.love.family.entity.supports.AbstractEntity;
 
@@ -24,6 +25,7 @@ public class GenericUser extends AbstractEntity<Long> {
 
 	private String status;
 	
+	@JsonIgnore
 	private List<GenericRole> roles;
 
 	@Id

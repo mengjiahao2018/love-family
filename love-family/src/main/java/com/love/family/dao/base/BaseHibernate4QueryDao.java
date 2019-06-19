@@ -18,6 +18,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.hql.internal.ast.QueryTranslatorImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository("baseHibernateQueryDao")
 public class BaseHibernate4QueryDao<E extends Serializable> {
+
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@PersistenceContext
 	private EntityManager em;
 	private static SessionFactory sf;
@@ -118,10 +123,18 @@ public class BaseHibernate4QueryDao<E extends Serializable> {
 		}
 	}
 
-	/*
-	 * public void delete(E entity) { em.remove(em.contains(entity) ? entity :
-	 * em.merge(entity)); } public void delete(Object id) { delete(load(id)); }
-	 */
+	
+	public void delete(Object id) {
+		delete(load(id));
+	}
+	
+	public <T extends Serializable> void delete(T entity,Class<T> objType) {
+		em.remove(em.contains(entity) ? entity : em.merge(entity));
+	}
+	
+	public void delete(E entity) {
+		em.remove(em.contains(entity) ? entity : em.merge(entity));
+	}
 
 	public E load(Object id) {
 		return em.find(entityClass, id);
@@ -280,8 +293,10 @@ public class BaseHibernate4QueryDao<E extends Serializable> {
 			long total = findCount(hql, conditionMap, values);
 			Query query = em.createQuery(hql, entityClass);
 			setParameters(query, conditionMap, values);
-			query.setFirstResult(pageRequest.getOffset());
-			query.setMaxResults(pageRequest.getPageSize());
+			Long offset =pageRequest.getOffset();
+			query.setFirstResult(offset.intValue());
+			int pageSize  =pageRequest.getPageSize();
+			query.setMaxResults(pageSize);
 			@SuppressWarnings("unchecked")
 			List<E> content = query.getResultList();
 
@@ -312,8 +327,10 @@ public class BaseHibernate4QueryDao<E extends Serializable> {
 			long total = findCount(hql, conditionMap, values);
 			Query query = em.createQuery(hql);
 			setParameters(query, conditionMap, values);
-			query.setFirstResult(pageRequest.getOffset());
-			query.setMaxResults(pageRequest.getPageSize());
+			Long offset =pageRequest.getOffset();
+			query.setFirstResult(offset.intValue());
+			int pageSize  =pageRequest.getPageSize();
+			query.setMaxResults(pageSize);
 			@SuppressWarnings("unchecked")
 			List<Object[]> content = query.getResultList();
 
@@ -461,11 +478,12 @@ public class BaseHibernate4QueryDao<E extends Serializable> {
 			long total = findCountBySql(sql, conditionMap, values);
 			Query query = em.createNativeQuery(sql, entityClass);
 			setParameters(query, conditionMap, values);
-			query.setFirstResult(pageRequest.getOffset());
-			query.setMaxResults(pageRequest.getPageSize());
+			Long offset =pageRequest.getOffset();
+			query.setFirstResult(offset.intValue());
+			int pageSize  =pageRequest.getPageSize();
+			query.setMaxResults(pageSize);
 			@SuppressWarnings("unchecked")
 			List<E> content = query.getResultList();
-
 			return new PageImpl<E>(content, pageRequest, total);
 
 		} else {
@@ -495,8 +513,10 @@ public class BaseHibernate4QueryDao<E extends Serializable> {
 			long total = findCountBySql(sql, conditionMap, values);
 			Query query = em.createNativeQuery(sql);
 			setParameters(query, conditionMap, values);
-			query.setFirstResult(pageRequest.getOffset());
-			query.setMaxResults(pageRequest.getPageSize());
+			Long offset =pageRequest.getOffset();
+			query.setFirstResult(offset.intValue());
+			int pageSize  =pageRequest.getPageSize();
+			query.setMaxResults(pageSize);
 			@SuppressWarnings("unchecked")
 			List<Object[]> content = query.getResultList();
 

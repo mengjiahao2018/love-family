@@ -125,6 +125,37 @@ new Vue({
         	this.structureMenuArr=sortStructureMenuArr;
         	console.log(this.structureMenuArr);
         },
+        getMenuArray:function(menu,mainMenu){
+        	var _this = this;
+        	var menuParentId = menu.parentId;//父级菜单
+        	if(menuParentId == mainMenu.id){
+        		_this.menuArr.push(menu.label);
+        		_this.menuArr.push(mainMenu.label);
+        	}else{
+        		if(mainMenu.demoMenus!=null){
+        			var flag =false;
+        			for(var i =0;i<mainMenu.demoMenus.length;i++){
+        				var sonMenu = mainMenu.demoMenus[i];
+        				if(menuParentId==sonMenu.id){
+        					_this.menuArr.push(menu.label);
+        	        		_this.menuArr.push(sonMenu.label);
+        	        		flag = true;
+        	        		break;
+        				}else{
+        					flag = false;
+        				}
+        			}
+        			if(flag){
+        				_this.menuArr.push(mainMenu.label);
+        			}else{
+            			for(var i =0;i<mainMenu.demoMenus.length;i++){
+            				var sonMenu = mainMenu.demoMenus[i];
+            				_this.getMenuArray(menu,sonMenu);
+            			}
+        			}
+        		}
+        	}
+        },
         selectMainMenu:function(index){
         	this.mainMenuIndex = index;
         	if(this.mainMenuIndex==0){

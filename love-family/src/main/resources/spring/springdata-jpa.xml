@@ -60,8 +60,7 @@
 				<prop key="hibernate.c3p0.min_size">10</prop>
 				<prop key="hibernate.hbm2ddl.auto">none</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 			</props>
 		</property>
 	</bean>

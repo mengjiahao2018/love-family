@@ -1,9 +1,27 @@
-.container {
+.main_container {
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
 	width: 100%;
 }
+
+.container {
+    padding: 10px;
+}
+
+.container-bottom {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.container-bottom .el-pagination {
+    display: inline-block;
+}
+
+.container-bottom .el-button {
+    float: left;
+}
+
 .header {
 		height: 60px;
 		line-height: 60px;
@@ -111,3 +129,48 @@
     background-color: #008cd7;
 }
 
+
+.search-form .el-form-item {
+    margin-bottom: 0;
+}
+
+.search-form .el-form-item__label {
+	text-align: left;
+}
+
+.search-form .el-form-item__content {
+    width: 195px;
+}
+
+.search-form .el-form-item__content>div {
+    width: 100%;
+}
+
+.search-form .el-form-item__error {
+	display: none;
+}
+
+.edit-from .el-form-item__content>div {
+    width: 100%;
+}
+
+.edit-from.el-form--label-top .el-col .el-form-item {
+    width: 100%;
+}
+
+.container {
+    padding: 10px;
+}
+
+.container-bottom {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.container-bottom .el-pagination {
+    display: inline-block;
+}
+
+.container-bottom .el-button {
+    float: left;
+}

@@ -2,8 +2,8 @@ package com.love.family.pub.rbac.system.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.love.family.business.loginManage.entity.GenericRole;
-
 
 public class User extends GenericUser implements BaseEntityInterfc {
 	private String idCard;
@@ -16,6 +16,7 @@ public class User extends GenericUser implements BaseEntityInterfc {
 	
 	private Date lastModifiedTime;
 	
+	@JsonIgnore
 	private GenericRole currentSelectRole;
 
 	/**
