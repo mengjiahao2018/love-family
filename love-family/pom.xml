@@ -72,9 +72,9 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>1.10.1.RELEASE</version>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-jpa</artifactId>
+		    <version>2.1.9.RELEASE</version>
 		</dependency>
 		<!-- spring核心包 end -->
 		<!-- jackson start -->
@@ -183,6 +183,14 @@
 		    <artifactId>freemarker</artifactId>
 		    <version>2.3.28</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
+		<dependency>
+		    <groupId>p6spy</groupId>
+		    <artifactId>p6spy</artifactId>
+		    <version>3.8.2</version>
+		</dependency>
+
 	</dependencies>
 
 
