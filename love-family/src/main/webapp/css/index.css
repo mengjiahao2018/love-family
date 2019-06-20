@@ -83,11 +83,15 @@
 }
 
 .submenu-container {
-    margin: 10px 10px 10px 200px;
+    margin: 5px 5px 5px 200px;
 }
 
-.weighDiv{
-	font-weight: bold;
+.submenu-container .el-badge{
+    margin: -18px -15px 0 -5px;
+}
+
+.submenu-container .el-badge__content{
+    border:none;
 }
 
 .body .body-inner {
@@ -173,4 +177,15 @@
 
 .container-bottom .el-button {
     float: left;
+}
+
+/******************************覆盖原有组件样式******************************/
+.el-collapse {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.el-collapse-item__header {
+    height: 33px;
+    line-height: 33px;
 }

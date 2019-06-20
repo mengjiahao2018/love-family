@@ -15,5 +15,11 @@ public interface MenuRepo {
 	 * @return
 	 */
 	List<MenuVO> findAllParentMenu();
+	/**
+	 * 根据菜单名称查询菜单
+	 * @param label
+	 * @return
+	 */
+	List<Object[]> findMenuByLabel(String label);
 
 }

@@ -13,4 +13,6 @@ public interface MenuService {
 
 	MenuEO findMenuByCode(String code);
 
+	List<Object[]> findMenuByLabel(String param);
+
 }

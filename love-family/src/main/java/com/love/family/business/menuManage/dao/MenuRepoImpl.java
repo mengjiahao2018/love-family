@@ -49,4 +49,9 @@ public class MenuRepoImpl extends BaseHibernate4QueryDao<MenuEO>  implements Men
 		return menuVOList;
 	}
 
+	@Override
+	public List<Object[]> findMenuByLabel(String label) {
+		return null;
+	}
+
 }

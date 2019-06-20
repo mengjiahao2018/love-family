@@ -134,4 +134,8 @@ public class MenuBiz {
 		return menuDao.findMenuByCode(code);
 	}
 
+	public List<Object[]> findMenuByLabel(String label) {
+		return menuRepo.findMenuByLabel(label);
+	}
+
 }

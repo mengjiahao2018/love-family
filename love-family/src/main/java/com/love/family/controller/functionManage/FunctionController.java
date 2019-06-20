@@ -1,6 +1,8 @@
 package com.love.family.controller.functionManage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -222,6 +224,32 @@ public class FunctionController {
 		Long id = Long.parseLong((String)pageRequest.get("id"));
 		GenericFunction function = functionService.findFunctionByFunctionId(id);
 		return function;
+		
+	}
+	
+	@RequestMapping(value = "/queryAllFatherMenu", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Map<String,Object> queryAllFatherMenu(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		Map<String,Object> resultMap = new HashMap<String, Object>();
+		resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_SUCCESS_CODE);
+		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
+		
+		String param = request.getParameter("label");
+		param = StringUtils.isBlank(param)?"%%":"%"+param+"%";
+		List<Object[]> list = menuService.findMenuByLabel(param);
+		List<Map<String,Object>> menuList = new ArrayList<Map<String,Object>>();
+		Map<String,Object> map = null;
+		for(Iterator<Object[]> iter = list.iterator();iter.hasNext()) {
+			Object [] data = iter.next();
+			map = new HashMap<String, Object>();
+			map.put("id", data[0]);
+			map.put("label", data[1]);
+			map.put("fid", data[2]);
+			map.put("hasSub", data[3]);
+			menuList.add(map);
+		}
+		resultMap.put("menuList",menuList);
+		return resultMap;
 		
 	}
 	

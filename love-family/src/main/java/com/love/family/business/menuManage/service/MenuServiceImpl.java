@@ -69,4 +69,9 @@ public class MenuServiceImpl implements MenuService {
 		return menuBiz.findMenuByCode(code);
 	}
 
+	@Override
+	public List<Object[]> findMenuByLabel(String label) {
+		return menuBiz.findMenuByLabel(label);
+	}
+
 }

@@ -7,6 +7,11 @@
 <LINK rel=stylesheet href="lib/font-awesome/css/font-awesome.min.css">
 <LINK rel=stylesheet href="css/index.css">
 <link href="./images/favicon.ico" mce_href="./images/favicon.ico" rel="icon" type="image/x-icon">
+<style type="text/css">
+	.weighDiv{
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
 	<div id="app"  v-loading.fullscreen.lock="loading" element-loading-text="拼命加载中">
@@ -33,7 +38,7 @@
 				<div class="body-middle">
 					<!-- 上方子菜单 -->
 					<div class="submenu-container" v-if="menus[mainMenuIndex]" :style="{'margin-left':bodyLeftWidth+'px'}">
-						<el-menu class="weighDiv" ref="subMenu" model="horizontal" @select="selectMenuItem">
+						<el-menu class="weighDiv el-menu--horizontal" ref="subMenu" @select="selectMenuItem">
 							<template v-for="submenu in menus[mainMenuIndex].demoMenus">
 								<el-submenu v-if="submenu.demoMenus" :index="''+submenu.id">
 									<template slot="title">
