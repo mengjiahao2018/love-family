@@ -52,5 +52,11 @@ public interface FunctionService {
 	 * @param function
 	 */
 	void deleteFuncion(GenericFunction function);
+	/**
+	 * 根据菜单名称查询菜单
+	 * @param param
+	 * @return
+	 */
+	List<GenericFunction> findFunctionByLikeName(String param);
 
 }

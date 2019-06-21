@@ -44,12 +44,11 @@ define(function(){
 							"size":this.pageSize,
 							"sort":"id"
 						},
-						"functionName":this.dataSearch.functionName,
-						"functionUrl":this.dataSearch.functionUrl
+						"menuName":this.dataSearch.menuName,
 				};
 				$.ajax({
 					type:"GET",
-					url:"function/queryAll.do",
+					url:"menuManage/queryAllMenu.do",
 					data:searchData,
 					dataType:"json",
 					success:function(data){
@@ -174,11 +173,29 @@ define(function(){
 					}
 				});
 			},
-			onClickMenuNode:function(){
-				
+			onClickMenuNode:function(menu,code,component){
+				component.tree.$parent.$parent.hide();
+				if(this.showAddDialog){
+					this.addingMenu.parentId = menu.id;
+					this.addingMenu.parentName = menu.label;
+				}else{
+					this.showEditDialog.parentId = menu.id;
+					this.showEditDialog.parentName = menu.label;
+				}
 			},
-			functionCodesChange:function(){
-				
+			functionCodesChange:function(functionCodes){
+				var menus = [];
+				for(var i =0;i<this.functions.length;i++){
+					if(functionCodes.indexOf(this.functions[i].id)>=0){
+						menus.push({
+							functionName : this.functions[i].name,
+							icon_create :'',
+							label_create:this.functions[i].name,
+							code_create:this.functions[i].id
+						});
+					}
+				}
+				this.addingMenu.menus = menus;
 			},
 			blur:function(e){
 				e.target.blur();
@@ -188,7 +205,6 @@ define(function(){
 			var _this = this;
 			this.$nextTick(function(){
 				_this.tableHeight+=$(".body-inner").height()-$(".container").outerHeight(true);
-				
 				//初始化下拉菜单
 				$.ajax({
 					type:"GET",
@@ -198,13 +214,14 @@ define(function(){
 					success:function(data){
 						if(data.result=='000000'){
 							var menuTreeData = [];
-							for(var i =0;i<data.length;i++){
-								var menu = {id:data[i].id,label:data[i].label};
-								if(data[i].hasSub=="Y"){
+							var menuList = data.menuList;
+							for(var i =0;i<menuList.length;i++){
+								var menu = {id:menuList[i].id,label:menuList[i].label};
+								if(menuList[i].hasSub=="Y"){
 									menu.children=[];
 								}
-								if(data[i].fid){
-									_this.menuMap[data[i].fid].children.push(menu);
+								if(menuList[i].fid){
+									_this.menuMap[menuList[i].fid].children.push(menu);
 								}else{
 									menuTreeData.push(menu);
 								}
@@ -224,12 +241,15 @@ define(function(){
 					dataType:"json",
 					success:function(data){
 						if(data.result=='000000'){
-							_this.functions=data;
+							var eos = data.eos;
+							_this.functions=eos;
 						}else{
 							_this.$message.error(data.message);
 						}
 					}
 				});
+				
+				_this.search();
 			});
 		}
 	}

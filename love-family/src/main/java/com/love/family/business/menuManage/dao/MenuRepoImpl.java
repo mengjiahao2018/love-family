@@ -51,7 +51,19 @@ public class MenuRepoImpl extends BaseHibernate4QueryDao<MenuEO>  implements Men
 
 	@Override
 	public List<Object[]> findMenuByLabel(String label) {
-		return null;
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(" SELECT                                  ");
+		buffer.append(" 	t.id,                               ");
+		buffer.append(" 	t.label,                            ");
+		buffer.append(" 	t.parent_id AS fid,                 ");
+		buffer.append("   isHasMenuChildrenList(t.id) as hassub,");
+		buffer.append(" 	getMenuLevel(t.Id) AS level         ");
+		buffer.append(" FROM                                    ");
+		buffer.append(" sys_menu t                              ");
+		buffer.append(" where 1=1 and t.label like :label 	    ");
+		Map<String,Object> conditionMap = new HashMap<String, Object>();
+		conditionMap.put("label",label);
+		return (List<Object[]>) this.findResutlObjectsBySql(buffer.toString(), conditionMap);
 	}
 
 }

@@ -25,6 +25,10 @@ public class MenuVO implements Serializable,Comparable<MenuVO> {
 	private String isChannel;
 
 	private List<MenuVO> demoMenus;
+	
+	private String functionName;
+	
+	private String functionUrl;
 
 	public Long getId() {
 		return id;
@@ -88,6 +92,22 @@ public class MenuVO implements Serializable,Comparable<MenuVO> {
 
 	public void setDemoMenus(List<MenuVO> demoMenus) {
 		this.demoMenus = demoMenus;
+	}
+	
+	public String getFunctionName() {
+		return functionName;
+	}
+
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
+	}
+
+	public String getFunctionUrl() {
+		return functionUrl;
+	}
+
+	public void setFunctionUrl(String functionUrl) {
+		this.functionUrl = functionUrl;
 	}
 
 	@Override

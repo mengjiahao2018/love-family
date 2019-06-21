@@ -10,6 +10,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.love.family.business.menuManage.entity.MenuEO;
@@ -72,6 +74,11 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public List<Object[]> findMenuByLabel(String label) {
 		return menuBiz.findMenuByLabel(label);
+	}
+
+	@Override
+	public Page<MenuEO> queryPageMenu(Pageable pageable, MenuEO menuEO) {
+		return menuBiz.queryPageMenu(pageable,menuEO);
 	}
 
 }

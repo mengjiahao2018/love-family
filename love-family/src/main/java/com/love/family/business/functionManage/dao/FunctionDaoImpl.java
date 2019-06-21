@@ -70,4 +70,13 @@ public class FunctionDaoImpl extends BaseHibernate4QueryDao<GenericFunction> imp
 		this.delete(function);
 	}
 
+	@Override
+	public List<GenericFunction> findFunctionByLikeName(String param) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("from GenericFunction where type='MENU' and name like :name order by name");
+		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		conditionMap.put("name",param);
+		return this.findEntityObjects(buffer.toString(), conditionMap);
+	}
+
 }

@@ -67,4 +67,9 @@ public class FunctionServiceImpl implements FunctionService {
 		roleFunctionDao.deleteAll(rfs);
 	}
 
+	@Override
+	public List<GenericFunction> findFunctionByLikeName(String param) {
+		return functionDao.findFunctionByLikeName(param);
+	}
+
 }

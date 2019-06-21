@@ -24,4 +24,6 @@ public interface FunctionDao {
 
 	void deleteFuncion(GenericFunction function);
 
+	List<GenericFunction> findFunctionByLikeName(String param);
+
 }

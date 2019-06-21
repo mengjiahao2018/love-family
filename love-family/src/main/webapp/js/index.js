@@ -182,7 +182,7 @@ new Vue({
         	var _this = this;
         	$.ajax({
         		type:"POST",
-        		url:"menu/queryFirstMenus.action",
+        		url:"menuManage/queryFirstMenus.action",
         		data:{},
         		dataType:"json",
         		success:function(data){

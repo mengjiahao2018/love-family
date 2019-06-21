@@ -234,23 +234,61 @@ public class FunctionController {
 		resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_SUCCESS_CODE);
 		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
 		
-		String param = request.getParameter("label");
-		param = StringUtils.isBlank(param)?"%%":"%"+param+"%";
-		List<Object[]> list = menuService.findMenuByLabel(param);
-		List<Map<String,Object>> menuList = new ArrayList<Map<String,Object>>();
-		Map<String,Object> map = null;
-		for(Iterator<Object[]> iter = list.iterator();iter.hasNext()) {
-			Object [] data = iter.next();
-			map = new HashMap<String, Object>();
-			map.put("id", data[0]);
-			map.put("label", data[1]);
-			map.put("fid", data[2]);
-			map.put("hasSub", data[3]);
-			menuList.add(map);
+		try {
+			String param = request.getParameter("label");
+			param = StringUtils.isBlank(param)?"%%":"%"+param+"%";
+			List<Object[]> list = menuService.findMenuByLabel(param);
+			List<Map<String,Object>> menuList = new ArrayList<Map<String,Object>>();
+			Map<String,Object> map = null;
+			for(Iterator<Object[]> iter = list.iterator();iter.hasNext();){
+				Object [] data = iter.next();
+				map = new HashMap<String, Object>();
+				map.put("id", data[0]);
+				map.put("label", data[1]);
+				map.put("fid", data[2]);
+				map.put("hasSub", data[3]);
+				menuList.add(map);
+			}
+			resultMap.put("menuList",menuList);
+		} catch (Exception e) {
+			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
+			resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, e.getMessage());
+			return resultMap;
 		}
-		resultMap.put("menuList",menuList);
-		return resultMap;
 		
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "/queryAllMenuFunction", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Map<String,Object> queryAllMenuFunction(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		Map<String,Object> resultMap = new HashMap<String, Object>();
+		resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_SUCCESS_CODE);
+		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
+		
+		try {
+			String param = request.getParameter("label");
+			param = StringUtils.isBlank(param)?"%%":"%"+param+"%";
+			List<GenericFunction> functions = functionService.findFunctionByLikeName(param);
+			List<Map<String,Object>> eos = new ArrayList<Map<String,Object>>();
+			for(GenericFunction function : functions){
+				Map<String,Object> eo = new HashMap<String, Object>();
+				eo.put("code", function.getCode());
+				eo.put("id", function.getId());
+				eo.put("name", function.getName());
+				eo.put("status", function.getStatus());
+				eo.put("type", function.getType());
+				eo.put("url", function.getUrl());
+				eos.add(eo);
+			}
+			resultMap.put("eos",eos);
+		} catch (Exception e) {
+			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
+			resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, e.getMessage());
+			return resultMap;
+		}
+		
+		return resultMap;
 	}
 	
 }

@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.love.family.business.menuManage.dao.MenuDao;
@@ -136,6 +138,10 @@ public class MenuBiz {
 
 	public List<Object[]> findMenuByLabel(String label) {
 		return menuRepo.findMenuByLabel(label);
+	}
+
+	public Page<MenuEO> queryPageMenu(Pageable pageable, MenuEO menuEO) {
+		return menuDao.queryPageMenu(pageable,menuEO);
 	}
 
 }
