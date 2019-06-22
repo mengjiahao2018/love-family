@@ -273,8 +273,8 @@ public class FunctionController {
 			List<Map<String,Object>> eos = new ArrayList<Map<String,Object>>();
 			for(GenericFunction function : functions){
 				Map<String,Object> eo = new HashMap<String, Object>();
-				eo.put("code", function.getCode());
-				eo.put("id", function.getId());
+				eo.put("code", function.getId());
+				eo.put("id", function.getCode());
 				eo.put("name", function.getName());
 				eo.put("status", function.getStatus());
 				eo.put("type", function.getType());

@@ -202,7 +202,7 @@ define(function(){
 							functionName : this.functions[i].name,
 							icon_create :'',
 							label_create:this.functions[i].name,
-							code_create:this.functions[i].code
+							code_create:this.functions[i].id
 						});
 					}
 				}
