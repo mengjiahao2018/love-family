@@ -24,5 +24,18 @@ public interface MenuService {
 	 * @return
 	 */
 	Page<MenuEO> queryPageMenu(Pageable pageable, MenuEO menuEO);
+	/**
+	 * 根据菜单ID查询菜单
+	 * @param menuId
+	 * @return
+	 */
+	MenuEO findMenuById(Long menuId);
+	/**
+	 * 根据ID删除菜单
+	 * @param eo
+	 */
+	void deleteMenu(MenuEO eo);
+
+	void saveMenu(MenuEO eo);
 
 }

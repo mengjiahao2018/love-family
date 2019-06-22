@@ -11,4 +11,10 @@ public interface MenuDao {
 
 	Page<MenuEO> queryPageMenu(Pageable pageable, MenuEO menuEO);
 
+	MenuEO findMenuById(Long menuId);
+
+	void deleteMenu(MenuEO eo);
+
+	void saveMenu(MenuEO eo);
+
 }

@@ -33,4 +33,19 @@ public class MenuDaoImpl extends BaseHibernate4QueryDao<MenuEO> implements MenuD
 		return this.findEntityObjects(buffer.toString(), conditionMap, pageRequest);
 	}
 
+	@Override
+	public MenuEO findMenuById(Long menuId) {
+		return this.load(menuId);
+	}
+
+	@Override
+	public void deleteMenu(MenuEO eo) {
+		this.delete(eo);
+	}
+
+	@Override
+	public void saveMenu(MenuEO eo) {
+		this.save(eo);
+	}
+
 }

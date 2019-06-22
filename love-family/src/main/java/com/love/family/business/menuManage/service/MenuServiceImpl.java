@@ -81,4 +81,19 @@ public class MenuServiceImpl implements MenuService {
 		return menuBiz.queryPageMenu(pageable,menuEO);
 	}
 
+	@Override
+	public MenuEO findMenuById(Long menuId) {
+		return menuBiz.findMenuById(menuId);
+	}
+
+	@Override
+	public void deleteMenu(MenuEO eo) {
+		menuBiz.deleteMenu(eo);
+	}
+
+	@Override
+	public void saveMenu(MenuEO eo) {
+		menuBiz.saveMenu(eo);
+	}
+
 }

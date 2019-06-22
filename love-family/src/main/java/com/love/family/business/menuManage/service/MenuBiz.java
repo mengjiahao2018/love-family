@@ -144,4 +144,16 @@ public class MenuBiz {
 		return menuDao.queryPageMenu(pageable,menuEO);
 	}
 
+	public MenuEO findMenuById(Long menuId) {
+		return menuDao.findMenuById(menuId);
+	}
+
+	public void deleteMenu(MenuEO eo) {
+		menuDao.deleteMenu(eo);
+	}
+
+	public void saveMenu(MenuEO eo) {
+		menuDao.saveMenu(eo);
+	}
+
 }

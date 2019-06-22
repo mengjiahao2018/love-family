@@ -8,6 +8,7 @@ define(function(){
 				tableHeight:250,
 				dataMenu:[],
 				addingMenu:{},
+				editingMenu:{},
 				pageSize:10,
 				currentPage:1,
 				total:0,
@@ -61,28 +62,31 @@ define(function(){
 				var _this = this;
 				$.ajax({
 					type:"GET",
-					url:"function/searchFunctionDataById.do",
+					url:"menuManage/searchMenuDataById.do",
 					data:{"id":func.id},
 					dataType:"json",
 					success:function(data){
-						_this.editingFunction = data;
-						_this.showEditDialog=true;
+						if(data.parentId){
+							data.parentName = _this.menuMap[data.parentId].label;
+						}
+						_this.editingMenu = data;
+						_this.showEditDialog = true;
 					}
 				});
-			},
+			},			
 			deleteMenu:function(func){
 				var _this = this;
-				this.$confirm('确认删除此功能？','提示',{
+				this.$confirm('确认删除此 菜单？','提示',{
 					type:"warning"
 				}).then(function(){
 					var deleteData = {
 							"id":func.id,
 							"pageRequest":{"page":_this.currentPage,"size":_this.pageSize,"sort":"id"},
-							"functionName":_this.dataSearch.functionName
+							"menuName":_this.dataSearch.menuName
 					}
 					$.ajax({
 						type:"GET",
-						url:"function/deleteFunctionDataById.do",
+						url:"menuManage/deleteMenuDataById.do",
 						data:deleteData,
 						dataType:"json",
 						success:function(data){
@@ -114,22 +118,56 @@ define(function(){
 			},
 			saveMenu:function(func){
 				var _this = this;
-				this.$refs.editForm.validate(function(isPass){
-					if(isPass){
-						if(func.id){
+				if(this.showAddDialog){
+					if(_this.addingMenu.menus.length==0){
+						_this.$alert("请至少选择一个功能","提示",{
+							type:"error"
+						});
+						return false;
+					}
+					for(var i=0;i<this.addingMenu.menus.length;i++){
+						if(!this.addingMenu.menus[i].label_create){
+							_this.$alert("存在菜单名称为空","提示",{
+								type:"error"
+							});
+						}
+					}
+					var createData ={
+							"parentId_create":this.addingMenu.parentId,
+							"dataRequest":JSON.stringify(this.addingMenu.menus),
+							"pageRequest":{"page":_this.currentPage,"size":_this.pageSize,"sort":"id"},
+							"menuName":_this.dataSearch.menuName
+					}
+					$.ajax({
+						type:"GET",
+						url:"menuManage/createMenuData.do",
+						data:createData,
+						dataType:"json",
+						success:function(data){
+							if(data.result=='000000'){
+								_this.dataMenu = data.resultList;
+								_this.total = data.totalCount;
+								_this.showAddDialog=false;
+							}else{
+								_this.$message.error(data.message);
+							}
+						}
+					});
+				}else if(this.showEditDialog){
+					this.$refs.editForm.validate(function(isPass){
+						if(isPass){
 							var updateData={
-									"id_update":_this.editingFunction.id,
-									"name_update":_this.editingFunction.name,
-									"url_update":_this.editingFunction.url,
-									"type_update":_this.editingFunction.type,
-									"code_update":_this.editingFunction.code,
-									"status_update":_this.editingFunction.status,
+									"id_update":_this.editingMenu.id,
+									"parentId_update":_this.editingMenu.parentId,
+									"code_update":_this.editingMenu.code,
+									"icon_update":_this.editingMenu.icon,
+									"label_update":_this.editingMenu.label,
 									"pageRequest":{"page":_this.currentPage,"size":_this.pageSize,"sort":"id"},
-									"functionName":_this.dataSearch.functionName
+									"menuName":_this.dataSearch.menuName
 							}
 							$.ajax({
 								type:"GET",
-								url:"function/updateFunctionDataById.do",
+								url:"menuManage/updateMenuDataById.do",
 								data:updateData,
 								dataType:"json",
 								success:function(data){
@@ -142,36 +180,9 @@ define(function(){
 									}
 								}
 							});
-						}else{
-							var createData={
-									"id_create":_this.editingFunction.id,
-									"name_create":_this.editingFunction.name,
-									"url_create":_this.editingFunction.url,
-									"type_create":_this.editingFunction.type,
-									"code_create":_this.editingFunction.code,
-									"status_create":_this.editingFunction.status,
-									"pageRequest":{"page":_this.currentPage,"size":_this.pageSize,"sort":"id"},
-									"functionName":_this.dataSearch.functionName
-							}
-							$.ajax({
-								type:"GET",
-								url:"function/createFunctionData.do",
-								data:createData,
-								dataType:"json",
-								success:function(data){
-									if(data.result=='000000'){
-										_this.dataMenu = data.resultList;
-										_this.total = data.totalCount;
-										_this.showEditDialog=false;
-									}else{
-										_this.$message.error(data.message);
-									}
-									
-								}
-							});
 						}
-					}
-				});
+					});
+				}
 			},
 			onClickMenuNode:function(menu,code,component){
 				component.tree.$parent.$parent.hide();
@@ -179,8 +190,8 @@ define(function(){
 					this.addingMenu.parentId = menu.id;
 					this.addingMenu.parentName = menu.label;
 				}else{
-					this.showEditDialog.parentId = menu.id;
-					this.showEditDialog.parentName = menu.label;
+					this.editingMenu.parentId = menu.id;
+					this.editingMenu.parentName = menu.label;
 				}
 			},
 			functionCodesChange:function(functionCodes){
@@ -191,7 +202,7 @@ define(function(){
 							functionName : this.functions[i].name,
 							icon_create :'',
 							label_create:this.functions[i].name,
-							code_create:this.functions[i].id
+							code_create:this.functions[i].code
 						});
 					}
 				}
