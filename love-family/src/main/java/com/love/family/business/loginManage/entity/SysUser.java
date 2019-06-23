@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.love.family.business.roleManage.entity.GenericRole;
 
 @Entity
 @Table(name = "sys_user")

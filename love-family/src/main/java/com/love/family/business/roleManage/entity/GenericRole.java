@@ -1,4 +1,4 @@
-package com.love.family.business.loginManage.entity;
+package com.love.family.business.roleManage.entity;
 
 import java.io.Serializable;
 

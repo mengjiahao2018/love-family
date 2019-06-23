@@ -1,6 +1,6 @@
 package com.love.family.business.roleManage.dao;
 
-import com.love.family.business.loginManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.GenericRole;
 
 public interface RoleDao {
 

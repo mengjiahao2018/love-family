@@ -6,13 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.love.family.business.functionManage.entity.GenericFunction;
 import com.love.family.business.functionManage.service.FunctionService;
-import com.love.family.business.loginManage.entity.GenericRole;
 import com.love.family.business.roleManage.dao.RoleDao;
 import com.love.family.business.roleManage.dao.UserRoleDao;
+import com.love.family.business.roleManage.entity.GenericRole;
 import com.love.family.pub.rbac.privilege.model.RolePrivilege;
 
 @Service
@@ -56,6 +58,12 @@ public class RoleServiceImpl implements RoleService {
 		rolePrivilege.setMenuMap(menuMap);
 		rolePrivilege.setResourceList(resourceList);
 		return rolePrivilege;
+	}
+
+	@Override
+	public Page<GenericRole> queryPageRole(Pageable pageable, GenericRole role) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

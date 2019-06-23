@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.love.family.business.loginManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.GenericRole;
 import com.love.family.entity.supports.AbstractEntity;
 
 @MappedSuperclass

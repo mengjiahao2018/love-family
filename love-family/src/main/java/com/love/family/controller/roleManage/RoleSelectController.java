@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.love.family.business.functionManage.entity.GenericFunction;
 import com.love.family.business.functionManage.service.FunctionService;
-import com.love.family.business.loginManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.GenericRole;
 import com.love.family.business.roleManage.service.RoleService;
 import com.love.family.pub.rbac.privilege.model.RolePrivilege;
 import com.love.family.pub.rbac.system.entity.User;

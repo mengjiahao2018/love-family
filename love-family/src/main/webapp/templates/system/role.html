@@ -1,0 +1,78 @@
+<div class="son_container">
+	<el-breadcrumb separator="/">
+	  <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+	  <el-breadcrumb-item>角色管理</el-breadcrumb-item>
+	</el-breadcrumb>
+
+	<el-collapse value="search" @change="collapseSearchChange">
+		 <el-collapse-item name="search">
+		 	<template slot="title">
+		 		查询条件
+		 	</template>
+		 	<el-form class="search-form" :inline="true" :model="dataSearch" label-width="80px" >
+			<el-form-item label="角色名称" prop="roleName">
+			    <el-input  v-model="dataSearch.roleName" size="small"></el-input>
+			  </el-form-item>
+			  <el-form-item>
+			    <el-button type="primary" @click="currentPage=1;search();">查询</el-button>
+			  </el-form-item>
+			  <el-form-item style="float:right;text-align:right">
+			    <el-button type="primary" @click="addRole" size="small"><span class="fa fa-plus"></span>增加数据</el-button>
+			  </el-form-item>
+			</el-form>
+		 </el-collapse-item>
+	</el-collapse>
+	 <el-table 
+	 	ref="tableData"  
+		:data="dataRoel" 
+		:height="tableHeight"  
+		border 
+		stripe 
+		highlight-current-row>
+	      <el-table-column property="id" label="功能ID"  width="100" align="center"></el-table-column>
+	      <el-table-column property="name" label="父菜单ID"  width="100" align="center"></el-table-column>
+	      <el-table-column property="code" label="菜单图标"  width="150" align="center"></el-table-column>	      
+	      <el-table-column label="操作"  width="70" align="center" fixed="right">
+	      	<template slot-scope="scope">
+	      		<el-tooltip effect="light" content="编辑" >
+			      <el-button @click="editRole(scope.row)" type="text" size="small" ><span class="fa fa-edit"></span></el-button>
+			    </el-tooltip>
+			    <el-tooltip effect="light" content="删除" >
+			      <el-button @click="deleteRole(scope.row)" type="text" size="small" ><span class="fa fa-trash"></span></el-button>
+			    </el-tooltip>
+	      	</template>
+	      </el-table-column>
+    </el-table>
+    
+    <div class="container-bottom">
+	    <el-pagination layout="total,prev,pager,next,jumper"
+	    	:pageSize="pageSize"
+	    	:current-page.sync="currentPage"
+	    	:total="total"
+	    	@current-change="search" >
+    	</el-pagination>
+    </div>
+    
+    
+   	<el-dialog :title="editingRole.id?'修改':'新增'" :visible.sync="showEditDialog">
+  		<el-form ref="editForm" :model="editingRole" :rules="rules" class="edit-from" label-position="top">
+  			<el-row :gutter="20">
+  				<el-col :span="12">
+  					<el-form-item label="角色名称" prop="name" required>
+  						<el-input  v-model="editingRole.name" size="small"></el-input>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="角色代码" prop="code" required>
+  						<el-input  v-model="editingRole.code" size="small"></el-input>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  		</el-form>
+  		<div slot="footer" align="center" >
+  			<el-button @click="saveRole(editingRole)" type="primary">确认</el-button>
+  			<el-button @click="showEditDialog=false" >取消</el-button>
+  		</div>
+	</el-dialog>
+	
+</div>
