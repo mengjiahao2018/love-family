@@ -3,7 +3,7 @@ package com.love.family.pub.rbac.system.entity;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.love.family.business.loginManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.GenericRole;
 
 public class User extends GenericUser implements BaseEntityInterfc {
 	private String idCard;

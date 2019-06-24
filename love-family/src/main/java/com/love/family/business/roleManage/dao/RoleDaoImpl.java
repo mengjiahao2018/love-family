@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.love.family.business.loginManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.GenericRole;
 import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository
