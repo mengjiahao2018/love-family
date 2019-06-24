@@ -44,7 +44,7 @@ public class MenuServiceImpl implements MenuService {
 		
 		MenuVO mainPageMenuEO = new MenuVO();
 		mainPageMenuEO.setCode("0SHOUYE");
-		mainPageMenuEO.setIcon("fa-home");
+		mainPageMenuEO.setIcon("fa fa-home");
 		mainPageMenuEO.setLabel("首页");
 		treeDemoMenu.add(mainPageMenuEO);
 		

@@ -1,4 +1,4 @@
-<div class="son_container">
+<div class="container">
 	<el-breadcrumb separator="/">
 	  <el-breadcrumb-item>权限管理</el-breadcrumb-item>
 	  <el-breadcrumb-item>菜单管理</el-breadcrumb-item>
@@ -29,13 +29,13 @@
 		border 
 		stripe 
 		highlight-current-row>
-	      <el-table-column property="id" label="功能ID"  width="100" align="center"></el-table-column>
-	      <el-table-column property="parentId" label="父菜单ID"  width="100" align="center"></el-table-column>
-	      <el-table-column property="icon" label="菜单图标"  width="150" align="center"></el-table-column>
-	      <el-table-column property="functionName" label="功能名称"  width="150" align="center"></el-table-column>
-	      <el-table-column property="functionUrl" label="功能链接地址"  width="300" align="center"></el-table-column>
-	      <el-table-column property="label" label="菜单名称"  width="150" align="center"></el-table-column>
-	      <el-table-column label="操作"  width="70" align="center" fixed="right">
+	      <el-table-column property="id" label="功能ID"  width="90" align="center"></el-table-column>
+	      <el-table-column property="parentId" label="父菜单ID"  width="90" align="center"></el-table-column>
+	      <el-table-column property="icon" label="菜单图标"  width="120" align="center"></el-table-column>
+	      <el-table-column property="functionName" label="功能名称"  width="140" align="center"></el-table-column>
+	      <el-table-column property="functionUrl" label="功能链接地址" align="center"></el-table-column>
+	      <el-table-column property="label" label="菜单名称"  width="140" align="center"></el-table-column>
+	      <el-table-column label="操作"  align="center">
 	      	<template slot-scope="scope">
 	      		<el-tooltip effect="light" content="编辑" >
 			      <el-button @click="editMenu(scope.row)" type="text" size="small" ><span class="fa fa-edit"></span></el-button>
@@ -123,7 +123,7 @@
   			</el-row>
   			<el-row :gutter="20">
   				<el-col :span="12">
-  					<el-form-item label="父菜单" prop="parentName" required>
+  					<el-form-item label="父菜单" prop="parentName">
   						<el-dropdown trigger="click">
   						  	<el-input  v-model="editingMenu.parentName" @focus="blur($event)" placeholder="请选择父菜单"></el-input>
 						      <el-dropdown-menu slot="dropdown" style="width:250px;height:300px;overflow:auto;">

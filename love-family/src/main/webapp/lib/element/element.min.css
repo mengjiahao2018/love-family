@@ -2549,7 +2549,7 @@ opacity
 }
 
 .el-table__body-wrapper {
-	overflow: hidden;
+	overflow: auto;
 	position: relative
 }
 
@@ -4241,8 +4241,8 @@ opacity
 }
 }
 .el-breadcrumb {
-	font-size: 14px;
-	line-height: 1
+	font-size: 15px;
+	line-height: 2
 }
 
 .el-breadcrumb::after, .el-breadcrumb::before {
