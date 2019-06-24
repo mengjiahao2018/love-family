@@ -79,6 +79,16 @@ public class FunctionController {
 	}
 	
 	
+	@RequestMapping(value = "/queryAllFunctionHelpFunction", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<GenericFunction> queryAllFunctionHelpFunction(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		String param = request.getParameter("label");
+		param = StringUtils.isBlank(param)?"%%":"%"+param+"%";
+		List<GenericFunction> functions = functionService.findFunctionByLikeName(param);
+		return functions;
+	}
+	
+	
 	@RequestMapping(value = "/createFunctionData", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Map<String,Object> createFunctionData(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {

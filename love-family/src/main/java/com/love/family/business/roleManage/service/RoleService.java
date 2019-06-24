@@ -57,4 +57,6 @@ public interface RoleService {
 
 	void deleteRolerole(GenericRole role);
 
+	List<GenericRole> findAllRole();
+
 }

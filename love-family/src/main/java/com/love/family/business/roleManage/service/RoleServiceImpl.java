@@ -90,4 +90,9 @@ public class RoleServiceImpl implements RoleService {
 		roleDao.deleteRolerole(role);
 	}
 
+	@Override
+	public List<GenericRole> findAllRole() {
+		return roleDao.findAllRole();
+	}
+
 }

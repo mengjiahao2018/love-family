@@ -59,4 +59,6 @@ public interface FunctionService {
 	 */
 	List<GenericFunction> findFunctionByLikeName(String param);
 
+	List<GenericFunction> findAllFunction();
+
 }

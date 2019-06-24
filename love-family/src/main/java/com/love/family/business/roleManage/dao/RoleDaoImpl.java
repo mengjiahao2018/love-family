@@ -62,4 +62,12 @@ public class RoleDaoImpl extends BaseHibernate4QueryDao<GenericRole>  implements
 		this.delete(role);
 	}
 
+	@Override
+	public List<GenericRole> findAllRole() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("from GenericRole");
+		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		return this.findEntityObjects(buffer.toString(), conditionMap);
+	}
+
 }

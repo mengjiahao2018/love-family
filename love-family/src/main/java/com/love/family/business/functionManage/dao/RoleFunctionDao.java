@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.love.family.business.functionManage.entity.RoleFunction;
+import com.love.family.business.roleFunctionManage.entity.RoleFunction;
 
 @Repository
 public interface RoleFunctionDao extends JpaRepository<RoleFunction, Long> {

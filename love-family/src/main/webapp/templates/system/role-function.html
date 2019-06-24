@@ -1,0 +1,113 @@
+<div class="container">
+	<el-breadcrumb separator="/">
+	  <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+	  <el-breadcrumb-item>角色功能管理</el-breadcrumb-item>
+	</el-breadcrumb>
+
+	<el-collapse value="search" @change="collapseSearchChange">
+		 <el-collapse-item name="search">
+		 	<template slot="title">
+		 		查询条件
+		 	</template>
+		 	<el-form class="search-form" :inline="true" :model="dataSearch" label-width="80px" >
+				<el-form-item label="角色名称" prop="roleName">
+			    	<el-input  v-model="dataSearch.roleName" size="small"></el-input>
+			  	</el-form-item>
+				<el-form-item label="功能名称" prop="functionName">
+			    	<el-input  v-model="dataSearch.functionName" size="small"></el-input>
+			  	</el-form-item>
+			  	<el-form-item>
+			    	<el-button type="primary" @click="currentPage=1;search();">查询</el-button>
+			  	</el-form-item>
+			  <el-form-item style="float:right;text-align:right">
+			    <el-button type="primary" @click="addRoleFunction" size="small"><span class="fa fa-plus"></span>增加数据</el-button>
+			  </el-form-item>
+			</el-form>
+		 </el-collapse-item>
+	</el-collapse>
+	 <el-table 
+	 	ref="tableData"  
+		:data="dataRoelFunction"
+		:height="tableHeight"  
+		border 
+		stripe 
+		highlight-current-row>
+	      <el-table-column property="roleName" label="角色名称"   align="left"></el-table-column>
+	      <el-table-column property="roleCode" label="角色代码"   align="left"></el-table-column>	      
+	      <el-table-column property="functionName" label="功能名称"   align="left"></el-table-column>	      
+	      <el-table-column property="functionUrl" label="功能链接"   align="left"></el-table-column>	      
+	      <el-table-column property="functionType" label="功能类型"   align="left"></el-table-column>	      
+	      <el-table-column label="操作" align="center" >
+	      	<template slot-scope="scope">
+			    <el-tooltip effect="light" content="删除" >
+			      <el-button @click="deleteRoleFunction(scope.row)" type="text" size="small" ><span class="fa fa-trash"></span></el-button>
+			    </el-tooltip>
+	      	</template>
+	      </el-table-column>
+    </el-table>
+    
+    <div class="container-bottom">
+	    <el-pagination layout="total,prev,pager,next,jumper"
+	    	:pageSize="pageSize"
+	    	:current-page.sync="currentPage"
+	    	:total="total"
+	    	@current-change="search" >
+    	</el-pagination>
+    </div>
+    
+    
+   	<el-dialog title="新增" :visible.sync="showAddDialog">
+  		<el-form :model="addingRoleFunction" class="edit-from" label-position="top">
+  			<el-row :gutter="20">
+  				<el-col :span="12">
+  					<el-form-item label="角色名称" prop="roleId" required>
+  						<el-select v-model="addingRoleFunction.roleId" @change="roleIdChange" placeholder="请选择角色">
+  							<el-option 
+  								v-for="role in roles"
+  								:key="role.id"
+  								:label="role.name"
+  								:value="role.id"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="角色代码" prop="roleId" required>
+  						<el-select v-model="addingRoleFunction.roleId" :disabled="true" placeholder="请选择角色">
+  							<el-option 
+  								v-for="role in roles"
+  								:key="role.id"
+  								:label="role.code"
+  								:value="role.id"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="功能名称" prop="functionIds" required>
+  						<el-select v-model="addingRoleFunction.functionIds" :disabled="!addingRoleFunction.roleId" @change="functionIdsChange"  multiple filterable placeholder="请选择功能" class="nowrap-select">
+  							<el-option 
+  								v-for="func in functions"
+  								:key="func.id"
+  								:label="func.name"
+  								:value="func.id"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  		</el-form>
+  		<el-table
+  			:data="addingRoleFunction.functions"
+  			:height="200"
+  			border
+  			stripe
+  			highlight-current-row>
+	      	<el-table-column property="name" label="功能名称" align="center"></el-table-column>
+	      	<el-table-column property="url" label="链接地址"  align="center"></el-table-column>
+	      	<el-table-column property="type" label="功能类型" align="center"></el-table-column>
+	    </el-table>
+  		<div slot="footer" align="center" >
+  			<el-button @click="saveRoleFunction()" type="primary">确认</el-button>
+  			<el-button @click="showAddDialog=false" >取消</el-button>
+  		</div>
+	</el-dialog>
+	
+</div>

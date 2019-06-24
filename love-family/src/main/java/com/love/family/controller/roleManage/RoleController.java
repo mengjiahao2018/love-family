@@ -25,6 +25,8 @@ import com.love.family.business.functionManage.entity.GenericFunction;
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.roleManage.entity.GenericRole;
 import com.love.family.business.roleManage.service.RoleService;
+import com.love.family.pub.rbac.system.util.UserInfoUtils;
+import com.love.family.security.model.UserInfo;
 import com.love.family.utils.MessageUtil;
 
 @Controller
@@ -62,6 +64,18 @@ public class RoleController {
 		}
 		
 		return resultMap;
+	}
+	
+	
+	@RequestMapping(value = "/queryAllRoleHelpRoleFunction", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<GenericRole> queryAllRoleHelpRoleFunction(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		UserInfo userInfo = UserInfoUtils.getCurrentUserInfo();
+		if(userInfo!=null) {
+			return roleService.findAllRole();
+		}else {
+			return null;
+		}
 	}
 	
 	@RequestMapping(value = "/searchRoleDataByCodeUpd", method = RequestMethod.GET, produces = "application/json")

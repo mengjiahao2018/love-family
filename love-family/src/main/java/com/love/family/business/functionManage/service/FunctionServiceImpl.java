@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.love.family.business.functionManage.dao.FunctionDao;
 import com.love.family.business.functionManage.dao.RoleFunctionDao;
 import com.love.family.business.functionManage.entity.GenericFunction;
-import com.love.family.business.functionManage.entity.RoleFunction;
+import com.love.family.business.roleFunctionManage.entity.RoleFunction;
 import com.love.family.utils.MyBusinessException;
 
 @Service
@@ -70,6 +70,11 @@ public class FunctionServiceImpl implements FunctionService {
 	@Override
 	public List<GenericFunction> findFunctionByLikeName(String param) {
 		return functionDao.findFunctionByLikeName(param);
+	}
+
+	@Override
+	public List<GenericFunction> findAllFunction() {
+		return functionDao.getAllFunctions();
 	}
 
 }

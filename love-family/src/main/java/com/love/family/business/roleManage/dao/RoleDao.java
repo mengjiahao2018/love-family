@@ -21,4 +21,6 @@ public interface RoleDao {
 
 	void deleteRolerole(GenericRole role);
 
+	List<GenericRole> findAllRole();
+
 }
