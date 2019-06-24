@@ -29,5 +29,32 @@ public interface RoleService {
 	 * @return
 	 */
 	Page<GenericRole> queryPageRole(Pageable pageable, GenericRole role);
+	/**
+	 * 根据角色ID和角色Code查询角色是否已经存在
+	 * @param id
+	 * @param roleCode
+	 * @return
+	 */
+	List<GenericRole> searchRoleDataByCodeUpd(Long id, String roleCode);
+	/**
+	 * 根据角色Code查询角色是否已经存在
+	 * @param roleCode
+	 * @return
+	 */
+	List<GenericRole> searchRoleDataByCode(String roleCode);
+	
+	/**
+	 * 更新或者新增角色
+	 * @param role
+	 */
+	void saveRole(GenericRole role);
+	/**
+	 * 根据角色ID查询角色
+	 * @param id
+	 * @return
+	 */
+	GenericRole findRoleByRoleId(Long id);
+
+	void deleteRolerole(GenericRole role);
 
 }

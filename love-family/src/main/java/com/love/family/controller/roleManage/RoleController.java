@@ -1,6 +1,7 @@
 package com.love.family.controller.roleManage;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.roleManage.entity.GenericRole;
 import com.love.family.business.roleManage.service.RoleService;
 import com.love.family.utils.MessageUtil;
@@ -59,5 +62,137 @@ public class RoleController {
 		}
 		
 		return resultMap;
+	}
+	
+	@RequestMapping(value = "/searchRoleDataByCodeUpd", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Map<String,Object> searchRoleDataByCodeUpd(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		Map<String,Object> resultMap = new HashMap<String, Object>();
+		resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_SUCCESS_CODE);
+		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
+		
+		String roleCode = (String)pageRequest.get("roleCode");
+		Long id = Long.valueOf((String)pageRequest.get("id"));
+		try {
+			List<GenericRole> roles = roleService.searchRoleDataByCodeUpd(id,roleCode);			
+			resultMap.put("totalCount", roles.size());
+			resultMap.put("resultList", roles);
+		} catch (Exception e) {
+			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
+			resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, e.getMessage());
+			return resultMap;
+		}
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "/searchRoleDataByCode", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Map<String,Object> searchRoleDataByCode(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		Map<String,Object> resultMap = new HashMap<String, Object>();
+		resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_SUCCESS_CODE);
+		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
+		
+		String roleCode = (String)pageRequest.get("roleCode");
+		try {
+			List<GenericRole> roles = roleService.searchRoleDataByCode(roleCode);			
+			resultMap.put("totalCount", roles.size());
+			resultMap.put("resultList", roles);
+		} catch (Exception e) {
+			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
+			resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, e.getMessage());
+			return resultMap;
+		}
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "/createRoleData", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Map<String,Object> createRoleData(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
+		resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_SUCCESS_CODE);
+		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
+		String name = (String)pageRequest.get("name_create");
+		String code = (String)pageRequest.get("code_create");
+		
+		GenericRole role = new GenericRole();
+		if(!StringUtils.isBlank(name)) {
+			role.setName(name);
+		}
+		if(!StringUtils.isBlank(code)) {
+			role.setCode(code);
+		}
+		
+		try {
+			roleService.saveRole(role);
+		} catch (Exception e) {
+			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
+			resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, e.getMessage());
+			return resultMap;
+		}
+		
+		return queryAllRole(model,request,pageRequest);
+	}
+	
+	
+	@RequestMapping(value = "/updateRoleDataById", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Map<String,Object> updateRoleDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
+		resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_SUCCESS_CODE);
+		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
+		Long id = Long.parseLong((String)pageRequest.get("id_update"));
+		String name = (String)pageRequest.get("name_update");
+		String code = (String)pageRequest.get("code_update");
+		
+		GenericRole role = new GenericRole();
+		role.setId(id);
+		if(!StringUtils.isBlank(name)) {
+			role.setName(name);
+		}
+		if(!StringUtils.isBlank(code)) {
+			role.setCode(code);
+		}
+		try {
+			roleService.saveRole(role);
+		} catch (Exception e) {
+			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
+			resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, e.getMessage());
+			return resultMap;
+		}
+		
+		return queryAllRole(model,request,pageRequest);
+	}
+	
+	@RequestMapping(value = "/searchRoleDataById", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public GenericRole searchRoleDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		Long id = Long.parseLong((String)pageRequest.get("id"));
+		GenericRole role = roleService.findRoleByRoleId(id);
+		return role;
+		
+	}
+	
+	@RequestMapping(value = "/deleteRoleDataById", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Map<String,Object> deleteRoleDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		HashMap<String,Object> resultMap = new HashMap<String, Object>();
+		resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_SUCCESS_CODE);
+		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
+		String id = (String)pageRequest.get("id");
+		
+		GenericRole role = new GenericRole() ;
+		role.setId(Long.valueOf(id));
+		
+		try {
+			roleService.deleteRolerole(role);
+		} catch (Exception e) {
+			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
+			resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, e.getMessage());
+			return resultMap;
+		}
+		
+		return queryAllRole(model,request,pageRequest);
 	}
 }

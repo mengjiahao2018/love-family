@@ -62,8 +62,32 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Page<GenericRole> queryPageRole(Pageable pageable, GenericRole role) {
-		// TODO Auto-generated method stub
-		return null;
+		return roleDao.queryPageRole(pageable,role);
+	}
+
+	@Override
+	public List<GenericRole> searchRoleDataByCodeUpd(Long id, String roleCode) {
+		return roleDao.searchRoleDataByCodeUpd(id,roleCode);
+	}
+
+	@Override
+	public List<GenericRole> searchRoleDataByCode(String roleCode) {
+		return roleDao.searchRoleDataByCode(roleCode);
+	}
+
+	@Override
+	public void saveRole(GenericRole role) {
+		roleDao.saveRole(role);
+	}
+
+	@Override
+	public GenericRole findRoleByRoleId(Long id) {
+		return roleDao.findRoleById(id);
+	}
+
+	@Override
+	public void deleteRolerole(GenericRole role) {
+		roleDao.deleteRolerole(role);
 	}
 
 }
