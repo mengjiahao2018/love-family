@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 
 public class SysUserVO implements Serializable{
 
@@ -25,7 +25,7 @@ public class SysUserVO implements Serializable{
 	private String status;
 	
 	@JsonIgnore
-	private List<GenericRole> roles = new ArrayList<GenericRole>();
+	private List<RoleInfo> roles = new ArrayList<RoleInfo>();
 
 	public Long getId() {
 		return id;
@@ -59,11 +59,11 @@ public class SysUserVO implements Serializable{
 		this.password = password;
 	}
 	
-	public List<GenericRole> getRoles() {
+	public List<RoleInfo> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<GenericRole> roles) {
+	public void setRoles(List<RoleInfo> roles) {
 		this.roles = roles;
 	}
 

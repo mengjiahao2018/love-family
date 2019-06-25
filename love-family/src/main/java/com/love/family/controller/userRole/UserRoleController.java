@@ -27,7 +27,7 @@ import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleFunctionManage.entity.RoleFunction;
 import com.love.family.business.roleFunctionManage.entity.RoleFunctionVO;
 import com.love.family.business.roleFunctionManage.service.RoleFunctionService;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;
 import com.love.family.business.userManage.entity.SysUser;
 import com.love.family.business.userManage.service.UserService;
@@ -92,7 +92,7 @@ public class UserRoleController {
 					sysUserRoleVO.setUserName(sysUser.getUserName());
 					sysUserRoleVO.setLoginName(sysUser.getLoginName());
 					
-					GenericRole role = roleService.findRoleById(sysUserRole.getRoleId());
+					RoleInfo role = roleService.findRoleById(sysUserRole.getRoleId());
 					sysUserRoleVO.setRoleName(role.getName());
 					sysUserRoleVO.setRoleCode(role.getCode());
 					

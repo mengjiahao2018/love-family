@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.love.family.business.functionManage.entity.GenericFunction;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleManage.dao.RoleDao;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.pub.rbac.privilege.model.RolePrivilege;
 
 @Service
@@ -30,7 +30,7 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public GenericRole findRoleById(Long roleId) {
+	public RoleInfo findRoleById(Long roleId) {
 		return roleDao.findRoleById(roleId);
 	}
 
@@ -58,37 +58,37 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public Page<GenericRole> queryPageRole(Pageable pageable, GenericRole role) {
+	public Page<RoleInfo> queryPageRole(Pageable pageable, RoleInfo role) {
 		return roleDao.queryPageRole(pageable,role);
 	}
 
 	@Override
-	public List<GenericRole> searchRoleDataByCodeUpd(Long id, String roleCode) {
+	public List<RoleInfo> searchRoleDataByCodeUpd(Long id, String roleCode) {
 		return roleDao.searchRoleDataByCodeUpd(id,roleCode);
 	}
 
 	@Override
-	public List<GenericRole> searchRoleDataByCode(String roleCode) {
+	public List<RoleInfo> searchRoleDataByCode(String roleCode) {
 		return roleDao.searchRoleDataByCode(roleCode);
 	}
 
 	@Override
-	public void saveRole(GenericRole role) {
+	public void saveRole(RoleInfo role) {
 		roleDao.saveRole(role);
 	}
 
 	@Override
-	public GenericRole findRoleByRoleId(Long id) {
+	public RoleInfo findRoleByRoleId(Long id) {
 		return roleDao.findRoleById(id);
 	}
 
 	@Override
-	public void deleteRolerole(GenericRole role) {
+	public void deleteRolerole(RoleInfo role) {
 		roleDao.deleteRolerole(role);
 	}
 
 	@Override
-	public List<GenericRole> findAllRole() {
+	public List<RoleInfo> findAllRole() {
 		return roleDao.findAllRole();
 	}
 

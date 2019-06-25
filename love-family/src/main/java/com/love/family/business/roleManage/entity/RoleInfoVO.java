@@ -1,6 +1,6 @@
 package com.love.family.business.roleManage.entity;
 
-public class GenericRoleVO {
+public class RoleInfoVO {
 
 	private Long id;
 

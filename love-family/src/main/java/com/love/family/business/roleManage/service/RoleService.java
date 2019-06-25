@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.pub.rbac.privilege.model.RolePrivilege;
 
 public interface RoleService {
 
 	List findRolesByUserId(Long id);
 
-	GenericRole findRoleById(Long roleId);
+	RoleInfo findRoleById(Long roleId);
 
 	/**
 	 * 得到角色对应的所有相关权限信息
@@ -28,35 +28,35 @@ public interface RoleService {
 	 * @param role
 	 * @return
 	 */
-	Page<GenericRole> queryPageRole(Pageable pageable, GenericRole role);
+	Page<RoleInfo> queryPageRole(Pageable pageable, RoleInfo role);
 	/**
 	 * 根据角色ID和角色Code查询角色是否已经存在
 	 * @param id
 	 * @param roleCode
 	 * @return
 	 */
-	List<GenericRole> searchRoleDataByCodeUpd(Long id, String roleCode);
+	List<RoleInfo> searchRoleDataByCodeUpd(Long id, String roleCode);
 	/**
 	 * 根据角色Code查询角色是否已经存在
 	 * @param roleCode
 	 * @return
 	 */
-	List<GenericRole> searchRoleDataByCode(String roleCode);
+	List<RoleInfo> searchRoleDataByCode(String roleCode);
 	
 	/**
 	 * 更新或者新增角色
 	 * @param role
 	 */
-	void saveRole(GenericRole role);
+	void saveRole(RoleInfo role);
 	/**
 	 * 根据角色ID查询角色
 	 * @param id
 	 * @return
 	 */
-	GenericRole findRoleByRoleId(Long id);
+	RoleInfo findRoleByRoleId(Long id);
 
-	void deleteRolerole(GenericRole role);
+	void deleteRolerole(RoleInfo role);
 
-	List<GenericRole> findAllRole();
+	List<RoleInfo> findAllRole();
 
 }

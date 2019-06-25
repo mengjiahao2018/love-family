@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.love.family.business.functionManage.entity.GenericFunction;
 import com.love.family.business.menuManage.entity.MenuEO;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;
 import com.love.family.pub.rbac.system.util.UserInfoUtils;
 import com.love.family.security.model.UserInfo;
@@ -50,11 +50,11 @@ public class RoleController {
 		String roleName = (String)pageRequest.get("roleName");
 		Pageable pageable = PageRequest.of(page-1, size, sort);
 
-		GenericRole role = new GenericRole();
+		RoleInfo role = new RoleInfo();
 		role.setName("%"+(StringUtils.isNotBlank(roleName)?roleName:"")+"%");
 		
 		try {
-			Page<GenericRole> data = roleService.queryPageRole(pageable,role);			
+			Page<RoleInfo> data = roleService.queryPageRole(pageable,role);			
 			resultMap.put("totalCount", data.getTotalElements());
 			resultMap.put("resultList", data.getContent());
 		} catch (Exception e) {
@@ -69,7 +69,7 @@ public class RoleController {
 	
 	@RequestMapping(value = "/queryAllRoleHelpRoleFunction", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<GenericRole> queryAllRoleHelpRoleFunction(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+	public List<RoleInfo> queryAllRoleHelpRoleFunction(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
 		UserInfo userInfo = UserInfoUtils.getCurrentUserInfo();
 		if(userInfo!=null) {
 			return roleService.findAllRole();
@@ -88,7 +88,7 @@ public class RoleController {
 		String roleCode = (String)pageRequest.get("roleCode");
 		Long id = Long.valueOf((String)pageRequest.get("id"));
 		try {
-			List<GenericRole> roles = roleService.searchRoleDataByCodeUpd(id,roleCode);			
+			List<RoleInfo> roles = roleService.searchRoleDataByCodeUpd(id,roleCode);			
 			resultMap.put("totalCount", roles.size());
 			resultMap.put("resultList", roles);
 		} catch (Exception e) {
@@ -109,7 +109,7 @@ public class RoleController {
 		
 		String roleCode = (String)pageRequest.get("roleCode");
 		try {
-			List<GenericRole> roles = roleService.searchRoleDataByCode(roleCode);			
+			List<RoleInfo> roles = roleService.searchRoleDataByCode(roleCode);			
 			resultMap.put("totalCount", roles.size());
 			resultMap.put("resultList", roles);
 		} catch (Exception e) {
@@ -130,7 +130,7 @@ public class RoleController {
 		String name = (String)pageRequest.get("name_create");
 		String code = (String)pageRequest.get("code_create");
 		
-		GenericRole role = new GenericRole();
+		RoleInfo role = new RoleInfo();
 		if(!StringUtils.isBlank(name)) {
 			role.setName(name);
 		}
@@ -160,7 +160,7 @@ public class RoleController {
 		String name = (String)pageRequest.get("name_update");
 		String code = (String)pageRequest.get("code_update");
 		
-		GenericRole role = new GenericRole();
+		RoleInfo role = new RoleInfo();
 		role.setId(id);
 		if(!StringUtils.isBlank(name)) {
 			role.setName(name);
@@ -181,9 +181,9 @@ public class RoleController {
 	
 	@RequestMapping(value = "/searchRoleDataById", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public GenericRole searchRoleDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+	public RoleInfo searchRoleDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
 		Long id = Long.parseLong((String)pageRequest.get("id"));
-		GenericRole role = roleService.findRoleByRoleId(id);
+		RoleInfo role = roleService.findRoleByRoleId(id);
 		return role;
 		
 	}
@@ -196,7 +196,7 @@ public class RoleController {
 		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
 		String id = (String)pageRequest.get("id");
 		
-		GenericRole role = new GenericRole() ;
+		RoleInfo role = new RoleInfo() ;
 		role.setId(Long.valueOf(id));
 		
 		try {

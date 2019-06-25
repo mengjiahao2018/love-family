@@ -17,7 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 
 @Entity
 @Table(name = "sys_user")
@@ -51,7 +51,7 @@ public class SysUser implements Serializable{
 	@ManyToMany(cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
 	@JsonIgnore
     @JoinTable(name = "sys_user_role",joinColumns = @JoinColumn(name="user_id",referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
-	private List<GenericRole> roles = new ArrayList<GenericRole>();
+	private List<RoleInfo> roles = new ArrayList<RoleInfo>();
 
 	public Long getId() {
 		return id;
@@ -85,11 +85,11 @@ public class SysUser implements Serializable{
 		this.password = password;
 	}
 	
-	public List<GenericRole> getRoles() {
+	public List<RoleInfo> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<GenericRole> roles) {
+	public void setRoles(List<RoleInfo> roles) {
 		this.roles = roles;
 	}
 

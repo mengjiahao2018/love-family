@@ -27,7 +27,7 @@ import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleFunctionManage.entity.RoleFunction;
 import com.love.family.business.roleFunctionManage.entity.RoleFunctionVO;
 import com.love.family.business.roleFunctionManage.service.RoleFunctionService;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;
 import com.love.family.pub.rbac.system.entity.User;
 import com.love.family.pub.rbac.system.util.UserInfoUtils;
@@ -85,10 +85,10 @@ public class RoleFunctionController {
 					}
 					
 					if(roleFunction.getRoleId()!=null) {
-						GenericRole genericRole = roleService.findRoleById(roleFunction.getRoleId());
-						if(genericRole!=null) {
-							roleFunctionVO.setRoleName(genericRole.getName());
-							roleFunctionVO.setRoleCode(genericRole.getCode());
+						RoleInfo RoleInfo = roleService.findRoleById(roleFunction.getRoleId());
+						if(RoleInfo!=null) {
+							roleFunctionVO.setRoleName(RoleInfo.getName());
+							roleFunctionVO.setRoleCode(RoleInfo.getCode());
 						}
 					}
 					
@@ -137,7 +137,7 @@ public class RoleFunctionController {
 			}
 			
 			UserInfo userInfo = UserInfoUtils.getCurrentUserInfo();
-			GenericRole role = null;
+			RoleInfo role = null;
 			if(userInfo!=null) {
 				role = ((User) userInfo.getSimpleUser()).getCurrentSelectRole();
 			}
@@ -194,7 +194,7 @@ public class RoleFunctionController {
 			
 			UserInfo userInfo = UserInfoUtils.getCurrentUserInfo();
 			User selfUser =(User) userInfo.getSimpleUser();
-			GenericRole role = null;
+			RoleInfo role = null;
 			if(userInfo!=null) {
 				role = selfUser.getCurrentSelectRole();
 			}

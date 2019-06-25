@@ -23,7 +23,7 @@ public class UserRoleDaoImpl extends BaseHibernate4QueryDao<SysUserRole> impleme
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		if(StringUtils.isNotBlank((String)param.get("roleName"))) {
 			conditionMap.put("roleName", (String)param.get("roleName"));
-			buffer.append(" and t.roleId in (select t1.id from GenericRole t1 where t1.name like :roleName ) ");
+			buffer.append(" and t.roleId in (select t1.id from RoleInfo t1 where t1.name like :roleName ) ");
 		}
 		if(StringUtils.isNotBlank((String)param.get("userName"))) {
 			conditionMap.put("userName", (String)param.get("userName"));

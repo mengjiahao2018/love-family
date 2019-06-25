@@ -36,7 +36,7 @@ public class RoleFunctionDaoSelfImpl  extends BaseHibernate4QueryDao<RoleFunctio
 	public Page<RoleFunction> queryRoleFunctionByRoleNameAndFunctionName(Pageable pageable, String roleName,
 			String functionName) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(" from RoleFunction s where s.roleId in (select t.id from GenericRole t where t.name like :roleName ) ");
+		buffer.append(" from RoleFunction s where s.roleId in (select t.id from RoleInfo t where t.name like :roleName ) ");
 		buffer.append(" and s.functionId in (select y.id from GenericFunction y where y.name like :functionName ) ");
 		Map<String,Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("roleName", roleName);

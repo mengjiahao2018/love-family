@@ -5,23 +5,23 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 
 public interface RoleDao {
 
-	GenericRole findRoleById(Long roleId);
+	RoleInfo findRoleById(Long roleId);
 
-	Page<GenericRole> queryPageRole(Pageable pageable, GenericRole role);
+	Page<RoleInfo> queryPageRole(Pageable pageable, RoleInfo role);
 
-	List<GenericRole> searchRoleDataByCodeUpd(Long id, String roleCode);
+	List<RoleInfo> searchRoleDataByCodeUpd(Long id, String roleCode);
 
-	List<GenericRole> searchRoleDataByCode(String roleCode);
+	List<RoleInfo> searchRoleDataByCode(String roleCode);
 
-	void saveRole(GenericRole role);
+	void saveRole(RoleInfo role);
 
-	void deleteRolerole(GenericRole role);
+	void deleteRolerole(RoleInfo role);
 
-	List<GenericRole> findAllRole();
+	List<RoleInfo> findAllRole();
 	
 	public List findRolesByUserId(Long id);
 

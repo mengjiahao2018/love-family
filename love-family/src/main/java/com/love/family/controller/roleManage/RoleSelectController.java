@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.love.family.business.functionManage.entity.GenericFunction;
 import com.love.family.business.functionManage.service.FunctionService;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;
 import com.love.family.pub.rbac.privilege.model.RolePrivilege;
 import com.love.family.pub.rbac.system.entity.User;
@@ -65,7 +65,7 @@ public class RoleSelectController {
 		UserInfo userInfo =(UserInfo)UserInfoUtils.getCurrentUserInfo();
 		if(userInfo!=null) {
 			User selfUser =(User) userInfo.getSimpleUser();
-			GenericRole role = selfUser.getCurrentSelectRole();
+			RoleInfo role = selfUser.getCurrentSelectRole();
 			msgMap.put("rolename", role.getName());
 			msgMap.put("username", selfUser.getUserName());
 			msgMap.put("usercode", selfUser.getLoginName());
@@ -86,7 +86,7 @@ public class RoleSelectController {
 				selectedRoleId = request.getParameter("selectedRoleId");
 			}
 			Long roleId = StringUtils.isBlank(selectedRoleId) ? 0 : Long.valueOf(selectedRoleId);
-			GenericRole role = roleService.findRoleById(roleId);
+			RoleInfo role = roleService.findRoleById(roleId);
 			selfUser.setCurrentSelectRole(role);
 			initUser(userInfo, Long.valueOf(selectedRoleId));
 		} catch (MyBusinessException e) {
@@ -125,9 +125,9 @@ public class RoleSelectController {
 	private void setUserPrivilege(UserInfo userInfo, List roles, Long selectedRoleId) {
 		@SuppressWarnings("rawtypes")
 		Iterator it = roles.iterator();
-		GenericRole role;
+		RoleInfo role;
 		while (it.hasNext()) {
-			role = (GenericRole) it.next();
+			role = (RoleInfo) it.next();
 			if(selectedRoleId.longValue()==role.getId().longValue()) {
 				try {
 					addRolePrivilege(userInfo,role);
@@ -141,7 +141,7 @@ public class RoleSelectController {
 		
 	}
 
-	private void addRolePrivilege(UserInfo userInfo, GenericRole role) {
+	private void addRolePrivilege(UserInfo userInfo, RoleInfo role) {
 		//第一步，得到角色的权限信息
 		RolePrivilege privilege = roleService.getRolePrivilege(role.getId()); 
 		

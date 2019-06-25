@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sys_role")
-public class GenericRole implements Serializable{
+public class RoleInfo implements Serializable{
 
 	/**
 	 * 

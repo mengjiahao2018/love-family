@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.entity.supports.AbstractEntity;
 
 @MappedSuperclass
@@ -26,7 +26,7 @@ public class GenericUser extends AbstractEntity<Long> {
 	private String status;
 	
 	@JsonIgnore
-	private List<GenericRole> roles;
+	private List<RoleInfo> roles;
 
 	@Id
 	@GeneratedValue(generator = "seq_user")
@@ -70,11 +70,11 @@ public class GenericUser extends AbstractEntity<Long> {
 		this.status = status;
 	}
 	
-	public List<GenericRole> getRoles() {
+	public List<RoleInfo> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<GenericRole> roles) {
+	public void setRoles(List<RoleInfo> roles) {
 		this.roles = roles;
 	}
 

@@ -3,7 +3,7 @@ package com.love.family.pub.rbac.system.entity;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.love.family.business.roleManage.entity.GenericRole;
+import com.love.family.business.roleManage.entity.RoleInfo;
 
 public class User extends GenericUser implements BaseEntityInterfc {
 	private String idCard;
@@ -17,7 +17,7 @@ public class User extends GenericUser implements BaseEntityInterfc {
 	private Date lastModifiedTime;
 	
 	@JsonIgnore
-	private GenericRole currentSelectRole;
+	private RoleInfo currentSelectRole;
 
 	/**
 	 * 
@@ -69,11 +69,11 @@ public class User extends GenericUser implements BaseEntityInterfc {
 		this.lastModifiedTime = lastModifiedTime;
 	}
 
-	public GenericRole getCurrentSelectRole() {
+	public RoleInfo getCurrentSelectRole() {
 		return currentSelectRole;
 	}
 
-	public void setCurrentSelectRole(GenericRole currentSelectRole) {
+	public void setCurrentSelectRole(RoleInfo currentSelectRole) {
 		this.currentSelectRole = currentSelectRole;
 	}
 	
