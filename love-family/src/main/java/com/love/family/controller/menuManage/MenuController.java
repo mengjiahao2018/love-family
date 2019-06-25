@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.menuManage.entity.MenuVO;
@@ -85,7 +85,7 @@ public class MenuController {
 				MenuVO menuVO = new MenuVO();
 				BeanUtils.copyProperties(demoMenuEO, menuVO);
 				if(demoMenuEO.getCode()!=null) {
-					List<GenericFunction> functions = functionService.findMenuFuncionByCode(demoMenuEO.getCode());
+					List<FunctionModel> functions = functionService.findMenuFuncionByCode(demoMenuEO.getCode());
 					if(functions!=null&&functions.size()!=1) {
 						resultMap.put("error", "function配置有误，code对应的function不存在或者存在多条数据！错误code"+demoMenuEO.getCode());
 					}else if(functions!=null&&functions.size()==1) {

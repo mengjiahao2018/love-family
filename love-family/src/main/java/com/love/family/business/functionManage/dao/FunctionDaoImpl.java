@@ -9,38 +9,38 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository
-public class FunctionDaoImpl extends BaseHibernate4QueryDao<GenericFunction> implements FunctionDao {
+public class FunctionDaoImpl extends BaseHibernate4QueryDao<FunctionModel> implements FunctionDao {
 
 	@Override
-	public List<GenericFunction> findFunctionsByRoleId(Long roleId) {
+	public List<FunctionModel> findFunctionsByRoleId(Long roleId) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(" from GenericFunction f where f.id in  ");
+		buffer.append(" from FunctionModel f where f.id in  ");
 		buffer.append(" (select fr.functionId from RoleFunction fr where fr.roleId=:roleId)");
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("roleId", roleId);
-		List<GenericFunction> functionList = this.findEntityObjects(buffer.toString(), conditionMap);
+		List<FunctionModel> functionList = this.findEntityObjects(buffer.toString(), conditionMap);
 		return functionList;
 
 	}
 
 	@Override
-	public List<GenericFunction> getAllFunctions() {
+	public List<FunctionModel> getAllFunctions() {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(" from GenericFunction f");
+		buffer.append(" from FunctionModel f");
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
-		List<GenericFunction> functionList = this.findEntityObjects(buffer.toString(), conditionMap);
+		List<FunctionModel> functionList = this.findEntityObjects(buffer.toString(), conditionMap);
 		return functionList;
 	}
 
 	@Override
-	public Page<GenericFunction> findFunctionByNameOrUrl(Map<String, Object> conditionMap,Pageable pageable) {
+	public Page<FunctionModel> findFunctionByNameOrUrl(Map<String, Object> conditionMap,Pageable pageable) {
 		StringBuffer buffer = new StringBuffer();
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		buffer.append("from GenericFunction f where 1=1 ");
+		buffer.append("from FunctionModel f where 1=1 ");
 		if(StringUtils.isNotBlank((String)conditionMap.get("functionName"))) {
 			buffer.append(" and f.name like '%"+(String)conditionMap.get("functionName")+"%'");
 		}
@@ -51,29 +51,29 @@ public class FunctionDaoImpl extends BaseHibernate4QueryDao<GenericFunction> imp
 	}
 
 	@Override
-	public List<GenericFunction> findMenuFuncionByCode(String code) {
+	public List<FunctionModel> findMenuFuncionByCode(String code) {
 		StringBuffer buffer = new StringBuffer();
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		buffer.append("from GenericFunction f where 1=1 and f.code = :code");
+		buffer.append("from FunctionModel f where 1=1 and f.code = :code");
 		paramMap.put("code", code);
-		List<GenericFunction> functions = this.findEntityObjects(buffer.toString(), paramMap);
+		List<FunctionModel> functions = this.findEntityObjects(buffer.toString(), paramMap);
 		return functions;
 	}
 
 	@Override
-	public GenericFunction findFunctionByFunctionId(Long id) {
+	public FunctionModel findFunctionByFunctionId(Long id) {
 		return this.load(id);
 	}
 
 	@Override
-	public void deleteFuncion(GenericFunction function) {
+	public void deleteFuncion(FunctionModel function) {
 		this.delete(function);
 	}
 
 	@Override
-	public List<GenericFunction> findFunctionByLikeName(String param) {
+	public List<FunctionModel> findFunctionByLikeName(String param) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("from GenericFunction where type='MENU' and name like :name order by name");
+		buffer.append("from FunctionModel where type='MENU' and name like :name order by name");
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("name",param);
 		return this.findEntityObjects(buffer.toString(), conditionMap);

@@ -2,7 +2,7 @@ package com.love.family.business.userRoleManage.entity;
 
 import java.io.Serializable;
 
-public class SysUserRoleVO implements Serializable {
+public class UserRoleVO implements Serializable {
 	/**
 	 * 
 	 */

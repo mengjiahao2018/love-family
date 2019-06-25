@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;

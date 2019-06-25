@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sys_function")
-public class GenericFunction implements Serializable{
+public class FunctionModel implements Serializable{
 
 	/**
 	 * 

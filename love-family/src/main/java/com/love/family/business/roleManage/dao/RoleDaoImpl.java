@@ -17,7 +17,7 @@ public class RoleDaoImpl extends BaseHibernate4QueryDao<RoleInfo>  implements Ro
 	@Override
 	public List findRolesByUserId(Long id) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("from RoleInfo r where r.id in (select t.roleId from SysUserRole t where t.userId=:userId) ");
+		buffer.append("from RoleInfo r where r.id in (select t.roleId from UserRole t where t.userId=:userId) ");
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("userId", id);
 		return findEntityObjects(buffer.toString(), conditionMap);

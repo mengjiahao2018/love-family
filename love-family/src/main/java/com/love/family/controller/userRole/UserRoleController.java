@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleFunctionManage.entity.RoleFunction;
 import com.love.family.business.roleFunctionManage.entity.RoleFunctionVO;
@@ -31,8 +31,8 @@ import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;
 import com.love.family.business.userManage.entity.UserModel;
 import com.love.family.business.userManage.service.UserService;
-import com.love.family.business.userRoleManage.entity.SysUserRole;
-import com.love.family.business.userRoleManage.entity.SysUserRoleVO;
+import com.love.family.business.userRoleManage.entity.UserRole;
+import com.love.family.business.userRoleManage.entity.UserRoleVO;
 import com.love.family.business.userRoleManage.service.UserRoleService;
 import com.love.family.pub.rbac.system.entity.User;
 import com.love.family.pub.rbac.system.util.UserInfoUtils;
@@ -78,12 +78,12 @@ public class UserRoleController {
 		try {
 			conditionMap.put("roleName", roleName);
 			conditionMap.put("userName", userName);
-			Page<SysUserRole> data = userRoleService.queryPageUserRole(pageable,conditionMap);			
+			Page<UserRole> data = userRoleService.queryPageUserRole(pageable,conditionMap);			
 			if(data!=null) {
-				List<SysUserRole> sysUserRoles = data.getContent();
-				List<SysUserRoleVO> sysUserRoleVOs = new ArrayList<SysUserRoleVO>();
-				for(SysUserRole sysUserRole : sysUserRoles) {
-					SysUserRoleVO sysUserRoleVO = new SysUserRoleVO();
+				List<UserRole> sysUserRoles = data.getContent();
+				List<UserRoleVO> sysUserRoleVOs = new ArrayList<UserRoleVO>();
+				for(UserRole sysUserRole : sysUserRoles) {
+					UserRoleVO sysUserRoleVO = new UserRoleVO();
 					sysUserRoleVO.setId(sysUserRole.getId());
 					sysUserRoleVO.setRoleId(sysUserRole.getRoleId());
 					sysUserRoleVO.setUserId(sysUserRole.getUserId());
@@ -120,7 +120,7 @@ public class UserRoleController {
 		
 		try {
 			Long id = Long.valueOf((String)pageRequest.get("id"));
-			SysUserRole sysUserRole = new SysUserRole();
+			UserRole sysUserRole = new UserRole();
 			sysUserRole.setId(id);
 			userRoleService.deleteUserRole(sysUserRole);
 		} catch (Exception e) {
@@ -154,7 +154,7 @@ public class UserRoleController {
 		try {
 			Long roleId = Long.valueOf((String)pageRequest.get("roleId_create"));
 			Long userId = Long.valueOf((String)pageRequest.get("userId_create"));
-			SysUserRole sysUserRole = new SysUserRole();
+			UserRole sysUserRole = new UserRole();
 			sysUserRole.setRoleId(roleId);
 			sysUserRole.setUserId(userId);
 			userRoleService.saveUserRole(sysUserRole);

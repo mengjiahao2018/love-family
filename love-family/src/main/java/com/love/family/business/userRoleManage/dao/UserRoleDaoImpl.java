@@ -9,17 +9,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import com.love.family.business.userRoleManage.entity.SysUserRole;
+import com.love.family.business.userRoleManage.entity.UserRole;
 import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository
-public class UserRoleDaoImpl extends BaseHibernate4QueryDao<SysUserRole> implements UserRoleDao {
+public class UserRoleDaoImpl extends BaseHibernate4QueryDao<UserRole> implements UserRoleDao {
 
 
 	@Override
-	public Page<SysUserRole> queryPageUserRole(Pageable pageable, Map<String, Object> param) {
+	public Page<UserRole> queryPageUserRole(Pageable pageable, Map<String, Object> param) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("from SysUserRole t where 1=1 ");
+		buffer.append("from UserRole t where 1=1 ");
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		if(StringUtils.isNotBlank((String)param.get("roleName"))) {
 			conditionMap.put("roleName", (String)param.get("roleName"));
@@ -33,14 +33,14 @@ public class UserRoleDaoImpl extends BaseHibernate4QueryDao<SysUserRole> impleme
 	}
 
 	@Override
-	public void deleteUserRole(SysUserRole sysUserRole) {
+	public void deleteUserRole(UserRole sysUserRole) {
 		this.delete(sysUserRole);
 	}
 
 	@Override
 	public List searchUserRoleDataByUserIdAndRoleId(Long roleId, Long userId) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("from SysUserRole r where r.userId=:userId and r.roleId = :roleId");
+		buffer.append("from UserRole r where r.userId=:userId and r.roleId = :roleId");
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("userId", userId);
 		conditionMap.put("roleId", roleId);
@@ -48,7 +48,7 @@ public class UserRoleDaoImpl extends BaseHibernate4QueryDao<SysUserRole> impleme
 	}
 
 	@Override
-	public void saveUserRole(SysUserRole sysUserRole) {
+	public void saveUserRole(UserRole sysUserRole) {
 		this.save(sysUserRole);
 	}
 

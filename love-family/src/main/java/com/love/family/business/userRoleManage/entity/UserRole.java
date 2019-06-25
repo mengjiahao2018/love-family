@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sys_user_role")
-public class SysUserRole implements Serializable{
+public class UserRole implements Serializable{
 
 	/**
 	 * 

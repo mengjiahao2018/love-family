@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;
@@ -112,10 +112,10 @@ public class RoleSelectController {
 
 	@SuppressWarnings({"unchecked"})
 	private void initSecurityContextFunctions() {
-		List<GenericFunction> functions = new ArrayList<GenericFunction>();
+		List<FunctionModel> functions = new ArrayList<FunctionModel>();
 		Set<String> functionValues = new HashSet<String>();
 		functions = functionService.getAllFunctions();
-		for(GenericFunction function : functions) {
+		for(FunctionModel function : functions) {
 			if(StringUtils.isNotBlank(function.getUrl()))
 				functionValues.add(function.getUrl());
 		}

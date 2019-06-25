@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.love.family.business.userRoleManage.dao.UserRoleDao;
-import com.love.family.business.userRoleManage.entity.SysUserRole;
+import com.love.family.business.userRoleManage.entity.UserRole;
 
 @Service
 public class UserRoleServiceImpl implements UserRoleService {
@@ -18,12 +18,12 @@ public class UserRoleServiceImpl implements UserRoleService {
 	UserRoleDao userRoleDao;
 	
 	@Override
-	public Page<SysUserRole> queryPageUserRole(Pageable pageable, Map<String, Object> conditionMap) {
+	public Page<UserRole> queryPageUserRole(Pageable pageable, Map<String, Object> conditionMap) {
 		return userRoleDao.queryPageUserRole(pageable,conditionMap);
 	}
 
 	@Override
-	public void deleteUserRole(SysUserRole sysUserRole) {
+	public void deleteUserRole(UserRole sysUserRole) {
 		userRoleDao.deleteUserRole(sysUserRole);
 	}
 
@@ -33,7 +33,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	}
 
 	@Override
-	public void saveUserRole(SysUserRole sysUserRole) {
+	public void saveUserRole(UserRole sysUserRole) {
 		userRoleDao.saveUserRole(sysUserRole);
 	}
 

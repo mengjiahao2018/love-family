@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleManage.dao.RoleDao;
 import com.love.family.business.roleManage.entity.RoleInfo;
@@ -43,12 +43,12 @@ public class RoleServiceImpl implements RoleService {
 
 	protected RolePrivilege loadRolePrivilege(Long roleId) {
 		RolePrivilege rolePrivilege = new RolePrivilege(roleId);
-		List<GenericFunction> functionList = functionService.findFunctionsByRoleId(roleId);
+		List<FunctionModel> functionList = functionService.findFunctionsByRoleId(roleId);
 		List<String> resourceList = new ArrayList<String>();
 		Map<String,String> menuMap = new HashMap<String, String>();
-		for(GenericFunction function:functionList) {
+		for(FunctionModel function:functionList) {
 			resourceList.add(function.getUrl());
-			if(GenericFunction.MENU_TYPE.equals(function.getType())) {
+			if(FunctionModel.MENU_TYPE.equals(function.getType())) {
 				menuMap.put(function.getCode(),function.getUrl());
 			}
 		}

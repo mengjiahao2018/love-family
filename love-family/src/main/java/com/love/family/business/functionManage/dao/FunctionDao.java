@@ -6,24 +6,24 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 
 public interface FunctionDao {
 
-	List<GenericFunction> findFunctionsByRoleId(Long roleId);
+	List<FunctionModel> findFunctionsByRoleId(Long roleId);
 
-	List<GenericFunction> getAllFunctions();
+	List<FunctionModel> getAllFunctions();
 
-	Page<GenericFunction> findFunctionByNameOrUrl(Map<String, Object> conditionMap,Pageable pageable);
+	Page<FunctionModel> findFunctionByNameOrUrl(Map<String, Object> conditionMap,Pageable pageable);
 
-	List<GenericFunction> findMenuFuncionByCode(String code);
+	List<FunctionModel> findMenuFuncionByCode(String code);
 
-	void save(GenericFunction function);
+	void save(FunctionModel function);
 
-	GenericFunction findFunctionByFunctionId(Long id);
+	FunctionModel findFunctionByFunctionId(Long id);
 
-	void deleteFuncion(GenericFunction function);
+	void deleteFuncion(FunctionModel function);
 
-	List<GenericFunction> findFunctionByLikeName(String param);
+	List<FunctionModel> findFunctionByLikeName(String param);
 
 }

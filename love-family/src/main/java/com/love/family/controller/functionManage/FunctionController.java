@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.menuManage.service.MenuService;
@@ -57,9 +57,9 @@ public class FunctionController {
 		Map<String,Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("functionName", functionName);
 		conditionMap.put("functionUrl", functionUrl);
-		Page<GenericFunction> data = functionService.findFunctionByNameOrUrl(conditionMap,pageable);
+		Page<FunctionModel> data = functionService.findFunctionByNameOrUrl(conditionMap,pageable);
 		
-		for(GenericFunction f : data.getContent()) {
+		for(FunctionModel f : data.getContent()) {
 			if(f.getStatus().equals("1")) {
 				f.setStatus("有效");
 			}
@@ -81,10 +81,10 @@ public class FunctionController {
 	
 	@RequestMapping(value = "/queryAllFunctionHelpFunction", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<GenericFunction> queryAllFunctionHelpFunction(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+	public List<FunctionModel> queryAllFunctionHelpFunction(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
 		String param = request.getParameter("label");
 		param = StringUtils.isBlank(param)?"%%":"%"+param+"%";
-		List<GenericFunction> functions = functionService.findFunctionByLikeName(param);
+		List<FunctionModel> functions = functionService.findFunctionByLikeName(param);
 		return functions;
 	}
 	
@@ -101,7 +101,7 @@ public class FunctionController {
 		String code = (String)pageRequest.get("code_create");
 		String status = (String)pageRequest.get("status_create");
 		
-		GenericFunction function = new GenericFunction();
+		FunctionModel function = new FunctionModel();
 		if(!StringUtils.isBlank(name)) {
 			function.setName(name);
 		}
@@ -117,7 +117,7 @@ public class FunctionController {
 		if(!StringUtils.isBlank(status)) {
 			function.setStatus(status);
 		}
-		List<GenericFunction> functions = functionService.findMenuFuncionByCode(function.getCode());
+		List<FunctionModel> functions = functionService.findMenuFuncionByCode(function.getCode());
 		
 		if(functions.size()>0) {
 			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
@@ -149,7 +149,7 @@ public class FunctionController {
 		String code = (String)pageRequest.get("code_update");
 		String status = (String)pageRequest.get("status_update");
 		
-		GenericFunction function = new GenericFunction();
+		FunctionModel function = new FunctionModel();
 		function.setId(id);
 		if(!StringUtils.isBlank(name)) {
 			function.setName(name);
@@ -166,7 +166,7 @@ public class FunctionController {
 		if(!StringUtils.isBlank(status)) {
 			function.setStatus(status);
 		}
-		List<GenericFunction> functions = functionService.findMenuFuncionByCode(function.getCode());
+		List<FunctionModel> functions = functionService.findMenuFuncionByCode(function.getCode());
 		
 		if(functions.size()>0) {
 			resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
@@ -193,14 +193,14 @@ public class FunctionController {
 		resultMap.put(MessageUtil.RETURN_MESSAGE_SIGN, MessageUtil.RETURN_SUCCESS_MESSAGE);
 		String id = (String)pageRequest.get("id");
 		
-		GenericFunction function ;
+		FunctionModel function ;
 		
 		if(StringUtils.isNotBlank(id)) {
 			//选择单条数据时
 			if(!id.contains(",")) {
-				function = new GenericFunction();
+				function = new FunctionModel();
 				function.setId(Long.parseLong(id));
-				GenericFunction function1 = functionService.findFunctionByFunctionId(Long.parseLong(id));
+				FunctionModel function1 = functionService.findFunctionByFunctionId(Long.parseLong(id));
 				MenuEO m = menuService.findMenuByCode(function1.getCode());
 				if(m!=null) {
 					resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
@@ -211,9 +211,9 @@ public class FunctionController {
 			}else {
 				String [] idArr = id.split(",");
 				for(String idx :idArr) {
-					GenericFunction gf = new GenericFunction();
+					FunctionModel gf = new FunctionModel();
 					gf.setId(Long.parseLong(idx));
-					GenericFunction function1 = functionService.findFunctionByFunctionId(Long.parseLong(idx));
+					FunctionModel function1 = functionService.findFunctionByFunctionId(Long.parseLong(idx));
 					MenuEO m = menuService.findMenuByCode(function1.getCode());
 					if(m!=null) {
 						resultMap.put(MessageUtil.RETURN_RESULT_SIGN, MessageUtil.RETURN_FAILED_CODE);
@@ -230,9 +230,9 @@ public class FunctionController {
 	
 	@RequestMapping(value = "/searchFunctionDataById", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public GenericFunction searchFunctionDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+	public FunctionModel searchFunctionDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
 		Long id = Long.parseLong((String)pageRequest.get("id"));
-		GenericFunction function = functionService.findFunctionByFunctionId(id);
+		FunctionModel function = functionService.findFunctionByFunctionId(id);
 		return function;
 		
 	}
@@ -279,9 +279,9 @@ public class FunctionController {
 		try {
 			String param = request.getParameter("label");
 			param = StringUtils.isBlank(param)?"%%":"%"+param+"%";
-			List<GenericFunction> functions = functionService.findFunctionByLikeName(param);
+			List<FunctionModel> functions = functionService.findFunctionByLikeName(param);
 			List<Map<String,Object>> eos = new ArrayList<Map<String,Object>>();
-			for(GenericFunction function : functions){
+			for(FunctionModel function : functions){
 				Map<String,Object> eo = new HashMap<String, Object>();
 				eo.put("code", function.getId());
 				eo.put("id", function.getCode());

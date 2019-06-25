@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleFunctionManage.entity.RoleFunction;
 import com.love.family.business.roleFunctionManage.entity.RoleFunctionVO;
@@ -75,7 +75,7 @@ public class RoleFunctionController {
 					roleFunctionVO.setRoleId(roleFunction.getRoleId());
 					
 					if(roleFunction.getFunctionId()!=null) {
-						GenericFunction functionDefault = functionService.findFunctionByFunctionId(roleFunction.getFunctionId());
+						FunctionModel functionDefault = functionService.findFunctionByFunctionId(roleFunction.getFunctionId());
 						if(functionDefault!=null) {
 							roleFunctionVO.setFunctionName(functionDefault.getName());
 							roleFunctionVO.setFunctionCode(functionDefault.getCode());
@@ -127,8 +127,8 @@ public class RoleFunctionController {
 					roleFunctionService.saveRoleFunction(roleFunction);
 				}
 			}else {
-				List<GenericFunction> functions = functionService.findAllFunction();
-				for(GenericFunction function : functions) {
+				List<FunctionModel> functions = functionService.findAllFunction();
+				for(FunctionModel function : functions) {
 					RoleFunction rf = new RoleFunction();
 					rf.setRoleId(roleId);
 					rf.setFunctionId(function.getId());
@@ -151,7 +151,7 @@ public class RoleFunctionController {
 				}
 				
 				for(String id : functionIds.split(",")) {
-					GenericFunction function = functionService.findFunctionByFunctionId(Long.valueOf(id));
+					FunctionModel function = functionService.findFunctionByFunctionId(Long.valueOf(id));
 					if(menus!=null&&function!=null) {
 						menus.remove(function.getCode());
 					}
@@ -207,7 +207,7 @@ public class RoleFunctionController {
 					resources = userInfo.getResources();
 				}
 				
-				GenericFunction function = functionService.findFunctionByFunctionId(functionId);
+				FunctionModel function = functionService.findFunctionByFunctionId(functionId);
 				if(menus!=null&&function!=null) {
 					menus.remove(function.getCode());
 				}

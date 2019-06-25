@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.love.family.business.functionManage.entity.GenericFunction;
+import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.menuManage.service.MenuService;
@@ -256,9 +256,9 @@ public class UserController {
 		try {
 			String param = request.getParameter("label");
 			param = StringUtils.isBlank(param)?"%%":"%"+param+"%";
-			List<GenericFunction> functions = functionService.findFunctionByLikeName(param);
+			List<FunctionModel> functions = functionService.findFunctionByLikeName(param);
 			List<Map<String,Object>> eos = new ArrayList<Map<String,Object>>();
-			for(GenericFunction function : functions){
+			for(FunctionModel function : functions){
 				Map<String,Object> eo = new HashMap<String, Object>();
 				eo.put("code", function.getId());
 				eo.put("id", function.getCode());
