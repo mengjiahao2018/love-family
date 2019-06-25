@@ -12,6 +12,7 @@ body {
 	top: 0px;
 	bottom: 0px;
 	width: 100%;
+	height:100%;
 }
 
 /******************************通用样式******************************/
@@ -30,6 +31,12 @@ body {
 
 .container-bottom .el-button {
     float: left;
+}
+
+.line {
+    height: 1px;
+    background-color: #e0e6ed;
+    margin: 10px 0;
 }
 
 .header {
@@ -83,7 +90,7 @@ body {
 
 .body {
     width: 100%;
-    height: 500px;
+    height: 100%;/**不可固定长度，避免大屏幕出现分页看不到，也不可设置100%，会出现上下滚动条，太难看**/
     overflow: hidden;
     font-family:"微软雅黑";
 }
@@ -144,7 +151,7 @@ body {
     line-height: 30px;
     font-size: 13px;
     color: #ffffff;
-    background-color: #20a0ff;
+    background-color: #008cd7;
 }
 
 
@@ -180,20 +187,6 @@ body {
     padding: 10px;
 }
 
-.container-bottom {
-    text-align: right;
-    margin-top: 5px;
-}
-
-.container-bottom .el-pagination {
-    display: inline-block;
-}
-
-.container-bottom .el-button {
-    float: left;
-}
-
-
 /******************************覆盖原有组件样式******************************/
 
 .el-menu {
@@ -202,7 +195,7 @@ body {
 
 .menu-container .el-menu-item.is-active {
     color: #ffffff;
-    background-color: #20a0ff;
+    background-color: #008cd7;
     /* border-left: 5px solid #a7c739; */
 }
 
@@ -244,30 +237,6 @@ body {
 	border: none;
 }
 
-
-/******************************通用样式******************************/
-.container {
-    padding: 10px;
-}
-
-.container-bottom {
-    text-align: right;
-    margin-top: 5px;
-}
-
-.container-bottom .el-pagination {
-    display: inline-block;
-}
-
-.container-bottom .el-button {
-    float: left;
-}
-
-.line {
-    height: 1px;
-    background-color: #e0e6ed;
-    margin: 10px 0;
-}
 
 /******************************覆盖原有组件样式******************************/
 
@@ -323,7 +292,7 @@ body {
 }
 
 .el-table th .cell {
-	background-color: #20a0ff;
+	background-color: #008cd7;
 	color: white;
 }
 
@@ -404,7 +373,7 @@ body {
 	height:30px;
 }
 .merge-suffix-input>input:focus+div{
-	border-color: #20a0ff;
+	border-color: #008cd7;
 }
 .merge-suffix-input>input:hover+div{
 	border-color: rgb(131, 147, 165);

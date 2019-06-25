@@ -29,13 +29,13 @@
 		border 
 		stripe 
 		highlight-current-row>
-	      <el-table-column property="id" label="功能ID"  width="90" align="center"></el-table-column>
-	      <el-table-column property="parentId" label="父菜单ID"  width="90" align="center"></el-table-column>
-	      <el-table-column property="icon" label="菜单图标"  width="120" align="center"></el-table-column>
-	      <el-table-column property="functionName" label="功能名称"  width="140" align="center"></el-table-column>
-	      <el-table-column property="functionUrl" label="功能链接地址" align="center"></el-table-column>
-	      <el-table-column property="label" label="菜单名称"  width="140" align="center"></el-table-column>
-	      <el-table-column label="操作"  align="center">
+	      <el-table-column property="id" label="功能ID"  width="90" align="left"></el-table-column>
+	      <el-table-column property="parentId" label="父菜单ID"  width="100" align="left"></el-table-column>
+	      <el-table-column property="icon" label="菜单图标"  width="200" align="left"></el-table-column>
+	      <el-table-column property="functionName" label="功能名称"  width="140" align="left"></el-table-column>
+	      <el-table-column property="functionUrl" label="功能链接地址" align="left"></el-table-column>
+	      <el-table-column property="label" label="菜单名称"  width="140" align="left"></el-table-column>
+	      <el-table-column label="操作" width="200" align="center">
 	      	<template slot-scope="scope">
 	      		<el-tooltip effect="light" content="编辑" >
 			      <el-button @click="editMenu(scope.row)" type="text" size="small" ><span class="fa fa-edit"></span></el-button>
