@@ -13,6 +13,15 @@ import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository
 public class RoleDaoImpl extends BaseHibernate4QueryDao<GenericRole>  implements RoleDao {
+	
+	@Override
+	public List findRolesByUserId(Long id) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("from GenericRole r where r.id in (select t.roleId from SysUserRole t where t.userId=:userId) ");
+		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		conditionMap.put("userId", id);
+		return findEntityObjects(buffer.toString(), conditionMap);
+	}
 
 	@Override
 	public GenericRole findRoleById(Long roleId) {

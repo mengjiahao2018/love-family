@@ -148,6 +148,8 @@ public class UserController {
 			String status = (String)pageRequest.get("status_update");
 			
 			SysUser sysUser = new SysUser();
+			SysUser oldSysUser = userService.findUserById(id);
+			BeanUtils.copyProperties(oldSysUser, sysUser);
 			sysUser.setId(id);
 			if(!StringUtils.isBlank(userName)) {
 				sysUser.setUserName(userName);
@@ -158,7 +160,6 @@ public class UserController {
 			if(!StringUtils.isBlank(status)) {
 				sysUser.setStatus(status);
 			}
-			
 			if(!StringUtils.isBlank(password)&&!"******".equals(password)) {
 				sysUser.setLastModifyPassword(password);
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -275,6 +276,13 @@ public class UserController {
 		}
 		
 		return resultMap;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/queryAllUserHelpUserRole", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List queryAllUserHelpUserRole(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+		return userService.findAllUsers();
 	}
 	
 }

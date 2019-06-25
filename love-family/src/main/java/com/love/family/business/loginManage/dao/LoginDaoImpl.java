@@ -43,7 +43,7 @@ public class LoginDaoImpl extends BaseHibernate4QueryDao<SysUser> implements Log
 	@Override
 	public List<SysUser> findLoginUserByLoginName(String loginName) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("from SysUser where loginName= :loginName and status=0");
+		buffer.append("from SysUser where loginName= :loginName and status=1");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("loginName", loginName);
 		try {

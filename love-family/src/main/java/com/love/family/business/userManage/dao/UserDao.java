@@ -1,5 +1,6 @@
 package com.love.family.business.userManage.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -14,5 +15,7 @@ public interface UserDao {
 	SysUser findUserById(Long id);
 
 	void saveUser(SysUser sysUser);
+
+	List findAllUsers();
 
 }

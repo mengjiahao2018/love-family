@@ -1,5 +1,7 @@
 package com.love.family.business.userManage.dao;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -29,4 +31,11 @@ public class UserDaoImpl extends BaseHibernate4QueryDao<SysUser>  implements Use
 		this.save(sysUser);
 	}
 
+	@Override
+	public List findAllUsers() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(" from SysUser ");
+		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		return this.findEntityObjects(buffer.toString(), conditionMap);
+	}
 }

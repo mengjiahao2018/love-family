@@ -1,5 +1,6 @@
 package com.love.family.business.userManage.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void saveUser(SysUser sysUser) {
 		userDao.saveUser(sysUser);
+	}
+
+	@Override
+	public List findAllUsers() {
+		return userDao.findAllUsers();
 	}
 
 }

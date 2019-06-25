@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.love.family.business.functionManage.entity.GenericFunction;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleManage.dao.RoleDao;
-import com.love.family.business.roleManage.dao.UserRoleDao;
 import com.love.family.business.roleManage.entity.GenericRole;
 import com.love.family.pub.rbac.privilege.model.RolePrivilege;
 
@@ -21,15 +20,13 @@ import com.love.family.pub.rbac.privilege.model.RolePrivilege;
 public class RoleServiceImpl implements RoleService {
 
 	@Autowired
-	private UserRoleDao userRoleDao;
-	@Autowired
 	private RoleDao roleDao;
 	@Autowired
 	private FunctionService functionService;
 
 	@Override
 	public List findRolesByUserId(Long id) {
-		return userRoleDao.findRolesByUserId(id);
+		return roleDao.findRolesByUserId(id);
 	}
 
 	@Override

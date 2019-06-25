@@ -22,5 +22,7 @@ public interface RoleDao {
 	void deleteRolerole(GenericRole role);
 
 	List<GenericRole> findAllRole();
+	
+	public List findRolesByUserId(Long id);
 
 }

@@ -1,0 +1,116 @@
+<div class="container">
+	<el-breadcrumb separator="/">
+	  <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+	  <el-breadcrumb-item>用户角色管理</el-breadcrumb-item>
+	</el-breadcrumb>
+
+	<el-collapse value="search" @change="collapseSearchChange">
+		 <el-collapse-item name="search">
+		 	<template slot="title">
+		 		查询条件
+		 	</template>
+		 	<el-form class="search-form" :inline="true" :model="dataSearch" label-width="80px" >
+				<el-form-item label="用户名称" prop="userName">
+			    	<el-input  v-model="dataSearch.userName" size="small"></el-input>
+			  	</el-form-item>
+				<el-form-item label="角色名称" prop="roleName">
+			    	<el-input  v-model="dataSearch.roleName" size="small"></el-input>
+			  	</el-form-item>
+			  	<el-form-item>
+			    	<el-button type="primary" @click="currentPage=1;search();">查询</el-button>
+			  	</el-form-item>
+			  <el-form-item style="float:right;text-align:right">
+			    <el-button type="primary" @click="addUserRole" size="small"><span class="fa fa-plus"></span>增加数据</el-button>
+			  </el-form-item>
+			</el-form>
+		 </el-collapse-item>
+	</el-collapse>
+	 <el-table 
+	 	ref="tableData"  
+		:data="dataUserRole"
+		:height="tableHeight"  
+		border 
+		stripe 
+		highlight-current-row>
+		  <el-table-column property="id" label="序列ID"   align="left"></el-table-column>	      
+	      <el-table-column property="userName" label="用户名称"   align="left"></el-table-column>
+	      <el-table-column property="loginName" label="登陆账号"   align="left"></el-table-column>
+	      <el-table-column property="roleName" label="角色名称"   align="left"></el-table-column>	      
+	      <el-table-column property="roleCode" label="角色代码"   align="left"></el-table-column>	      
+	      <el-table-column label="操作" align="center" >
+	      	<template slot-scope="scope">
+			    <el-tooltip effect="light" content="删除" >
+			      <el-button @click="deleteUserRole(scope.row)" type="text" size="small" ><span class="fa fa-trash"></span></el-button>
+			    </el-tooltip>
+	      	</template>
+	      </el-table-column>
+    </el-table>
+    
+    <div class="container-bottom">
+	    <el-pagination layout="total,prev,pager,next,jumper"
+	    	:pageSize="pageSize"
+	    	:current-page.sync="currentPage"
+	    	:total="total"
+	    	@current-change="search" >
+    	</el-pagination>
+    </div>
+    
+    
+   	<el-dialog title="新增" :visible.sync="showAddDialog">
+  		<el-form ref="editForm" :model="addingUserRole" class="edit-from" label-position="top">
+  			<el-row :gutter="20">
+  				<el-col :span="12">
+  					<el-form-item label="用户名称" prop="userId" required>
+  						<el-select v-model="addingUserRole.userId" filterable placeholder="请选择角色">
+  							<el-option 
+  								v-for="user in users"
+  								:key="user.id"
+  								:label="user.userName"
+  								:value="user.id"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="用户代码" prop="userId" required>
+  						<el-select v-model="addingUserRole.userId" :disabled="true"  placeholder="请选择角色">
+  							<el-option 
+  								v-for="user in users"
+  								:key="user.id"
+  								:label="user.loginName"
+  								:value="user.id"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  			<el-row>
+  				<el-col :span="12">
+  					<el-form-item label="角色名称" prop="roleId" required>
+  						<el-select v-model="addingUserRole.roleId"  placeholder="请选择角色">
+  							<el-option 
+  								v-for="role in roles"
+  								:key="role.id"
+  								:label="role.name"
+  								:value="role.id"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="角色代码" prop="roleId" required>
+  						<el-select v-model="addingUserRole.roleId" :disabled="true" placeholder="请选择角色">
+  							<el-option 
+  								v-for="role in roles"
+  								:key="role.id"
+  								:label="role.code"
+  								:value="role.id"></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  		</el-form>
+  		<div slot="footer" align="center" >
+  			<el-button @click="saveUserRole()" type="primary">确认</el-button>
+  			<el-button @click="showAddDialog=false" >取消</el-button>
+  		</div>
+	</el-dialog>
+	
+</div>
