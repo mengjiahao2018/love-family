@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.love.family.business.userManage.dao.UserDao;
-import com.love.family.business.userManage.entity.SysUser;
+import com.love.family.business.userManage.entity.UserModel;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,17 +18,17 @@ public class UserServiceImpl implements UserService {
 	UserDao userDao;
 
 	@Override
-	public Page<SysUser> findPageUserInfoByCondition(Map<String, Object> conditionMap, Pageable pageable) {
+	public Page<UserModel> findPageUserInfoByCondition(Map<String, Object> conditionMap, Pageable pageable) {
 		return userDao.findPageUserInfoByCondition(conditionMap,pageable);
 	}
 
 	@Override
-	public SysUser findUserById(Long id) {
+	public UserModel findUserById(Long id) {
 		return userDao.findUserById(id);
 	}
 
 	@Override
-	public void saveUser(SysUser sysUser) {
+	public void saveUser(UserModel sysUser) {
 		userDao.saveUser(sysUser);
 	}
 

@@ -27,8 +27,8 @@ import com.love.family.business.functionManage.entity.GenericFunction;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.menuManage.service.MenuService;
-import com.love.family.business.userManage.entity.SysUser;
-import com.love.family.business.userManage.entity.SysUserVO;
+import com.love.family.business.userManage.entity.UserModel;
+import com.love.family.business.userManage.entity.UserModelVO;
 import com.love.family.business.userManage.service.UserService;
 import com.love.family.utils.MessageUtil;
 import com.love.family.utils.MyBusinessException;
@@ -65,12 +65,12 @@ public class UserController {
 		Map<String,Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("userName", userName);
 		conditionMap.put("loginName", loginName);
-		Page<SysUser> data = userService.findPageUserInfoByCondition(conditionMap,pageable);
+		Page<UserModel> data = userService.findPageUserInfoByCondition(conditionMap,pageable);
 		
-		List<SysUserVO> sysUserVOs = new ArrayList<SysUserVO>();
+		List<UserModelVO> sysUserVOs = new ArrayList<UserModelVO>();
 		
-		for(SysUser sysUser : data.getContent()) {
-			SysUserVO sysUserVO = new SysUserVO();
+		for(UserModel sysUser : data.getContent()) {
+			UserModelVO sysUserVO = new UserModelVO();
 			BeanUtils.copyProperties(sysUser, sysUserVO);
 			if(sysUserVO.getStatus().equals("1")) {
 				sysUserVO.setStatus("有效");
@@ -103,7 +103,7 @@ public class UserController {
 			String password = (String)pageRequest.get("password_create");
 			String status = (String)pageRequest.get("status_create");
 			
-			SysUser sysUser = new SysUser();
+			UserModel sysUser = new UserModel();
 			
 			if(!StringUtils.isBlank(userName)) {
 				sysUser.setUserName(userName);
@@ -147,8 +147,8 @@ public class UserController {
 			String password = (String)pageRequest.get("password_update");
 			String status = (String)pageRequest.get("status_update");
 			
-			SysUser sysUser = new SysUser();
-			SysUser oldSysUser = userService.findUserById(id);
+			UserModel sysUser = new UserModel();
+			UserModel oldSysUser = userService.findUserById(id);
 			BeanUtils.copyProperties(oldSysUser, sysUser);
 			sysUser.setId(id);
 			if(!StringUtils.isBlank(userName)) {
@@ -185,7 +185,7 @@ public class UserController {
 		String id = (String)pageRequest.get("id");
 		
 		try {
-			SysUser sysUser = new SysUser() ;
+			UserModel sysUser = new UserModel() ;
 			if(StringUtils.isNotBlank(id)) {
 				sysUser.setId(Long.valueOf(id));
 				sysUser.setStatus("0");
@@ -204,9 +204,9 @@ public class UserController {
 	
 	@RequestMapping(value = "/searchUserDataById", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public SysUser searchUserDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
+	public UserModel searchUserDataById(Model model, HttpServletRequest request, @RequestParam Map<String, Object> pageRequest) {
 		Long id = Long.parseLong((String)pageRequest.get("id"));
-		SysUser sysUser = userService.findUserById(id);
+		UserModel sysUser = userService.findUserById(id);
 		if(StringUtils.isNotBlank(sysUser.getPassword())){
 			sysUser.setPassword("******");
 		}

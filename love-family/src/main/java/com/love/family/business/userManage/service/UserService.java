@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.love.family.business.userManage.entity.SysUser;
+import com.love.family.business.userManage.entity.UserModel;
 
 public interface UserService {
 	/**
@@ -15,11 +15,11 @@ public interface UserService {
 	 * @param pageable
 	 * @return
 	 */
-	Page<SysUser> findPageUserInfoByCondition(Map<String, Object> conditionMap, Pageable pageable);
+	Page<UserModel> findPageUserInfoByCondition(Map<String, Object> conditionMap, Pageable pageable);
 
-	SysUser findUserById(Long id);
+	UserModel findUserById(Long id);
 
-	void saveUser(SysUser sysUser);
+	void saveUser(UserModel sysUser);
 
 	List findAllUsers();
 

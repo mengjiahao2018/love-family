@@ -6,11 +6,11 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.love.family.business.userManage.entity.SysUser;
+import com.love.family.business.userManage.entity.UserModel;
 import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository
-public class LoginDaoImpl extends BaseHibernate4QueryDao<SysUser> implements LoginDao {
+public class LoginDaoImpl extends BaseHibernate4QueryDao<UserModel> implements LoginDao {
 
 	@Override
 	public boolean login(String loginName, String password) {
@@ -20,7 +20,7 @@ public class LoginDaoImpl extends BaseHibernate4QueryDao<SysUser> implements Log
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("from LoginUser where loginName= :loginName and password= :password");
 		try {
-			List<SysUser> loginUserList = super.findEntityObjects(buffer.toString(), params);
+			List<UserModel> loginUserList = super.findEntityObjects(buffer.toString(), params);
 			if (loginUserList != null && loginUserList.size() > 0) {
 				return true;
 			}
@@ -32,7 +32,7 @@ public class LoginDaoImpl extends BaseHibernate4QueryDao<SysUser> implements Log
 
 	@Override
 	public boolean addLoginUser(String loginName, String password) {
-		SysUser sysUser = new SysUser();
+		UserModel sysUser = new UserModel();
 		sysUser.setLoginName(loginName);
 		sysUser.setPassword(password);
 		sysUser.setStatus("0");
@@ -41,13 +41,13 @@ public class LoginDaoImpl extends BaseHibernate4QueryDao<SysUser> implements Log
 	}
 
 	@Override
-	public List<SysUser> findLoginUserByLoginName(String loginName) {
+	public List<UserModel> findLoginUserByLoginName(String loginName) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("from SysUser where loginName= :loginName and status=1");
+		buffer.append("from UserModel where loginName= :loginName and status=1");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("loginName", loginName);
 		try {
-			List<SysUser> sysUserList = super.findEntityObjects(buffer.toString(), params);
+			List<UserModel> sysUserList = super.findEntityObjects(buffer.toString(), params);
 			return sysUserList;
 		} catch (Exception e) {
 			e.printStackTrace();

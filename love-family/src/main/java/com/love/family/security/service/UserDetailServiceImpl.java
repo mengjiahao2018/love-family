@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.love.family.business.loginManage.service.LoginService;
-import com.love.family.business.userManage.entity.SysUser;
+import com.love.family.business.userManage.entity.UserModel;
 import com.love.family.pub.rbac.system.entity.User;
 import com.love.family.security.model.UserInfoImpl;
 import com.love.family.utils.MyBusinessException;
@@ -27,7 +27,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
-			SysUser sysUser = findUser(username);
+			UserModel sysUser = findUser(username);
 			User user = new User();
 			BeanUtils.copyProperties(sysUser, user);
 			return new UserInfoImpl(user);  
@@ -38,15 +38,15 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		}
 	}
 
-	private SysUser findUser(String username) {
+	private UserModel findUser(String username) {
 		List users = loginService.findLoginUserByLoginName(username);
-		SysUser sysUser;
+		UserModel sysUser;
 		if(users==null||users.size()==0) {
 			return null;
 		}else if(users.size()>1) {
 			throw new UsernameNotFoundException("系统错误：根据用户名["+username+"]找到"+users.size()+"个用户");
 		}else {
-			sysUser = (SysUser) users.get(0);
+			sysUser = (UserModel) users.get(0);
 		}
 		return sysUser;
 	}

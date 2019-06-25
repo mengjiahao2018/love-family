@@ -21,7 +21,7 @@ import com.love.family.business.roleManage.entity.RoleInfo;
 
 @Entity
 @Table(name = "sys_user")
-public class SysUser implements Serializable{
+public class UserModel implements Serializable{
 	
 	/**
 	 * 

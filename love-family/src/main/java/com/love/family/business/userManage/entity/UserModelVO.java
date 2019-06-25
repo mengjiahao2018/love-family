@@ -7,7 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.love.family.business.roleManage.entity.RoleInfo;
 
-public class SysUserVO implements Serializable{
+public class UserModelVO implements Serializable{
 
 	/**
 	 * 

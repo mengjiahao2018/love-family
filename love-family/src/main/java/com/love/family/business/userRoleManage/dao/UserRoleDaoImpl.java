@@ -27,7 +27,7 @@ public class UserRoleDaoImpl extends BaseHibernate4QueryDao<SysUserRole> impleme
 		}
 		if(StringUtils.isNotBlank((String)param.get("userName"))) {
 			conditionMap.put("userName", (String)param.get("userName"));
-			buffer.append(" and t.userId in (select t2.id from SysUser t2 where t2.userName like :userName ) ");
+			buffer.append(" and t.userId in (select t2.id from UserModel t2 where t2.userName like :userName ) ");
 		}
 		return this.findEntityObjects(buffer.toString(), conditionMap, pageable);
 	}
