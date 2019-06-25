@@ -1,4 +1,4 @@
-package com.love.family.entity.supports;
+package com.love.family.dao.base;
 
 import java.io.Serializable;
 
