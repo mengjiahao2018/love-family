@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.love.family.business.loginManage.dao.LoginDao;
-import com.love.family.business.loginManage.entity.SysUser;
+import com.love.family.business.userManage.entity.SysUser;
 import com.love.family.utils.MyBusinessException;
 
 @Service

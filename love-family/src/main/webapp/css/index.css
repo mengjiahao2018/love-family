@@ -144,7 +144,7 @@ body {
     line-height: 30px;
     font-size: 13px;
     color: #ffffff;
-    background-color: #008cd7;
+    background-color: #20a0ff;
 }
 
 
@@ -202,7 +202,7 @@ body {
 
 .menu-container .el-menu-item.is-active {
     color: #ffffff;
-    background-color: #008cd7;
+    background-color: #20a0ff;
     /* border-left: 5px solid #a7c739; */
 }
 
@@ -323,7 +323,7 @@ body {
 }
 
 .el-table th .cell {
-	background-color: #008cd7;
+	background-color: #20a0ff;
 	color: white;
 }
 
@@ -404,7 +404,7 @@ body {
 	height:30px;
 }
 .merge-suffix-input>input:focus+div{
-	border-color: #008cd7;
+	border-color: #20a0ff;
 }
 .merge-suffix-input>input:hover+div{
 	border-color: rgb(131, 147, 165);

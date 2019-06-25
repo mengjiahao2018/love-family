@@ -1,0 +1,98 @@
+<div class="container">
+	<el-breadcrumb separator="/">
+	  <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+	  <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+	</el-breadcrumb>
+
+	<el-collapse value="search" @change="collapseSearchChange">
+		 <el-collapse-item name="search">
+		 	<template slot="title">
+		 		查询条件
+		 	</template>
+		 	<el-form class="search-form" :inline="true" :model="dataSearch" label-width="80px" >
+			<el-form-item label="用户名称" prop="userName">
+			    <el-input  v-model="dataSearch.userName" size="small"></el-input>
+			  </el-form-item>
+			  <el-form-item label="用户账户" prop="loginName">
+			    <el-input  v-model="dataSearch.loginName" auto-complete="off"></el-input>
+			  </el-form-item>
+			  <el-form-item>
+			    <el-button type="primary" @click="currentPage=1;search();">查询</el-button>
+			  </el-form-item>
+			  <el-form-item style="float:right;text-align:right">
+			    <el-button type="primary" @click="addUser" size="small"><span class="fa fa-plus"></span></el-button>
+			  </el-form-item>
+			</el-form>
+		 </el-collapse-item>
+	</el-collapse>
+	 <el-table 
+	 	ref="tableData"  
+		:data="dataUser" 
+		:height="tableHeight"  
+		border 
+		stripe 
+		highlight-current-row>
+	      <el-table-column property="id" label="序列ID"  width="100" align="center"></el-table-column>
+	      <el-table-column property="userName" label="用户名称"  width="150" align="left"></el-table-column>
+	      <el-table-column property="loginName" label="登陆账号"  width="150" align="left"></el-table-column>
+	      <el-table-column property="password" label="密码"   align="center"></el-table-column>
+	      <el-table-column property="status" label="用户状态"   align="left"></el-table-column>
+	      <el-table-column label="操作"  width="70" align="center" fixed="right">
+	      	<template slot-scope="scope">
+	      		<el-tooltip effect="light" content="编辑" >
+			      <el-button @click="editUser(scope.row)" type="text" size="small" ><span class="fa fa-edit"></span></el-button>
+			    </el-tooltip>
+			    <el-tooltip effect="light" content="删除" >
+			      <el-button @click="deleteUser(scope.row)" type="text" size="small" ><span class="fa fa-trash"></span></el-button>
+			    </el-tooltip>
+	      	</template>
+	      </el-table-column>
+    </el-table>
+    
+    <div class="container-bottom">
+	    	<el-pagination layout="total,prev,pager,next,jumper"
+	    	:pageSize="pageSize"
+	    	:current-page.sync="currentPage"
+	    	:total="total"
+	    	@current-change="search" >
+    	</el-pagination>
+    </div>
+    
+    
+   	<el-dialog :title="editingUser.id?'修改':'新增'" :visible.sync="showEditDialog">
+  		<el-form ref="editForm" :model="editingUser" :rules="rules" class="edit-from" label-position="top">
+  			<el-row :gutter="20">
+  				<el-col :span="12">
+  					<el-form-item label="用户名称" prop="userName" required>
+  						<el-input  v-model="editingUser.userName" size="small"></el-input>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="登陆账号" prop="loginName" required>
+  						<el-input  v-model="editingUser.loginName" size="small"></el-input>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  			<el-row :gutter="20">
+  				<el-col :span="12">
+  					<el-form-item label="密码" prop="password" required>
+  						<el-input  v-model="editingUser.password" size="small"></el-input>
+  					</el-form-item>
+  				</el-col>
+  				<el-col :span="12">
+  					<el-form-item label="标识位" prop="status" required>
+  						<el-select v-model="editingUser.status" size="small" placeholder="请选择标识位">
+  							<el-option label="有效" value="1" ></el-option>
+  							<el-option label="无效" value="0" ></el-option>
+  						</el-select>
+  					</el-form-item>
+  				</el-col>
+  			</el-row>
+  		</el-form>
+  		<div slot="footer" align="center" >
+  			<el-button @click="saveUser(editingUser)" type="primary">确认</el-button>
+  			<el-button @click="showEditDialog=false" >取消</el-button>
+  		</div>
+	</el-dialog>
+	
+</div>

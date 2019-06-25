@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.love.family.business.loginManage.entity.SysUser;
+import com.love.family.business.userManage.entity.SysUser;
 import com.love.family.dao.base.BaseHibernate4QueryDao;
 
 @Repository

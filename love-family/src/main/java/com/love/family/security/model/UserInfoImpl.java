@@ -10,7 +10,6 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import com.love.family.business.loginManage.entity.SysUser;
 import com.love.family.pub.rbac.system.entity.GenericUser;
 
 public class UserInfoImpl implements UserInfo {

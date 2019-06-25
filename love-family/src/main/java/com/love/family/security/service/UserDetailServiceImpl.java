@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.love.family.business.loginManage.entity.SysUser;
 import com.love.family.business.loginManage.service.LoginService;
+import com.love.family.business.userManage.entity.SysUser;
 import com.love.family.pub.rbac.system.entity.User;
 import com.love.family.security.model.UserInfoImpl;
 import com.love.family.utils.MyBusinessException;
