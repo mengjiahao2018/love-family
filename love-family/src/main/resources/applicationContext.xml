@@ -23,5 +23,6 @@
 	<import resource="classpath:spring/spring-mvc.xml" />
 	<import resource="classpath:spring/springdata-jpa.xml" />
 	<import resource="classpath:spring/spring-security.xml" />
+	<import resource="classpath:cache/ehcache-base.xml" />
 
 </beans>

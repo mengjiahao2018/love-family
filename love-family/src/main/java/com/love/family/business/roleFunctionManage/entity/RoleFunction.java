@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.love.family.dao.base.AbstractEntity;
+import com.love.family.system.dao.AbstractEntity;
 
 @Entity
 @Table(name = "sys_role_function")

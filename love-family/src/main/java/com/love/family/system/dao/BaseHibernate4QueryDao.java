@@ -1,4 +1,4 @@
-package com.love.family.dao.base;
+package com.love.family.system.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;

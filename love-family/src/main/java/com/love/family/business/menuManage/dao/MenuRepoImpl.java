@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.menuManage.entity.MenuVO;
-import com.love.family.dao.base.BaseHibernate4QueryDao;
+import com.love.family.system.dao.BaseHibernate4QueryDao;
 
 @Repository
 public class MenuRepoImpl extends BaseHibernate4QueryDao<MenuEO>  implements MenuRepo {

@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.love.family.business.roleManage.entity.RoleInfo;
-import com.love.family.dao.base.AbstractEntity;
+import com.love.family.system.dao.AbstractEntity;
 
 @MappedSuperclass
 public class GenericUser extends AbstractEntity<Long> {

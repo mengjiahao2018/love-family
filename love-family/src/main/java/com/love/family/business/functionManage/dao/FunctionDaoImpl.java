@@ -10,7 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.love.family.business.functionManage.entity.FunctionModel;
-import com.love.family.dao.base.BaseHibernate4QueryDao;
+import com.love.family.system.dao.BaseHibernate4QueryDao;
+
 
 @Repository
 public class FunctionDaoImpl extends BaseHibernate4QueryDao<FunctionModel> implements FunctionDao {

@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.love.family.business.menuManage.entity.MenuEO;
-import com.love.family.dao.base.BaseHibernate4QueryDao;
+import com.love.family.system.dao.BaseHibernate4QueryDao;
 
 @Repository
 public class MenuDaoImpl extends BaseHibernate4QueryDao<MenuEO> implements MenuDao {

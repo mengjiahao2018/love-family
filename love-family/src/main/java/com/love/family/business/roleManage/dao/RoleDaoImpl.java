@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.love.family.business.roleManage.entity.RoleInfo;
-import com.love.family.dao.base.BaseHibernate4QueryDao;
+import com.love.family.system.dao.BaseHibernate4QueryDao;
 
 @Repository
 public class RoleDaoImpl extends BaseHibernate4QueryDao<RoleInfo>  implements RoleDao {
