@@ -25,10 +25,10 @@ import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;
-import com.love.family.pub.rbac.privilege.model.RolePrivilege;
-import com.love.family.pub.rbac.system.entity.User;
-import com.love.family.pub.rbac.system.util.UserInfoUtils;
+import com.love.family.common.UserInfoUtils;
 import com.love.family.security.context.SecurityContext;
+import com.love.family.security.model.RolePrivilege;
+import com.love.family.security.model.User;
 import com.love.family.security.model.UserInfo;
 import com.love.family.utils.MyBusinessException;
 

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.love.family.business.roleManage.entity.RoleInfo;
-import com.love.family.pub.rbac.privilege.model.RolePrivilege;
+import com.love.family.security.model.RolePrivilege;
 
 public interface RoleService {
 

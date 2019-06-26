@@ -25,7 +25,7 @@ import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.roleManage.entity.RoleInfo;
 import com.love.family.business.roleManage.service.RoleService;
-import com.love.family.pub.rbac.system.util.UserInfoUtils;
+import com.love.family.common.UserInfoUtils;
 import com.love.family.security.model.UserInfo;
 import com.love.family.utils.MessageUtil;
 

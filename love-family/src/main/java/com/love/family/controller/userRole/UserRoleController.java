@@ -34,9 +34,9 @@ import com.love.family.business.userManage.service.UserService;
 import com.love.family.business.userRoleManage.entity.UserRole;
 import com.love.family.business.userRoleManage.entity.UserRoleVO;
 import com.love.family.business.userRoleManage.service.UserRoleService;
-import com.love.family.pub.rbac.system.entity.User;
-import com.love.family.pub.rbac.system.util.UserInfoUtils;
+import com.love.family.common.UserInfoUtils;
 import com.love.family.security.context.SecurityContext;
+import com.love.family.security.model.User;
 import com.love.family.security.model.UserInfo;
 import com.love.family.utils.MessageUtil;
 

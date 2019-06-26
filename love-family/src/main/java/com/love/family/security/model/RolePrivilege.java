@@ -1,4 +1,4 @@
-package com.love.family.pub.rbac.privilege.model;
+package com.love.family.security.model;
 
 import java.io.Serializable;
 import java.util.List;

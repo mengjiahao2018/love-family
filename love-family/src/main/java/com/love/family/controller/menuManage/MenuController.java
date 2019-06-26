@@ -31,9 +31,9 @@ import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.menuManage.entity.MenuEO;
 import com.love.family.business.menuManage.entity.MenuVO;
 import com.love.family.business.menuManage.service.MenuService;
+import com.love.family.common.UserInfoUtils;
 import com.love.family.controller.roleManage.RoleSelectController;
-import com.love.family.pub.rbac.system.entity.User;
-import com.love.family.pub.rbac.system.util.UserInfoUtils;
+import com.love.family.security.model.User;
 import com.love.family.utils.MessageUtil;
 
 import net.sf.json.JSONArray;

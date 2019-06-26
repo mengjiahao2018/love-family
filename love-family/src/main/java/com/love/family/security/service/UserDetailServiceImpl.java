@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.love.family.business.loginManage.service.LoginService;
 import com.love.family.business.userManage.entity.UserModel;
-import com.love.family.pub.rbac.system.entity.User;
+import com.love.family.security.model.User;
 import com.love.family.security.model.UserInfoImpl;
 import com.love.family.utils.MyBusinessException;
 

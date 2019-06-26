@@ -14,7 +14,7 @@ import com.love.family.business.functionManage.entity.FunctionModel;
 import com.love.family.business.functionManage.service.FunctionService;
 import com.love.family.business.roleManage.dao.RoleDao;
 import com.love.family.business.roleManage.entity.RoleInfo;
-import com.love.family.pub.rbac.privilege.model.RolePrivilege;
+import com.love.family.security.model.RolePrivilege;
 
 @Service
 public class RoleServiceImpl implements RoleService {

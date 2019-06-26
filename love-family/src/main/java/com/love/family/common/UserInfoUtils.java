@@ -1,4 +1,4 @@
-package com.love.family.pub.rbac.system.util;
+package com.love.family.common;
 
 import org.springframework.stereotype.Component;
 
